@@ -78,7 +78,7 @@ class PostgresRepository:
                 """
                 INSERT INTO safety_alerts (id, code, source_id, message, created_at)
                 VALUES (%s, %s, %s, %s, %s)
-                ON CONFLICT (id) DO NOTHING
+                ON CONFLICT (source_id) DO NOTHING
                 """,
                 (str(alert.id), alert.code, alert.source_id, alert.message, alert.created_at),
             )
@@ -154,10 +154,16 @@ class PostgresRepository:
         self, table: str, columns: str, values: tuple[Any, ...], conflict_column: str
     ) -> None:
         placeholders = ", ".join(["%s"] * len(values))
+        updates = {
+            "parts": "status=EXCLUDED.status, observed_at=EXCLUDED.observed_at, payload=EXCLUDED.payload",
+            "events": "status=EXCLUDED.status, context=EXCLUDED.context",
+            "work_orders": "status=EXCLUDED.status, payload=EXCLUDED.payload",
+        }
+        update = updates.get(table, "payload=EXCLUDED.payload")
         with self.connection.cursor() as cursor:
             cursor.execute(
                 f"INSERT INTO {table} ({columns}) VALUES ({placeholders}) "
-                f"ON CONFLICT ({conflict_column}) DO UPDATE SET payload=EXCLUDED.payload",
+                f"ON CONFLICT ({conflict_column}) DO UPDATE SET {update}",
                 values,
             )
 

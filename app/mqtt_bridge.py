@@ -28,6 +28,7 @@ class MqttBridge:
         }
         self.client = client or self._new_client()
         self.errors: list[str] = []
+        self.enlace_ok = False
 
     @staticmethod
     def _new_client() -> Any:
@@ -39,11 +40,14 @@ class MqttBridge:
 
     def start(self, host: str = "broker", port: int = 1883) -> None:
         self.client.on_message = self._on_message
-        self.client.connect(host, port, keepalive=30)
+        self.client.on_connect = self._on_connect
+        self.client.on_disconnect = self._on_disconnect
+        result = self.client.connect(host, port, keepalive=30)
+        self.enlace_ok = result == 0 if isinstance(result, int) else True
         contract = load_contract()
         subscriptions = (
             contract.Topicos.RECORRIDAS,
-            contract.Topicos.SENSORES,
+            "planta/sensores/#",
             contract.Topicos.CIERRES,
             contract.Topicos.RESPUESTAS,
         )
@@ -52,8 +56,29 @@ class MqttBridge:
         self.client.loop_start()
 
     def stop(self) -> None:
+        self.enlace_ok = False
         self.client.loop_stop()
         self.client.disconnect()
+
+    def _on_connect(
+        self,
+        _client: Any,
+        _userdata: Any,
+        _flags: Any,
+        reason_code: Any,
+        _properties: Any = None,
+    ) -> None:
+        self.enlace_ok = not bool(getattr(reason_code, "is_failure", False))
+
+    def _on_disconnect(
+        self,
+        _client: Any,
+        _userdata: Any,
+        _flags: Any = None,
+        reason_code: Any = None,
+        _properties: Any = None,
+    ) -> None:
+        self.enlace_ok = False
 
     def _on_message(self, _client: Any, _userdata: Any, message: Any) -> None:
         try:
@@ -70,13 +95,29 @@ class MqttBridge:
         contract = load_contract()
         if message_topic == contract.Topicos.RECORRIDAS:
             return "recorrida"
-        if message_topic.startswith("planta/sensores/"):
+        if message_topic.startswith("planta/sensores/") and len(message_topic.split("/")) == 4:
             return "sensor"
         if message_topic == contract.Topicos.CIERRES:
             return "cierre"
         if message_topic == contract.Topicos.RESPUESTAS:
             return "respuesta"
         raise ValueError(f"Topic MQTT no soportado: {message_topic}")
+
+    def publish_event(self, payload: dict[str, Any]) -> None:
+        self.client.publish(
+            topic("EVENTOS"),
+            json.dumps(payload),
+            qos=1,
+            retain=False,
+        )
+
+    def publish_order(self, payload: dict[str, Any]) -> None:
+        self.client.publish(
+            topic("ORDENES"),
+            json.dumps(payload),
+            qos=1,
+            retain=False,
+        )
 
     def publish_heartbeat(
         self, sistema: str, enlace_ok: bool, pendientes: int

@@ -19,7 +19,20 @@ Para ejecutar las pruebas localmente:
 
 ```powershell
 python -m pip install -e ".[test]"
+python -m pip install "git+https://github.com/NovitSoftware/academia2026-planta#subdirectory=contrato"
 pytest
+```
+
+## Integración con la planta
+
+La API se conecta al broker de la planta por MQTT cuando `MQTT_HOST` está
+definido. Publica `sistema/eventos`, `sistema/ordenes` y `sistema/estado` cada
+30 segundos, y consume `planta/sensores/#`. Al arrancar, carga equipos y
+límites desde `PLANTA_URL/api/planta` si `PLANTA_URL` está configurado.
+
+```powershell
+$env:MQTT_HOST = "broker"
+$env:PLANTA_URL = "http://sim:8100"
 ```
 
 ## Arquitectura planta/nube
@@ -62,6 +75,21 @@ Para levantar con la red externa requerida por la planta:
 docker network create planta-lan
 docker compose up --build
 ```
+
+El Compose instala el contrato oficial desde el contexto local
+`..\academia2026-tp\contrato` y monta `.\models` como `/models`. Para habilitar
+las notas de voz reales, colocar allí un modelo permitido como
+`models\whisper-small` e instalar el extra local si se ejecuta fuera de Docker:
+
+```powershell
+python -m pip install -e ".[test,integration,voice]"
+```
+
+La integración de Entrega 1 consume `planta/recorridas`, descarga el audio desde
+`http://sim:8100`, transcribe localmente, publica el borrador en
+`sistema/tablet` y confirma el parte al recibir `planta/respuestas`. Sin un
+modelo montado, la nota se rechaza explícitamente y no se guarda como
+confirmada.
 
 Los adaptadores locales de [app/integrations.py](./app/integrations.py),
 [app/rag.py](./app/rag.py), [app/memory.py](./app/memory.py) y

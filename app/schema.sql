@@ -45,6 +45,8 @@ CREATE TABLE IF NOT EXISTS safety_alerts (
     message TEXT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL
 );
+CREATE UNIQUE INDEX IF NOT EXISTS safety_alert_source_idx
+    ON safety_alerts (source_id);
 CREATE TABLE IF NOT EXISTS work_orders (
     id UUID PRIMARY KEY,
     event_id UUID NOT NULL UNIQUE REFERENCES events(id),
@@ -62,4 +64,9 @@ CREATE TABLE IF NOT EXISTS sync_queue (
     synced BOOLEAN NOT NULL DEFAULT FALSE,
     last_error TEXT
 );
-
+CREATE INDEX IF NOT EXISTS sensor_history_idx
+    ON sensor_readings (equipment_tag, variable, observed_at);
+CREATE INDEX IF NOT EXISTS event_status_idx
+    ON events (status, created_at);
+CREATE INDEX IF NOT EXISTS work_order_status_idx
+    ON work_orders (status, created_at);

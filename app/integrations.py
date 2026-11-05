@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import re
 from datetime import datetime
+from pathlib import Path
+import tempfile
 from typing import Protocol
+
+import httpx
 
 from .models import Equipment, FilaParte, TabletResponse, VoiceNote
 
@@ -36,6 +40,49 @@ class FixtureTranscriber:
         if key not in self.transcripts:
             raise ValueError("No hay transcripción local para la nota")
         return self.transcripts[key]
+
+
+class WhisperTranscriber:
+    """Transcriptor local; no realiza llamadas de inferencia a servicios externos."""
+
+    def __init__(self, model_path: str, *, device: str = "cpu", compute_type: str = "int8") -> None:
+        if not model_path:
+            raise ValueError("WHISPER_MODEL_PATH debe apuntar a un modelo local")
+        self.model_path = Path(model_path)
+        if not self.model_path.exists():
+            raise FileNotFoundError(f"Modelo Whisper local inexistente: {self.model_path}")
+        self.device = device
+        self.compute_type = compute_type
+        self._model = None
+
+    def transcribe(self, audio: bytes) -> str:
+        if self._model is None:
+            try:
+                from faster_whisper import WhisperModel
+            except ImportError as exc:
+                raise RuntimeError(
+                    "Instalá el extra voice para transcribir notas localmente"
+                ) from exc
+            self._model = WhisperModel(
+                str(self.model_path),
+                device=self.device,
+                compute_type=self.compute_type,
+            )
+        with tempfile.NamedTemporaryFile(suffix=".wav") as audio_file:
+            audio_file.write(audio)
+            audio_file.flush()
+            segments, _ = self._model.transcribe(
+                audio_file.name, language="es", vad_filter=True
+            )
+            return " ".join(segment.text.strip() for segment in segments).strip()
+
+
+def download_media(base_url: str, path: str) -> bytes:
+    if not path.startswith("/"):
+        raise ValueError("La ruta de media debe ser absoluta dentro de la planta")
+    response = httpx.get(f"{base_url.rstrip('/')}{path}", timeout=15)
+    response.raise_for_status()
+    return response.content
 
 
 class VoicePartExtractor:
@@ -80,16 +127,33 @@ class VoicePartExtractor:
 
     def extract(self, note: VoiceNote, transcript: str) -> list[FilaParte]:
         rows: list[FilaParte] = []
-        matches = list(self._reading.finditer(transcript))
+        names = sorted(
+            {alias for item in self.equipment for alias in (item.aliases + [item.name])},
+            key=len,
+            reverse=True,
+        )
+        name_pattern = "|".join(re.escape(name) for name in names)
+        reading = re.compile(
+            rf"(?P<name>{name_pattern}).*?"
+            r"(?P<value>\d+(?:[.,]\d+)?)\s*(?P<unit>kg/?cm2|kgf/?cm2|kilos?|psi|bar)?",
+            re.IGNORECASE,
+        )
+        word_reading = re.compile(
+            rf"(?P<name>{name_pattern}).*?"
+            rf"(?P<value>{self._word_value_pattern})\s*"
+            r"(?P<unit>kg/?cm2|kgf/?cm2|kilos?|psi|bar)",
+            re.IGNORECASE,
+        )
+        matches = list(reading.finditer(transcript))
         spans = {match.span() for match in matches}
         matches.extend(
-            match for match in self._word_reading.finditer(transcript)
+            match for match in word_reading.finditer(transcript)
             if match.span() not in spans
         )
         for match in matches:
             equipment = self.resolve_equipment(match.group("name"))
             raw_value = match.group("value")
-            if match.re is self._word_reading:
+            if match.re is word_reading:
                 prefix = transcript[match.end("name"):match.start("value")]
                 prefix_words = [
                     word for word in re.findall(r"[a-záéíóú]+", prefix.casefold())
@@ -122,6 +186,20 @@ class VoicePartExtractor:
                 )
             )
         return rows
+
+    @property
+    def _word_value_pattern(self) -> str:
+        return (
+            r"(?:mil|seiscientos|quinientos|cuatrocientos|trescientos|doscientos|"
+            r"ciento|cien|noventa|ochenta|setenta|sesenta|cincuenta|cuarenta|"
+            r"treinta|veinte|dieciocho|dieciséis|dieciseis|quince|catorce|"
+            r"trece|doce|once|diez|nueve|ocho|siete|seis|cinco|cuatro|tres|"
+            r"dos|uno)(?:\s+(?:mil|seiscientos|quinientos|cuatrocientos|"
+            r"trescientos|doscientos|ciento|cien|noventa|ochenta|setenta|"
+            r"sesenta|cincuenta|cuarenta|treinta|veinte|dieciocho|dieciséis|"
+            r"dieciseis|quince|catorce|trece|doce|once|diez|nueve|ocho|siete|"
+            r"seis|cinco|cuatro|tres|dos|uno|con)){0,5}"
+        )
 
     @classmethod
     def parse_words(cls, value: str) -> float:
@@ -162,6 +240,8 @@ class VoicePartExtractor:
             return None
         normalized = unit.casefold()
         if normalized.startswith("kilo"):
+            return "kg/cm2"
+        if normalized.startswith("kgf"):
             return "kg/cm2"
         return normalized.replace("kg/cm2", "kg/cm2")
 

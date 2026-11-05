@@ -15,25 +15,43 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    labels:
+      academia.planta: pc
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 1G
     networks:
       - planta-lan
   api:
     build:
       context: .
       dockerfile: Dockerfile
+      additional_contexts:
+        contrato: ../academia2026-tp/contrato
     environment:
       DATABASE_URL: postgresql://$${POSTGRES_USER}:$${POSTGRES_PASSWORD}@db:5432/$${POSTGRES_DB}
       POSTGRES_USER: planta
       POSTGRES_PASSWORD: planta
       POSTGRES_DB: planta
-      HTTP_PROXY: ${HTTP_PROXY:-}
-      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      MQTT_HOST: broker
+      MQTT_PORT: "1883"
+      SISTEMA_NOMBRE: planta
+      PLANTA_URL: http://sim:8100
+      HTTP_PROXY: ${HTTP_PROXY:-http://enlace:3128}
+      HTTPS_PROXY: ${HTTPS_PROXY:-http://enlace:3128}
       NO_PROXY: broker,sim,localhost,db
+      WHISPER_MODEL_PATH: /models/whisper-small
+      WHISPER_DEVICE: cpu
+      WHISPER_COMPUTE_TYPE: int8
     depends_on:
       db:
         condition: service_healthy
     ports:
       - "8000:8000"
+    volumes:
+      - ./models:/models:ro
     networks:
       - planta-lan
     labels:

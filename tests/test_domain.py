@@ -3,8 +3,16 @@ from uuid import uuid4
 
 import pytest
 
-from app.domain import DomainService, evaluate_value
-from app.models import Equipment, EventStatus, Order, OrderStatus, Part, PartReading
+from app.domain import DomainService, detect_safety, evaluate_value
+from app.models import (
+    Equipment,
+    EventStatus,
+    Order,
+    OrderStatus,
+    Part,
+    PartReading,
+    SensorReading,
+)
 
 
 def pump(**overrides):
@@ -101,3 +109,35 @@ def test_fuga_sin_enlace_creates_local_alert():
     alerts = [item for item in results if hasattr(item, "code")]
     assert alerts and alerts[0].code == "S1"
     assert not service.sync_queue
+
+
+def test_sustained_requires_two_anomalous_readings():
+    service = DomainService()
+    service.add_equipment(pump())
+    first = service.evaluate_sensor(
+        SensorReading(
+            idempotency_key="s-1",
+            equipment_tag="B-101",
+            variable="presion",
+            value=120,
+            unit="kg/cm2",
+            observed_at=datetime.utcnow(),
+        )
+    )
+    second = service.evaluate_sensor(
+        SensorReading(
+            idempotency_key="s-2",
+            equipment_tag="B-101",
+            variable="presion",
+            value=121,
+            unit="kg/cm2",
+            observed_at=datetime.utcnow(),
+        )
+    )
+    assert first.status == EventStatus.NORMAL
+    assert second.status == EventStatus.ESCALATED
+
+
+def test_safety_negation_and_accents_do_not_false_alarm():
+    assert detect_safety("No hay olor a gas y la presión es normal", "x") == []
+    assert detect_safety("Pérdida con proyección de agua a presión", "x")[0].code == "S1"

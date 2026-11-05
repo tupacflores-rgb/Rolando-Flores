@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Any
 from uuid import UUID, uuid4
@@ -77,6 +77,30 @@ class SensorReading(StrictModel):
     observed_at: datetime
 
 
+class OrderHistoryQuery(StrictModel):
+    equipment_tag: str | None = Field(default=None, min_length=1)
+    limit: int = Field(default=100, ge=1, le=1000)
+
+
+class InventoryQuery(StrictModel):
+    equipment_tag: str | None = Field(default=None, min_length=1)
+    code: str | None = Field(default=None, min_length=1)
+
+
+class MaterialListQuery(StrictModel):
+    equipment_tag: str = Field(min_length=1)
+
+
+class TaskCatalogQuery(StrictModel):
+    equipment_tag: str | None = Field(default=None, min_length=1)
+
+
+class ManualSearchQuery(StrictModel):
+    question: str = Field(min_length=1, max_length=500)
+    equipment_tag: str | None = Field(default=None, min_length=1)
+    limit: int = Field(default=5, ge=1, le=20)
+
+
 class Event(StrictModel):
     id: UUID = Field(default_factory=uuid4)
     idempotency_key: str = Field(min_length=1)
@@ -87,7 +111,7 @@ class Event(StrictModel):
     variable: str | None = None
     value: float | None = None
     context: dict[str, Any] = Field(default_factory=dict)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
 
 class SafetyAlert(StrictModel):
@@ -95,7 +119,7 @@ class SafetyAlert(StrictModel):
     code: str = Field(pattern=r"^S[1-4]$")
     message: str = Field(min_length=1)
     source_id: str = Field(min_length=1)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
     emergency_procedure: str = "Avisar por radio al supervisor de turno"
     wait_for_response: bool = False
 
@@ -111,13 +135,45 @@ class OrderCreate(StrictModel):
     keeps_injection: bool
     internal_staff: bool
     structural_damage: bool = False
+    detiene_equipo: bool = False
+    reduce_inyeccion: bool = False
+
+
+class ClosureReport(StrictModel):
+    order_id: UUID
+    technician: str = Field(min_length=1)
+    contractor: bool = False
+    tasks_done: list[str] = Field(min_length=1)
+    parts_used: list[str] = Field(default_factory=list)
+    hours: float = Field(ge=0)
+    final_test: str = Field(min_length=1)
+    photo_ids: list[str] = Field(default_factory=list)
+
+
+class ClosureComparison(StrictModel):
+    order_id: UUID
+    missing_tasks: list[str] = Field(default_factory=list)
+    unexpected_tasks: list[str] = Field(default_factory=list)
+    missing_parts: list[str] = Field(default_factory=list)
+    unexpected_parts: list[str] = Field(default_factory=list)
+    differences: list[str] = Field(default_factory=list)
+    matches: bool
+
+
+class Habilita(StrictModel):
+    number: str
+    order_id: UUID
+    amount_usd: float = Field(ge=0)
+    issued_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
 
 class Order(OrderCreate):
     id: UUID = Field(default_factory=uuid4)
     status: OrderStatus = OrderStatus.DRAFT
     approval_reasons: list[str] = Field(default_factory=list)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
+    closure: ClosureReport | None = None
+    habilita: Habilita | None = None
 
 
 class SyncItem(StrictModel):
@@ -145,6 +201,8 @@ class FilaParte(StrictModel):
 class VoiceNote(StrictModel):
     note_id: str = Field(min_length=1)
     observed_at: datetime
+    operator_id: str = Field(default="operador", min_length=1, max_length=80)
+    recorrido_id: str | None = None
     audio_url: str | None = None
     photo_urls: list[str] = Field(default_factory=list)
     transcript: str | None = None
@@ -193,31 +251,3 @@ class WorkOrderEvidence(StrictModel):
     photo_ids: list[str] = Field(default_factory=list)
     sensor_trend: list[dict[str, Any]] = Field(default_factory=list)
     causes: list[ProbableCause] = Field(default_factory=list)
-
-
-class ClosureReport(StrictModel):
-    order_id: UUID
-    technician: str = Field(min_length=1)
-    contractor: bool = False
-    tasks_done: list[str] = Field(min_length=1)
-    parts_used: list[str] = Field(default_factory=list)
-    hours: float = Field(ge=0)
-    final_test: str = Field(min_length=1)
-    photo_ids: list[str] = Field(default_factory=list)
-
-
-class ClosureComparison(StrictModel):
-    order_id: UUID
-    missing_tasks: list[str] = Field(default_factory=list)
-    unexpected_tasks: list[str] = Field(default_factory=list)
-    missing_parts: list[str] = Field(default_factory=list)
-    unexpected_parts: list[str] = Field(default_factory=list)
-    differences: list[str] = Field(default_factory=list)
-    matches: bool
-
-
-class Habilita(StrictModel):
-    number: str
-    order_id: UUID
-    amount_usd: float = Field(ge=0)
-    issued_at: datetime = Field(default_factory=datetime.utcnow)

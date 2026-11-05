@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from collections import defaultdict, deque
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Iterable
+from uuid import UUID
 
 from .models import (
+    ClosureReport,
     Equipment,
     Event,
     EventStatus,
@@ -43,7 +46,7 @@ def evaluate_value(
 
 
 _SAFETY_PATTERNS: tuple[tuple[str, tuple[str, ...], str], ...] = (
-    ("S1", ("agua a presión", "proyección de agua", "chorro a presión"), "Alejarse y aislar la presión"),
+    ("S1", ("agua a presion", "proyeccion de agua", "chorro a presion"), "Alejarse y aislar la presión"),
     ("S2", ("olor a gas", "gas"), "Evacuar el área y avisar por radio"),
     ("S3", ("humo", "fuego", "incendio"), "Activar el procedimiento contra incendio"),
     ("S4", ("persona lesionada", "lesionado", "herido"), "Solicitar asistencia y asegurar el área"),
@@ -51,10 +54,16 @@ _SAFETY_PATTERNS: tuple[tuple[str, tuple[str, ...], str], ...] = (
 
 
 def detect_safety(text: str, source_id: str) -> list[SafetyAlert]:
-    normalized = re.sub(r"\s+", " ", text.casefold())
+    normalized = unicodedata.normalize("NFD", text.casefold())
+    normalized = "".join(
+        char for char in normalized if unicodedata.category(char) != "Mn"
+    )
+    normalized = re.sub(r"\s+", " ", normalized)
     alerts: list[SafetyAlert] = []
     for code, patterns, action in _SAFETY_PATTERNS:
-        if any(pattern in normalized for pattern in patterns):
+        if re.search(r"\b(?:no|sin)\s+(?:hay\s+)?(?:olor\s+a\s+)?gas\b", normalized):
+            continue
+        if any(re.search(rf"\b{re.escape(pattern)}\b", normalized) for pattern in patterns):
             alerts.append(
                 SafetyAlert(
                     code=code,
@@ -72,6 +81,7 @@ class DomainService:
         self.parts: dict[str, Part] = {}
         self.sensor_readings: dict[str, SensorReading] = {}
         self.events: dict[str, Event] = {}
+        self.events_by_id: dict[str, Event] = {}
         self.alerts: dict[str, SafetyAlert] = {}
         self.orders: dict[str, Order] = {}
         self.sync_queue: deque[str] = deque()
@@ -82,8 +92,16 @@ class DomainService:
             self.equipment = {item.tag: item for item in restored["equipment"]}
             self.parts = {item.idempotency_key: item for item in restored["parts"]}
             self.events = {item.idempotency_key: item for item in restored["events"]}
+            self.events_by_id = {str(item.id): item for item in restored["events"]}
             self.alerts = {str(item.id): item for item in restored["alerts"]}
             self.orders = {str(item.id): item for item in restored["orders"]}
+
+    def get_event(self, event_id: str | UUID) -> Event | None:
+        return self.events_by_id.get(str(event_id))
+
+    def _remember_event(self, event: Event) -> None:
+        self.events[event.idempotency_key] = event
+        self.events_by_id[str(event.id)] = event
 
     def add_equipment(self, equipment: Equipment) -> Equipment:
         self.equipment[equipment.tag] = equipment
@@ -94,16 +112,29 @@ class DomainService:
     def confirm_part(self, key: str) -> Part:
         part = self.parts[key]
         part.status = part.status.CONFIRMED
+        if self.repository:
+            self.repository.save_part(part)
         return part
 
     def save_part(self, part: Part) -> Part:
         existing = self.parts.get(part.idempotency_key)
         if existing:
+            if existing.model_dump(exclude={"status", "id"}) != part.model_dump(
+                exclude={"status", "id"}
+            ):
+                raise ValueError("La clave idempotente ya existe con otro payload")
             return existing
         self.parts[part.idempotency_key] = part
         if self.repository:
             self.repository.save_part(part)
         return part
+
+    def attach_closure(self, order_id: str, closure: ClosureReport) -> Order:
+        order = self.orders[order_id]
+        order.closure = closure
+        if self.repository:
+            self.repository.save_order(order)
+        return order
 
     def evaluate_part(self, part: Part) -> list[Event | SafetyAlert]:
         if part.status != part.status.CONFIRMED:
@@ -134,17 +165,28 @@ class DomainService:
                 raise ValueError(f"Equipo inexistente: {reading.equipment_tag}")
             if reading.value is None:
                 continue
-            key = (equipment.tag, reading.variable)
-            history = self._sustained[key]
-            history.append((part.observed_at, reading.value))
-            cutoff = part.observed_at - timedelta(hours=4)
-            self._sustained[key] = [(when, val) for when, val in history if when >= cutoff]
-            sustained = len(self._sustained[key]) >= 2
-            result = evaluate_value(equipment, reading.value, sustained=sustained)
             event_key = f"part:{part.idempotency_key}:{index}"
             if event_key in self.events:
                 results.append(self.events[event_key])
                 continue
+            key = (equipment.tag, reading.variable)
+            history = self._sustained[key]
+            observed_at = self._aware(part.observed_at)
+            history.append((observed_at, reading.value))
+            cutoff = observed_at - timedelta(hours=4)
+            self._sustained[key] = [(when, val) for when, val in history if when >= cutoff]
+            anomalies = [
+                val
+                for _, val in self._sustained[key]
+                if (
+                    equipment.alarm_min is not None and val < equipment.alarm_min
+                )
+                or (
+                    equipment.alarm_max is not None and val > equipment.alarm_max
+                )
+            ]
+            sustained = len(anomalies) >= 2
+            result = evaluate_value(equipment, reading.value, sustained=sustained)
             event = Event(
                 idempotency_key=event_key,
                 origin="part",
@@ -155,20 +197,33 @@ class DomainService:
                 value=reading.value,
                 context={"reason": result.reason, "photos": reading.photo_ids},
             )
-            self.events[event_key] = event
+            self._remember_event(event)
             if self.repository:
                 self.repository.save_event(event)
             results.append(event)
         return results
 
-    def evaluate_sensor(self, reading: SensorReading, sustained: bool = True) -> Event:
+    def evaluate_sensor(self, reading: SensorReading, sustained: bool = False) -> Event:
         if reading.idempotency_key in self.events:
+            previous = self.sensor_readings.get(reading.idempotency_key)
+            if previous and previous != reading:
+                raise ValueError("La clave idempotente ya existe con otra lectura")
             return self.events[reading.idempotency_key]
         equipment = self.equipment.get(reading.equipment_tag)
         if equipment is None:
             raise ValueError(f"Equipo inexistente: {reading.equipment_tag}")
         key = (equipment.tag, reading.variable)
-        self._sustained[key].append((reading.observed_at, reading.value))
+        observed_at = self._aware(reading.observed_at)
+        history = self._sustained[key]
+        history.append((observed_at, reading.value))
+        cutoff = observed_at - timedelta(hours=4)
+        self._sustained[key] = [(when, val) for when, val in history if when >= cutoff]
+        anomalies = [
+            val for _, val in self._sustained[key]
+            if (equipment.alarm_min is not None and val < equipment.alarm_min)
+            or (equipment.alarm_max is not None and val > equipment.alarm_max)
+        ]
+        sustained = sustained or len(anomalies) >= 2
         evaluation = evaluate_value(equipment, reading.value, sustained=sustained)
         event = Event(
             idempotency_key=reading.idempotency_key,
@@ -180,11 +235,18 @@ class DomainService:
             value=reading.value,
             context={"reason": evaluation.reason},
         )
-        self.events[reading.idempotency_key] = event
+        self._remember_event(event)
+        self.sensor_readings[reading.idempotency_key] = reading
         if self.repository:
             self.repository.save_sensor(reading)
             self.repository.save_event(event)
         return event
+
+    @staticmethod
+    def _aware(value: datetime) -> datetime:
+        if value.tzinfo is None:
+            return value.replace(tzinfo=datetime.now().astimezone().tzinfo)
+        return value
 
     def create_order(self, request: Order) -> Order:
         existing = next((o for o in self.orders.values() if o.event_id == request.event_id), None)

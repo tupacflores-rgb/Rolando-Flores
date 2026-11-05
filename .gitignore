@@ -1,4 +1,7 @@
 teaching/
 context/
+models/
+__pycache__/
+.pytest_cache/
 !teaching/
 !teaching/**

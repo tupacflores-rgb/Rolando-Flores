@@ -32,9 +32,12 @@ def compare_closure(order: Order, closure: ClosureReport) -> ClosureComparison:
 
 
 def issue_habilita(order: Order, contract_prices: dict[str, float]) -> Habilita:
-    amount = sum(contract_prices.get(part, 0.0) for part in order.parts)
+    missing = [part for part in order.parts if part not in contract_prices]
+    if missing:
+        raise ValueError(f"Faltan precios contractuales: {', '.join(missing)}")
+    amount = sum(contract_prices[part] for part in order.parts)
     return Habilita(
-        number=f"HAB-{str(order.id)[:8].upper()}",
+        number=f"HAB-{str(order.id).upper()}",
         order_id=UUID(str(order.id)),
         amount_usd=amount,
     )

@@ -20,9 +20,27 @@ def load_yaml(path: str | Path) -> dict[str, Any]:
     return data
 
 
-def load_equipment(path: str | Path) -> list[Equipment]:
-    data = load_yaml(path)
+def equipment_from_definition(data: dict[str, Any]) -> list[Equipment]:
+    if not isinstance(data, dict):
+        raise ValueError("La definición de planta no es un objeto")
     result: list[Equipment] = []
+    limits: dict[str, dict[str, float | None]] = {}
+    sensor_groups: dict[str, list[dict[str, Any]]] = {}
+    for sensor in data.get("sensores", []):
+        if isinstance(sensor, dict):
+            sensor_groups.setdefault(sensor["tag"], []).append(sensor)
+    for tag, sensors in sensor_groups.items():
+        selected = next(
+            (item for item in sensors if item["variable"] == "presion_descarga"),
+            next(
+                (item for item in sensors if item["variable"] == "presion_diferencial"),
+                sensors[0],
+            ),
+        )
+        limits[tag] = {
+            "min": selected.get("alarma_baja"),
+            "max": selected.get("alarma_alta"),
+        }
     for item in data.get("equipos", []):
         if not isinstance(item, dict):
             raise ValueError("Entrada de equipo inválida")
@@ -32,10 +50,16 @@ def load_equipment(path: str | Path) -> list[Equipment]:
                 name=item["descripcion"],
                 aliases=item.get("nombres", []),
                 kind=item["tipo"],
+                alarm_min=limits.get(item["tag"], {}).get("min"),
+                alarm_max=limits.get(item["tag"], {}).get("max"),
                 reserve_available=item.get("rol_inicial") == "reserva",
             )
         )
     return result
+
+
+def load_equipment(path: str | Path) -> list[Equipment]:
+    return equipment_from_definition(load_yaml(path))
 
 
 def load_material_catalog(path: str | Path) -> dict[str, Any]:

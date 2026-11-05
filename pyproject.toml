@@ -13,12 +13,15 @@ dependencies = [
   "pydantic>=2.6",
   "psycopg[binary]>=3.1",
   "PyYAML>=6.0",
+  "paho-mqtt>=2.1",
+  "httpx>=0.27",
 ]
 
 [project.optional-dependencies]
 test = ["httpx>=0.27", "pytest>=8.0"]
 official = ["planta_contrato"]
-integration = ["planta_contrato", "paho-mqtt>=2.1"]
+integration = ["paho-mqtt>=2.1"]
+voice = ["faster-whisper>=1.1"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

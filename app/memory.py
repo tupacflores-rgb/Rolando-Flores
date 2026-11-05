@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 
@@ -13,11 +13,13 @@ class ConversationMemory:
 
     def append(self, note_id: str, kind: str, payload: dict[str, Any]) -> None:
         self._items.setdefault(note_id, []).append(
-            {"kind": kind, "payload": payload, "created_at": datetime.utcnow()}
+            {"kind": kind, "payload": payload, "created_at": datetime.now(UTC)}
         )
 
     def get(self, note_id: str, now: datetime | None = None) -> list[dict[str, Any]]:
-        current = now or datetime.utcnow()
+        current = now or datetime.now(UTC)
+        if current.tzinfo is None:
+            current = current.replace(tzinfo=UTC)
         return [
             item
             for item in self._items.get(note_id, [])
@@ -25,7 +27,9 @@ class ConversationMemory:
         ]
 
     def purge(self, now: datetime | None = None) -> int:
-        current = now or datetime.utcnow()
+        current = now or datetime.now(UTC)
+        if current.tzinfo is None:
+            current = current.replace(tzinfo=UTC)
         removed = 0
         for note_id in list(self._items):
             before = len(self._items[note_id])

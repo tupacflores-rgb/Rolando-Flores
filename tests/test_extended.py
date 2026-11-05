@@ -47,6 +47,18 @@ def test_official_plant_data_and_spanish_number_are_supported():
     assert rows[0].equipment_tag == "B-102"
     assert rows[0].value == 1640
     assert rows[0].unit == "psi"
+    assert next(item for item in equipment if item.tag == "B-101").alarm_max == 125
+
+
+def test_voice_extractor_uses_official_aliases():
+    equipment = load_equipment(
+        r"C:\Users\Rolando\Documents\GitHub\academia2026-tp\datos\planta.yaml"
+    )
+    note = VoiceNote(note_id="VIVO-3", observed_at=datetime(2026, 11, 5, 10, 0))
+    rows = VoicePartExtractor(equipment).extract(
+        note, "El de la izquierda está en dieciocho psi"
+    )
+    assert rows[0].equipment_tag == "F-201A"
 
 
 def test_voice_extractor_rejects_ambiguous_alias():
