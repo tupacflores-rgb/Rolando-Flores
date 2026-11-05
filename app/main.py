@@ -29,6 +29,7 @@ from .integrations import (
     WhisperTranscriber,
     apply_tablet_response,
     download_media,
+    merge_corrected_rows,
 )
 from .memory import ConversationMemory
 from .mcp import EquipmentMCPServer
@@ -80,10 +81,12 @@ mqtt_bridge: MqttBridge | None = None
 
 
 def _publish_event(event: Event, *, nota_ids: list[str] | None = None) -> None:
-    if mqtt_bridge is None:
+    payload = event_message(event, nota_ids=nota_ids)
+    if mqtt_bridge is None or not getattr(mqtt_bridge, "enlace_ok", True):
+        service.enqueue("event", str(event.id), payload)
         return
     try:
-        mqtt_bridge.publish_event(event_message(event, nota_ids=nota_ids))
+        mqtt_bridge.publish_event(payload)
     except Exception:
         logger.exception("No se pudo publicar el evento %s", event.id)
 
@@ -95,23 +98,36 @@ def _publish_alert(
     parte_id: str | None = None,
     nota_ids: list[str] | None = None,
 ) -> None:
-    if mqtt_bridge is None:
+    payload = alert_message(alert, equipo=equipo, parte_id=parte_id, nota_ids=nota_ids)
+    if mqtt_bridge is None or not getattr(mqtt_bridge, "enlace_ok", True):
+        service.enqueue("event", str(alert.id), payload)
         return
     try:
-        mqtt_bridge.publish_event(
-            alert_message(alert, equipo=equipo, parte_id=parte_id, nota_ids=nota_ids)
-        )
+        mqtt_bridge.publish_event(payload)
     except Exception:
         logger.exception("No se pudo publicar la alerta %s", alert.id)
 
 
 def _publish_order(order: Order) -> None:
-    if mqtt_bridge is None:
+    payload = order_message(order)
+    if mqtt_bridge is None or not getattr(mqtt_bridge, "enlace_ok", True):
+        service.enqueue("order", str(order.id), payload)
         return
     try:
-        mqtt_bridge.publish_order(order_message(order))
+        mqtt_bridge.publish_order(payload)
     except Exception:
         logger.exception("No se pudo publicar la orden %s", order.id)
+
+
+def _publish_tablet(payload: dict[str, Any]) -> None:
+    key = str(payload["id"])
+    if mqtt_bridge is None or not getattr(mqtt_bridge, "enlace_ok", True):
+        service.enqueue("tablet", key, payload)
+        return
+    try:
+        mqtt_bridge.publish_tablet(payload)
+    except Exception:
+        logger.exception("No se pudo publicar el mensaje de tablet %s", key)
 
 
 def _publish_heartbeat() -> None:
@@ -167,19 +183,18 @@ def _on_recorrida(payload: dict[str, Any]) -> None:
         safety_alerts = detect_safety(transcript, note.note_id)
         for alert in safety_alerts:
             _publish_alert(alert, nota_ids=[note.note_id])
-            if mqtt_bridge is not None:
-                mqtt_bridge.publish_tablet(
-                    tablet_message(
-                        message_id=f"tablet:safety:{note.note_id}:{alert.code}",
-                        note_ids=[note.note_id],
-                        texto=(
-                            f"{alert.message}. Aplique el procedimiento de emergencia "
-                            "y avise por radio al supervisor de turno."
-                        ),
-                        filas=[],
-                        espera_respuesta=False,
-                    )
+            _publish_tablet(
+                tablet_message(
+                    message_id=f"tablet:safety:{note.note_id}:{alert.code}",
+                    note_ids=[note.note_id],
+                    texto=(
+                        f"{alert.message}. Aplique el procedimiento de emergencia "
+                        "y avise por radio al supervisor de turno."
+                    ),
+                    filas=[],
+                    espera_respuesta=False,
                 )
+            )
         rows = VoicePartExtractor(list(service.equipment.values())).extract(note, transcript)
         if not rows:
             logger.info("Nota %s sin filas reportables; no se publica borrador vacío", note.note_id)
@@ -196,7 +211,30 @@ def _on_recorrida(payload: dict[str, Any]) -> None:
 
 
 def _on_cierre(payload: dict[str, Any]) -> None:
-    logger.info("Nota de cierre recibida: %s", payload.get("id"))
+    try:
+        note = load_contract().NotaCierre.model_validate(payload)
+        order = service.orders.get(note.orden_id)
+        if order is None:
+            raise ValueError(f"Orden inexistente: {note.orden_id}")
+        if order.status != OrderStatus.APPROVED:
+            raise ValueError(f"La orden no está Aprobada: {order.status}")
+        service.transition_order(note.orden_id, OrderStatus.EXECUTED)
+        closure = ClosureReport(
+            order_id=order.id,
+            technician=note.tecnico,
+            contractor=note.empresa.casefold() != "propio",
+            tasks_done=[order.task],
+            parts_used=order.parts,
+            hours=0,
+            final_test="Cierre recibido por la planta",
+            photo_ids=note.fotos,
+        )
+        service.attach_closure(note.orden_id, closure)
+        _publish_order(order)
+    except (KeyError, ValueError) as exc:
+        logger.warning("Cierre rechazado: %s", exc)
+    except Exception:
+        logger.exception("No se pudo procesar la nota de cierre %s", payload.get("id"))
 
 
 def _on_respuesta(payload: dict[str, Any]) -> None:
@@ -207,9 +245,13 @@ def _on_respuesta(payload: dict[str, Any]) -> None:
             raise ValueError(f"Mensaje de tablet inexistente: {response.mensaje_id}")
         note = draft_notes[note_id]
         if response.texto.strip().casefold().startswith(("no", "nop")):
-            rows = VoicePartExtractor(list(service.equipment.values())).extract(
+            corrected = VoicePartExtractor(list(service.equipment.values())).extract(
                 note, response.texto
             )
+            rows = merge_corrected_rows(draft_rows[note_id], corrected)
+            draft_rows[note_id] = rows
+            _publish_draft(note, rows)
+            return
         else:
             rows = draft_rows[note_id]
         draft_rows[note_id] = rows
@@ -219,11 +261,9 @@ def _on_respuesta(payload: dict[str, Any]) -> None:
 
 
 def _publish_draft(note: VoiceNote, rows: list[FilaParte]) -> None:
-    if mqtt_bridge is None:
-        return
     message_id = f"tablet:{note.note_id}:{uuid4()}"
     tablet_notes[message_id] = note.note_id
-    mqtt_bridge.publish_tablet(
+    _publish_tablet(
         tablet_message(
             message_id=message_id,
             note_ids=[note.note_id],
@@ -235,9 +275,7 @@ def _publish_draft(note: VoiceNote, rows: list[FilaParte]) -> None:
 
 
 def _publish_tablet_error(note_id: str, text: str) -> None:
-    if mqtt_bridge is None:
-        return
-    mqtt_bridge.publish_tablet(
+    _publish_tablet(
         tablet_message(
             message_id=f"tablet:error:{note_id}",
             note_ids=[note_id],
@@ -273,6 +311,8 @@ def _confirm_voice_draft(note: VoiceNote, rows: list[FilaParte]) -> None:
             _publish_alert(item, parte_id=str(part.id), nota_ids=[note.note_id])
         else:
             _publish_event(item, nota_ids=[note.note_id])
+            if item.status == EventStatus.ESCALATED:
+                _publish_order(service._ensure_order_for_event(item))
 
 
 def _bootstrap_equipment() -> None:
@@ -473,9 +513,10 @@ def process_tablet_response(response: TabletResponse) -> list[FilaParte]:
             if response.corrections and response.corrections.strip().casefold().startswith(
                 ("no", "nop")
             ):
-                corrected = VoicePartExtractor(list(service.equipment.values())).extract(
+                extracted = VoicePartExtractor(list(service.equipment.values())).extract(
                     note, response.corrections
                 )
+                corrected = merge_corrected_rows(corrected, extracted)
                 draft_rows[response.note_id] = corrected
             _confirm_voice_draft(note, corrected)
         except ValueError as exc:
@@ -701,6 +742,16 @@ def enqueue_sync(operation: str, idempotency_key: str, payload: dict[str, Any]) 
 
 @app.post("/api/sincronizacion/procesar")
 def process_sync(enlace_ok: bool = False) -> list[dict]:
-    if not enlace_ok:
+    if not enlace_ok or mqtt_bridge is None or not mqtt_bridge.enlace_ok:
         return []
-    return service.sync(lambda item: None)
+    def publish(item: dict[str, Any]) -> None:
+        if item["operation"] == "event":
+            mqtt_bridge.publish_event(item["payload"])
+        elif item["operation"] == "order":
+            mqtt_bridge.publish_order(item["payload"])
+        elif item["operation"] == "tablet":
+            mqtt_bridge.publish_tablet(item["payload"])
+        else:
+            raise ValueError(f"Operación de sincronización desconocida: {item['operation']}")
+
+    return service.sync(publish)

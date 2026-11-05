@@ -22,13 +22,14 @@ class PostgresRepository:
             cursor.execute(
                 """
                 INSERT INTO equipment
-                    (tag, name, aliases, kind, alarm_min, alarm_max, normal_state, reserve_available)
-                VALUES (%s, %s, %s::jsonb, %s, %s, %s, %s, %s)
+                    (tag, name, aliases, kind, alarm_min, alarm_max, normal_state, reserve_available, sensor_limits)
+                VALUES (%s, %s, %s::jsonb, %s, %s, %s, %s, %s, %s::jsonb)
                 ON CONFLICT (tag) DO UPDATE SET
                     name=EXCLUDED.name, aliases=EXCLUDED.aliases, kind=EXCLUDED.kind,
                     alarm_min=EXCLUDED.alarm_min, alarm_max=EXCLUDED.alarm_max,
                     normal_state=EXCLUDED.normal_state,
-                    reserve_available=EXCLUDED.reserve_available
+                    reserve_available=EXCLUDED.reserve_available,
+                    sensor_limits=EXCLUDED.sensor_limits
                 """,
                 (
                     equipment.tag,
@@ -39,6 +40,10 @@ class PostgresRepository:
                     equipment.alarm_max,
                     equipment.normal_state,
                     equipment.reserve_available,
+                    json.dumps({
+                        key: value.model_dump()
+                        for key, value in equipment.sensor_limits.items()
+                    }),
                 ),
             )
 
@@ -109,21 +114,33 @@ class PostgresRepository:
 
     def restore(self) -> dict[str, list[Any]]:
         restored: dict[str, list[Any]] = {
-            "equipment": [], "parts": [], "events": [], "alerts": [], "orders": []
+            "equipment": [], "parts": [], "sensor_readings": [],
+            "events": [], "alerts": [], "orders": [], "sync": []
         }
         with self.connection.cursor() as cursor:
             cursor.execute(
                 "SELECT tag, name, aliases, kind, alarm_min, alarm_max, normal_state, reserve_available "
-                "FROM equipment"
+                ", sensor_limits FROM equipment"
             )
             for row in cursor.fetchall():
                 restored["equipment"].append(
                     Equipment(
                         tag=row[0], name=row[1], aliases=row[2], kind=row[3],
                         alarm_min=row[4], alarm_max=row[5], normal_state=row[6],
-                        reserve_available=row[7],
+                        reserve_available=row[7], sensor_limits=row[8],
                     )
                 )
+            cursor.execute(
+                "SELECT idempotency_key, equipment_tag, variable, value, unit, observed_at "
+                "FROM sensor_readings ORDER BY observed_at"
+            )
+            restored["sensor_readings"] = [
+                SensorReading(
+                    idempotency_key=row[0], equipment_tag=row[1], variable=row[2],
+                    value=row[3], unit=row[4], observed_at=row[5],
+                )
+                for row in cursor.fetchall()
+            ]
             cursor.execute("SELECT payload FROM parts")
             restored["parts"] = [Part.model_validate(row[0]) for row in cursor.fetchall()]
             cursor.execute("SELECT payload FROM work_orders")
@@ -146,6 +163,21 @@ class PostgresRepository:
                     id=row[0], code=row[1], source_id=row[2], message=row[3],
                     created_at=row[4],
                 )
+                for row in cursor.fetchall()
+            ]
+            cursor.execute(
+                "SELECT idempotency_key, operation, payload, attempts, synced, last_error "
+                "FROM sync_queue WHERE synced = FALSE ORDER BY id"
+            )
+            restored["sync"] = [
+                {
+                    "idempotency_key": row[0],
+                    "operation": row[1],
+                    "payload": row[2],
+                    "attempts": row[3],
+                    "synced": row[4],
+                    "last_error": row[5],
+                }
                 for row in cursor.fetchall()
             ]
         return restored

@@ -8,8 +8,10 @@ CREATE TABLE IF NOT EXISTS equipment (
     alarm_min DOUBLE PRECISION,
     alarm_max DOUBLE PRECISION,
     normal_state TEXT,
-    reserve_available BOOLEAN NOT NULL DEFAULT FALSE
+    reserve_available BOOLEAN NOT NULL DEFAULT FALSE,
+    sensor_limits JSONB NOT NULL DEFAULT '{}'
 );
+ALTER TABLE equipment ADD COLUMN IF NOT EXISTS sensor_limits JSONB NOT NULL DEFAULT '{}';
 CREATE TABLE IF NOT EXISTS parts (
     id UUID PRIMARY KEY,
     idempotency_key TEXT NOT NULL UNIQUE,

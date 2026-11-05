@@ -69,8 +69,17 @@ def detect_safety(text: str, source_id: str) -> list[SafetyAlert]:
         for pattern in patterns:
             found = re.search(rf"\b{re.escape(pattern)}\b", normalized)
             if found:
-                prefix = normalized[max(0, found.start() - 32):found.start()]
-                if not re.search(r"\b(?:no|sin)\b(?:\s+\w+){0,4}\s*$", prefix):
+                prefix = normalized[max(0, found.start() - 16):found.start()]
+                directly_negated = re.search(
+                    rf"(?:\bno\s+(?:hay\s+)?|\bsin\s+){re.escape(pattern)}\s*$",
+                    prefix + pattern,
+                )
+                if pattern == "gas" and re.search(
+                    r"\b(?:no\s+(?:hay\s+)?|sin\s+)olor\s+a\s+gas\s*$",
+                    prefix + pattern,
+                ):
+                    directly_negated = True
+                if not directly_negated:
                     matched = True
                     break
         if matched:
@@ -98,6 +107,7 @@ class DomainService:
         self.material_catalog: dict[str, list[dict]] = {}
         self.task_catalog: list[dict] = []
         self.manual_index = None
+        self.tool_audits: list[dict] = []
         self.sync_queue: deque[str] = deque()
         self.sync_items: dict[str, dict] = {}
         self._sustained: dict[tuple[str, str], list[tuple[datetime, float]]] = defaultdict(list)
@@ -105,10 +115,19 @@ class DomainService:
             restored = self.repository.restore()
             self.equipment = {item.tag: item for item in restored["equipment"]}
             self.parts = {item.idempotency_key: item for item in restored["parts"]}
+            self.sensor_readings = {
+                item.idempotency_key: item for item in restored["sensor_readings"]
+            }
             self.events = {item.idempotency_key: item for item in restored["events"]}
             self.events_by_id = {str(item.id): item for item in restored["events"]}
             self.alerts = {str(item.id): item for item in restored["alerts"]}
             self.orders = {str(item.id): item for item in restored["orders"]}
+            for reading in restored["sensor_readings"]:
+                key = (reading.equipment_tag, reading.variable)
+                self._sustained[key].append((self._aware(reading.observed_at), reading.value))
+            for item in restored["sync"]:
+                self.sync_items[item["idempotency_key"]] = item
+                self.sync_queue.append(item["idempotency_key"])
 
     def get_event(self, event_id: str | UUID) -> Event | None:
         return self.events_by_id.get(str(event_id))
@@ -239,8 +258,20 @@ class DomainService:
         self._sustained[key] = [(when, val) for when, val in history if when >= cutoff]
         anomalies = [
             val for _, val in self._sustained[key]
-            if (equipment.alarm_min is not None and val < equipment.alarm_min)
-            or (equipment.alarm_max is not None and val > equipment.alarm_max)
+            if (
+                (limits := equipment.sensor_limits.get(reading.variable)) is not None
+                and (
+                    (limits.alarm_min is not None and val < limits.alarm_min)
+                    or (limits.alarm_max is not None and val > limits.alarm_max)
+                )
+            )
+            or (
+                limits is None
+                and (
+                    (equipment.alarm_min is not None and val < equipment.alarm_min)
+                    or (equipment.alarm_max is not None and val > equipment.alarm_max)
+                )
+            )
         ]
         sustained = sustained or len(anomalies) >= 2
         evaluation = evaluate_value(
@@ -318,27 +349,51 @@ class DomainService:
             )
             if catalog_task is None:
                 reasons.append("La tarea no está en el catálogo oficial para ese equipo")
+                request.parts = []
             else:
                 request.task = str(catalog_task["nombre"])
                 request.standard_task = True
                 request.detiene_equipo = bool(catalog_task.get("detiene", False))
-                request.keeps_injection = not request.detiene_equipo
+                reserve_available = any(
+                    item.reserve_available for item in self.equipment.values()
+                )
+                request.keeps_injection = (
+                    not request.detiene_equipo or reserve_available
+                )
                 request.internal_staff = catalog_task.get("ejecutor") == "propio"
-                required_parts = [
-                    part["codigo"]
+                required = {
+                    part["codigo"]: float(part.get("cantidad", 0))
                     for part in catalog_task.get("repuestos", [])
-                ]
-                request.parts = required_parts
+                }
+                request.parts = list(required)
                 prices = {
                     item.get("codigo"): float(item.get("costo_usd", 0))
                     for item in self.inventory_catalog
                 }
-                request.total_cost_usd = sum(prices.get(code, 0) for code in required_parts)
                 stock = {
-                    item.get("codigo"): float(item.get("stock", {}).get("yacimiento", 0))
+                    item.get("codigo"): float(
+                        item.get("stock", {}).get("yacimiento", 0)
+                    )
                     for item in self.inventory_catalog
                 }
-                request.stock_available = all(stock.get(code, 0) >= 1 for code in required_parts)
+                for code, quantity in required.items():
+                    if code not in prices:
+                        reasons.append(f"Repuesto sin precio oficial: {code}")
+                    if code not in stock:
+                        reasons.append(f"Repuesto sin stock oficial: {code}")
+                    elif stock[code] < quantity:
+                        reasons.append(
+                            f"Stock insuficiente para {code}: "
+                            f"requiere {quantity}, disponible {stock[code]}"
+                        )
+                request.total_cost_usd = sum(
+                    quantity * prices.get(code, 0)
+                    for code, quantity in required.items()
+                )
+                request.stock_available = not any(
+                    code not in stock or stock[code] < quantity
+                    for code, quantity in required.items()
+                )
         if not request.standard_task:
             reasons.append("La tarea no está en el catálogo estándar")
         if not request.keeps_injection:

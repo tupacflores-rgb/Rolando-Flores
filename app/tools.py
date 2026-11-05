@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from time import perf_counter
 from typing import Any
 
 from pydantic import Field
@@ -30,31 +31,65 @@ class ReadOnlyTools:
     def __init__(self, service) -> None:
         self.service = service
 
+    def _audit(self, name: str, arguments: dict[str, Any], started: float) -> None:
+        self.service.tool_audits.append(
+            {
+                "tool_name": name,
+                "arguments": arguments,
+                "duration_ms": max(0, round((perf_counter() - started) * 1000)),
+                "tokens": 0,
+                "error": None,
+            }
+        )
+
     def equipment(self, query: EquipmentQuery) -> list[Equipment]:
+        started = perf_counter()
         if query.tag:
             equipment = self.service.equipment.get(query.tag)
-            return [] if equipment is None else [equipment]
-        return list(self.service.equipment.values())
+            result = [] if equipment is None else [equipment]
+        else:
+            result = list(self.service.equipment.values())
+        self._audit("equipos", query.model_dump(), started)
+        return result
 
     def sensor_history(self, query: SensorHistoryQuery) -> list[dict[str, Any]]:
-        return [
-            {"equipment_tag": query.tag, "variable": query.variable, "value": value, "observed_at": when}
-            for (tag, variable), values in self.service._sustained.items()
-            if tag == query.tag and variable == query.variable
-            for when, value in values[-query.limit :]
+        started = perf_counter()
+        readings = sorted(
+            (
+                reading
+                for reading in self.service.sensor_readings.values()
+                if reading.equipment_tag == query.tag
+                and reading.variable == query.variable
+            ),
+            key=lambda reading: reading.observed_at,
+        )
+        result = [
+            {
+                "equipment_tag": reading.equipment_tag,
+                "variable": reading.variable,
+                "value": reading.value,
+                "observed_at": reading.observed_at,
+            }
+            for reading in readings[-query.limit :]
         ]
+        self._audit("historial_sensores", query.model_dump(), started)
+        return result
 
     def order_history(self, query: OrderHistoryQuery) -> list[dict[str, Any]]:
+        started = perf_counter()
         orders = [
             order.model_dump(mode="json")
             for order in self.service.orders.values()
             if query.equipment_tag is None or order.equipment_tag == query.equipment_tag
         ]
-        return orders[-query.limit :]
+        result = orders[-query.limit :]
+        self._audit("historial_ordenes", query.model_dump(), started)
+        return result
 
     def inventory(self, query: InventoryQuery) -> list[dict[str, Any]]:
+        started = perf_counter()
         catalog = getattr(self.service, "inventory_catalog", [])
-        return [
+        result = [
             item for item in catalog
             if (query.code is None or item.get("codigo") == query.code)
             and (
@@ -62,38 +97,50 @@ class ReadOnlyTools:
                 or query.equipment_tag in item.get("equipos", [])
             )
         ]
+        self._audit("inventario", query.model_dump(), started)
+        return result
 
     def materials(self, query: MaterialListQuery) -> list[dict[str, Any]]:
-        return [
+        started = perf_counter()
+        result = [
             item for item in getattr(self.service, "material_catalog", {}).get(
                 query.equipment_tag, []
             )
         ]
+        self._audit("materiales", query.model_dump(), started)
+        return result
 
     def tasks(self, query: TaskCatalogQuery) -> list[dict[str, Any]]:
+        started = perf_counter()
         tasks = getattr(self.service, "task_catalog", [])
-        return [
+        result = [
             item for item in tasks
             if query.equipment_tag is None
             or query.equipment_tag in item.get("equipos", [])
         ]
+        self._audit("tareas", query.model_dump(), started)
+        return result
 
     def manuals(self, query: ManualSearchQuery) -> list[dict[str, Any]]:
+        started = perf_counter()
         index = getattr(self.service, "manual_index", None)
         if index is None:
-            return []
-        results = index.search(
-            RetrievalQuery(
-                question=query.question,
-                equipment_tag=query.equipment_tag,
-                k=query.limit,
+            result = []
+        else:
+            results = index.search(
+                RetrievalQuery(
+                    question=query.question,
+                    equipment_tag=query.equipment_tag,
+                    k=query.limit,
+                )
             )
-        )
-        return [
-            {
-                "citation": result.chunk.citation,
-                "text": result.chunk.text,
-                "score": result.score,
-            }
-            for result in results[: query.limit]
-        ]
+            result = [
+                {
+                    "citation": result.chunk.citation,
+                    "text": result.chunk.text,
+                    "score": result.score,
+                }
+                for result in results[: query.limit]
+            ]
+        self._audit("manuales", query.model_dump(), started)
+        return result

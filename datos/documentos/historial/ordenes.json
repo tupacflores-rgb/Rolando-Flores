@@ -1,0 +1,5960 @@
+[
+  {
+    "id": "OT-24-0001",
+    "fecha_aviso": "2024-10-03T20:15-03:00",
+    "fecha_inicio": "2024-10-04T01:15-03:00",
+    "fecha_cierre": "2024-10-04T07:15-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "pulsacion alta en descraga de bomba 1",
+    "trabajo_realizado": "valvulas gastadas, un resorte partido en descarga 2. se cambio kit completo",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0002",
+    "fecha_aviso": "2024-10-09T21:00-03:00",
+    "fecha_inicio": "2024-10-10T00:00-03:00",
+    "fecha_cierre": "2024-10-10T02:30-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "bomba 2 patinan las correas",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0003",
+    "fecha_aviso": "2024-10-12T14:20-03:00",
+    "fecha_inicio": "2024-10-12T16:20-03:00",
+    "fecha_cierre": "2024-10-12T19:20-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "medicion mensual de vibraciones B-101, B-102, B-103",
+    "trabajo_realizado": "se mideiron las 3 bbas. valores globales en zona B. sin novedad",
+    "repuestos": [],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-24-0004",
+    "fecha_aviso": "2024-10-15T08:35-03:00",
+    "fecha_inicio": "2024-10-15T09:35-03:00",
+    "fecha_cierre": "2024-10-15T13:05-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "dif de primario en 1,54",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0005",
+    "fecha_aviso": "2024-10-16T21:30-03:00",
+    "fecha_inicio": "2024-10-16T23:30-03:00",
+    "fecha_cierre": "2024-10-17T03:30-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Oscar Millapi",
+    "aviso": "pierde agua x el prensa de b-102, cuento 45 gotas/min",
+    "trabajo_realizado": "cambio empaq. emoblo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0006",
+    "fecha_aviso": "2024-10-22T21:10-03:00",
+    "fecha_inicio": "2024-10-24T21:10-03:00",
+    "fecha_cierre": "2024-10-25T02:10-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Oscar Millapi",
+    "aviso": "PIERDE AGUA X EL PRENSA DE B-103, CUENTO 27 GOTAS/MIN",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0007",
+    "fecha_aviso": "2024-10-26T02:40-03:00",
+    "fecha_inicio": "2024-10-26T04:40-03:00",
+    "fecha_cierre": "2024-10-26T06:40-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Oscar Millapi",
+    "aviso": "caudal de bba 2 bajo y motor caliente, chilla",
+    "trabajo_realizado": "CORREAS CUARTEADAS, SE CAMBIO EL JUEGO DE 4. SE REVISO POLEA OK",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0008",
+    "fecha_aviso": "2024-10-26T14:05-03:00",
+    "fecha_inicio": "2024-10-27T10:05-03:00",
+    "fecha_cierre": "2024-10-27T13:35-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "F-201B CON DIFERENCIAL ALTO, CAMBIAR CARTUCHOS",
+    "trabajo_realizado": "cartuchos nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0009",
+    "fecha_aviso": "2024-11-03T09:20-03:00",
+    "fecha_inicio": "2024-11-03T11:20-03:00",
+    "fecha_cierre": "2024-11-03T13:20-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "caudal de la tres bajo y motor caliente, chilla",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0010",
+    "fecha_aviso": "2024-11-04T08:25-03:00",
+    "fecha_inicio": "2024-11-05T04:25-03:00",
+    "fecha_cierre": "2024-11-05T05:55-03:00",
+    "equipo": "B-101",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "B1 VIBRACION SUBIENDO Y TEMP ACEITE 76",
+    "trabajo_realizado": "espectro c/ picos en BPFO del rodamiento lado polea. recomienda cambio de rodamientos de ciguenal",
+    "repuestos": [],
+    "horas": 1.5,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-24-0011",
+    "fecha_aviso": "2024-11-08T20:30-03:00",
+    "fecha_inicio": "2024-11-10T20:30-03:00",
+    "fecha_cierre": "2024-11-10T21:00-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "bba 3 aceite bajo en visor, temp aceite subiendo",
+    "trabajo_realizado": "SE COMPLETO NIVEL DE ACEITE ISO 220. OK",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0012",
+    "fecha_aviso": "2024-11-10T15:15-03:00",
+    "fecha_inicio": "2024-11-10T20:15-03:00",
+    "fecha_cierre": "2024-11-11T00:15-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "f-201a con diferencial alto, cambiar cartuchos",
+    "trabajo_realizado": "cartuchos nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0013",
+    "fecha_aviso": "2024-11-12T16:30-03:00",
+    "fecha_inicio": "2024-11-12T17:30-03:00",
+    "fecha_cierre": "2024-11-12T20:30-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "medicion mensual de vibraciones b-101, b-102, b-103",
+    "trabajo_realizado": "vibraciones mensuales ok. B3 en reserva medida en marcha 15 min",
+    "repuestos": [],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-24-0014",
+    "fecha_aviso": "2024-11-16T02:45-03:00",
+    "fecha_inicio": "2024-11-16T05:45-03:00",
+    "fecha_cierre": "2024-11-16T09:15-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "PIERDE AGUA X EL PRENSA DE LA TRES, CUENTO 63 GOTAS/MIN",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0015",
+    "fecha_aviso": "2024-11-19T16:30-03:00",
+    "fecha_inicio": "2024-11-21T16:30-03:00",
+    "fecha_cierre": "2024-11-22T10:00-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ROD"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "cambio rodamientos cigueñal B-101 programado",
+    "trabajo_realizado": "se cambiaron rodamientos de cigueñal ambos lados y sellos de carter. pista ext lado polea picada. prueba 2 hs vib 2,4 temp 54",
+    "repuestos": [
+      {
+        "codigo": "TX-ROD-CIG",
+        "cantidad": 1
+      },
+      {
+        "codigo": "TX-SELLO-CAR",
+        "cantidad": 1
+      }
+    ],
+    "horas": 17.5,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-24-0016",
+    "fecha_aviso": "2024-11-19T20:30-03:00",
+    "fecha_inicio": "2024-11-20T22:30-03:00",
+    "fecha_cierre": "2024-11-21T00:30-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "caudal de B-103 bajo y motor caliente, chilla",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0017",
+    "fecha_aviso": "2024-11-24T16:30-03:00",
+    "fecha_inicio": "2024-11-25T12:30-03:00",
+    "fecha_cierre": "2024-11-25T14:30-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "la del fondo patinan las correas",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0018",
+    "fecha_aviso": "2024-11-29T20:40-03:00",
+    "fecha_inicio": "2024-11-29T22:40-03:00",
+    "fecha_cierre": "2024-11-30T01:10-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "chirrido en crreas de la tres al arrancar",
+    "trabajo_realizado": "SE CAMBIARON LAS 4 CORREAS 5V-1800 Y SE TENSARON. RETESNAR EN 24 HS",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0019",
+    "fecha_aviso": "2024-12-05T20:15-03:00",
+    "fecha_inicio": "2024-12-06T16:15-03:00",
+    "fecha_cierre": "2024-12-06T21:15-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "goteo empaquetadura B2 en aumento (86 g/min) revisar",
+    "trabajo_realizado": "cambio empaq. embolo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0020",
+    "fecha_aviso": "2024-12-07T20:15-03:00",
+    "fecha_inicio": "2024-12-08T16:15-03:00",
+    "fecha_cierre": "2024-12-08T18:45-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Oscar Millapi",
+    "aviso": "FA con diferencial alto, cambiar cartuchos",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0021",
+    "fecha_aviso": "2024-12-11T20:10-03:00",
+    "fecha_inicio": "2024-12-12T01:10-03:00",
+    "fecha_cierre": "2024-12-12T03:40-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Oscar Millapi",
+    "aviso": "cambio de cartuchos filtro b x dif alto",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0022",
+    "fecha_aviso": "2024-12-12T14:25-03:00",
+    "fecha_inicio": "2024-12-12T15:25-03:00",
+    "fecha_cierre": "2024-12-12T18:25-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "medicion mensual de vibraciones b-101, b-102, b-103",
+    "trabajo_realizado": "se midieron las 3 bbas. valores globales en zona B. sin novedad",
+    "repuestos": [],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-24-0023",
+    "fecha_aviso": "2024-12-13T16:00-03:00",
+    "fecha_inicio": "2024-12-14T12:00-03:00",
+    "fecha_cierre": "2024-12-14T17:00-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Oscar Millapi",
+    "aviso": "bba 1 empaquetadura pierde, charco abajo del cabezal",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0024",
+    "fecha_aviso": "2024-12-16T20:45-03:00",
+    "fecha_inicio": "2024-12-16T22:45-03:00",
+    "fecha_cierre": "2024-12-16T23:15-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Oscar Millapi",
+    "aviso": "la uno aceite bajo en visor, temp aceite subiendo",
+    "trabajo_realizado": "SE CMPLETO NIVEL DE ACEITE ISO 220. OK",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0025",
+    "fecha_aviso": "2024-12-21T02:10-03:00",
+    "fecha_inicio": "2024-12-23T02:10-03:00",
+    "fecha_cierre": "2024-12-23T04:40-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "b2 patinan las coreas",
+    "trabajo_realizado": "se cambiaron las 4 correas 5v-1800 y se tensaron. retenasr en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0026",
+    "fecha_aviso": "2024-12-27T10:00-03:00",
+    "fecha_inicio": "2024-12-27T15:00-03:00",
+    "fecha_cierre": "2024-12-27T15:30-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "temp aceite bba 2 en 74 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "reposicion de aceite. 6 litros. temp bajando",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-24-0027",
+    "fecha_aviso": "2024-12-28T14:05-03:00",
+    "fecha_inicio": "2024-12-28T17:05-03:00",
+    "fecha_cierre": "2024-12-28T18:35-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "I-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Oscar Millapi",
+    "aviso": "disparo de bomba 2 x temp aceite, no rearmar hasta revisar",
+    "trabajo_realizado": "se revisaron valvulas, ok. se rearmo y quedo normal",
+    "repuestos": [],
+    "horas": 1.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0001",
+    "fecha_aviso": "2025-01-02T10:00-03:00",
+    "fecha_inicio": "2025-01-03T06:00-03:00",
+    "fecha_cierre": "2025-01-03T09:30-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Oscar Millapi",
+    "aviso": "la dos empaquetadura pierde, charco abajo del cabezal",
+    "trabajo_realizado": "se cambio empaquetadura completa de los 3 embolos con kit. ebolos ok. queda goteando normal",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0002",
+    "fecha_aviso": "2025-01-07T02:05-03:00",
+    "fecha_inicio": "2025-01-09T02:05-03:00",
+    "fecha_cierre": "2025-01-09T04:35-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "DIF DE FILTRO A EN 1,60",
+    "trabajo_realizado": "cambio de cartuchos y junta de tapa (estaba aplastada). ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      },
+      {
+        "codigo": "FC-JUNTA-TAPA",
+        "cantidad": 1
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0003",
+    "fecha_aviso": "2025-01-08T09:15-03:00",
+    "fecha_inicio": "2025-01-08T14:15-03:00",
+    "fecha_cierre": "2025-01-08T16:15-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "caudal de bba 3 bajo y motor caliente, chilla",
+    "trabajo_realizado": "se cambiaron las 4 correas 5v-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0004",
+    "fecha_aviso": "2025-01-12T14:30-03:00",
+    "fecha_inicio": "2025-01-12T17:30-03:00",
+    "fecha_cierre": "2025-01-12T21:00-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "MEDICION MENSUAL DE VIBRACIONES B-101, B-102, B-103",
+    "trabajo_realizado": "se midieron las 3 bbas. valores globales en zona b. sin novedad",
+    "repuestos": [],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0005",
+    "fecha_aviso": "2025-01-13T02:25-03:00",
+    "fecha_inicio": "2025-01-13T03:25-03:00",
+    "fecha_cierre": "2025-01-13T07:25-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "bba 3 gotea mucho la empaquetadura, 75 gotas x min aprox",
+    "trabajo_realizado": "EMPAQUETADURA NUEVA. SE DEJO GOTEANDO Y SE AJUSTO. OK SIN PERDIDA",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0006",
+    "fecha_aviso": "2025-01-14T09:50-03:00",
+    "fecha_inicio": "2025-01-15T05:50-03:00",
+    "fecha_cierre": "2025-01-15T07:50-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "I-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "la uno vibra 5,8, no golpea pero vibra",
+    "trabajo_realizado": "se revisaron valvulas, desgaste normal, no se cambian. vibracion sigue igual",
+    "repuestos": [],
+    "horas": 2.0,
+    "codigo_falla": "F06",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0007",
+    "fecha_aviso": "2025-01-16T08:50-03:00",
+    "fecha_inicio": "2025-01-17T04:50-03:00",
+    "fecha_cierre": "2025-01-17T11:20-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "b-103 golpea, manometro oscila mucho",
+    "trabajo_realizado": "se cambiaron valvulas de sucion y descarga (kit completo). discos con escalon",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0008",
+    "fecha_aviso": "2025-01-20T14:15-03:00",
+    "fecha_inicio": "2025-01-20T17:15-03:00",
+    "fecha_cierre": "2025-01-20T17:45-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "temp aceite la tres en 66 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "reposicion de aceite. 8 litros. temp bajando",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0009",
+    "fecha_aviso": "2025-01-25T15:30-03:00",
+    "fecha_inicio": "2025-01-26T11:30-03:00",
+    "fecha_cierre": "2025-01-26T14:00-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "cambio de cartcuhos F-201B x dif alto",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0010",
+    "fecha_aviso": "2025-01-27T09:30-03:00",
+    "fecha_inicio": "2025-01-27T11:30-03:00",
+    "fecha_cierre": "2025-01-27T16:30-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "GOTEO EMPAQUETADURA BOMBA 1 EN AUMENTO (31 G/MIN) REVISAR",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0011",
+    "fecha_aviso": "2025-01-30T10:00-03:00",
+    "fecha_inicio": "2025-01-30T11:00-03:00",
+    "fecha_cierre": "2025-01-30T11:30-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "falta aceite b-101",
+    "trabajo_realizado": "SE COMPLETO NIVEL DE ACEITE ISO 220. OK",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0012",
+    "fecha_aviso": "2025-02-02T21:40-03:00",
+    "fecha_inicio": "2025-02-03T23:40-03:00",
+    "fecha_cierre": "2025-02-04T02:10-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "chirrido en correas de la uno al arrancar",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0013",
+    "fecha_aviso": "2025-02-03T14:10-03:00",
+    "fecha_inicio": "2025-02-03T15:10-03:00",
+    "fecha_cierre": "2025-02-03T18:40-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Oscar Millapi",
+    "aviso": "filtro a sucio, manometro dif 1,7",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0014",
+    "fecha_aviso": "2025-02-03T14:30-03:00",
+    "fecha_inicio": "2025-02-03T19:30-03:00",
+    "fecha_cierre": "2025-02-04T00:30-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "B1 vib 6,3 en aumento, cambiar valvulas",
+    "trabajo_realizado": "CBIO DE VALVULAS KIT COMPLETO. VIBRACION BAJO UN POCO (6,0) PERO NO SE FUE. NO HAY PULSACION",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": "F06",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0015",
+    "fecha_aviso": "2025-02-05T20:40-03:00",
+    "fecha_inicio": "2025-02-05T23:40-03:00",
+    "fecha_cierre": "2025-02-06T04:40-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "B1 gotea mucho la empaquetadura, 65 gotas x min aprox",
+    "trabajo_realizado": "cambio empaq. embolo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0016",
+    "fecha_aviso": "2025-02-12T09:20-03:00",
+    "fecha_inicio": "2025-02-12T12:20-03:00",
+    "fecha_cierre": "2025-02-12T16:20-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "b-102 gotea mucho la empaquetadura, 76 gotas x min aprox",
+    "trabajo_realizado": "cmabio empaq. embolo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0017",
+    "fecha_aviso": "2025-02-12T16:15-03:00",
+    "fecha_inicio": "2025-02-12T18:15-03:00",
+    "fecha_cierre": "2025-02-12T22:15-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "medicion mensual de vibraciones B-101, B-102, B-103",
+    "trabajo_realizado": "se midieron las 3 bbas. valores globales en zona b. sin novedad",
+    "repuestos": [],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0018",
+    "fecha_aviso": "2025-02-17T21:40-03:00",
+    "fecha_inicio": "2025-02-19T21:40-03:00",
+    "fecha_cierre": "2025-02-19T23:40-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "chirrido en correas de la dos al arrancar",
+    "trabajo_realizado": "cbio de juego de correas completo. flceha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0019",
+    "fecha_aviso": "2025-02-24T08:00-03:00",
+    "fecha_inicio": "2025-02-24T11:00-03:00",
+    "fecha_cierre": "2025-02-24T18:30-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "GOLPETEO EN CABEZAL DE B3, VIBRA MAS DE LO NORMAL",
+    "trabajo_realizado": "se cambiaron valvulas de succion y descarga (kit completo). discos con escalon",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 7.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0020",
+    "fecha_aviso": "2025-02-26T21:15-03:00",
+    "fecha_inicio": "2025-02-26T22:15-03:00",
+    "fecha_cierre": "2025-02-27T00:45-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "I-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "dipsaro de B2 x vibracion, no raermar hasta revisar",
+    "trabajo_realizado": "se revisaron valvulas, ok. se rearmo y quedo normal",
+    "repuestos": [],
+    "horas": 2.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0021",
+    "fecha_aviso": "2025-02-28T02:55-03:00",
+    "fecha_inicio": "2025-03-02T02:55-03:00",
+    "fecha_cierre": "2025-03-02T05:25-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Oscar Millapi",
+    "aviso": "caudal de B3 bajo y motor caliente, chilla",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0022",
+    "fecha_aviso": "2025-03-02T15:25-03:00",
+    "fecha_inicio": "2025-03-02T20:25-03:00",
+    "fecha_cierre": "2025-03-02T23:25-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "PRIMARIO SUCIO, MANOMETRO DIF 1,7",
+    "trabajo_realizado": "cambio de cartuchos y junta de tapa (estaba aplastada). ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      },
+      {
+        "codigo": "FC-JUNTA-TAPA",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0023",
+    "fecha_aviso": "2025-03-06T08:40-03:00",
+    "fecha_inicio": "2025-03-06T10:40-03:00",
+    "fecha_cierre": "2025-03-06T14:10-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "LA DEL FONDO GOTEA MUCHO LA EMPAQUETADURA, 46 GOTAS X MIN APROX",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0024",
+    "fecha_aviso": "2025-03-06T10:55-03:00",
+    "fecha_inicio": "2025-03-08T10:55-03:00",
+    "fecha_cierre": "2025-03-08T11:55-03:00",
+    "equipo": "B-101",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "B1 SIGUE VIBRANDO DESPUES DE CAMBIAR VALULAS",
+    "trabajo_realizado": "espectro: axial alta en 1x y 2x, tipico desalineacion. rodamientos ok (cambiados nov). acople caliente 61 grados",
+    "repuestos": [],
+    "horas": 1.0,
+    "codigo_falla": "F06",
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0025",
+    "fecha_aviso": "2025-03-06T14:05-03:00",
+    "fecha_inicio": "2025-03-06T19:05-03:00",
+    "fecha_cierre": "2025-03-06T22:35-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "FB sucio, manometro dif 1,6",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0026",
+    "fecha_aviso": "2025-03-11T16:35-03:00",
+    "fecha_inicio": "2025-03-11T19:35-03:00",
+    "fecha_cierre": "2025-03-12T01:05-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ALI"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "alinear acople b-101 segun informe vibraciones",
+    "trabajo_realizado": "alineacion laser contraeje-piñon. estaba 0,35 mm paralelo. elastomero hecho polvo, se cambio. vib despues 2,6. la base del contraeje tiene un calce flojo, se ajusto",
+    "repuestos": [
+      {
+        "codigo": "ACO-ELAST-90",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.5,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0027",
+    "fecha_aviso": "2025-03-12T10:05-03:00",
+    "fecha_inicio": "2025-03-13T06:05-03:00",
+    "fecha_cierre": "2025-03-13T09:35-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "meidcion mensual de vibraciones b-101, b-102, b-103",
+    "trabajo_realizado": "se midieron las 3 bbas. valores globales en zona b. sin novedad",
+    "repuestos": [],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0028",
+    "fecha_aviso": "2025-03-14T15:05-03:00",
+    "fecha_inicio": "2025-03-14T17:05-03:00",
+    "fecha_cierre": "2025-03-14T19:05-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "BBA 3 CORREAS FLOJAS, POLEA CALIENTE",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se rveiso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0029",
+    "fecha_aviso": "2025-03-17T10:15-03:00",
+    "fecha_inicio": "2025-03-17T11:15-03:00",
+    "fecha_cierre": "2025-03-17T16:45-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "GOLPETEO EN CABEZAL DE BBA 3, VIBRA MAS DE LO NORMAL",
+    "trabajo_realizado": "valvulas gastadas, un resorte partido en descarga 2. se cambio kit completo",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.5,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0030",
+    "fecha_aviso": "2025-03-20T20:30-03:00",
+    "fecha_inicio": "2025-03-21T16:30-03:00",
+    "fecha_cierre": "2025-03-21T18:30-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "CAUDAL DE B-103 BAJO Y MOTOR CALIENTE, CHILLA",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0031",
+    "fecha_aviso": "2025-03-24T02:30-03:00",
+    "fecha_inicio": "2025-03-24T04:30-03:00",
+    "fecha_cierre": "2025-03-24T10:00-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "GOLPETEO EN CABEZAL DE B-101, VIBRA MAS DE LO NORMAL",
+    "trabajo_realizado": "valvulas gastadas, un resorte partido en descarga 2. se cambio kit completo",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.5,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0032",
+    "fecha_aviso": "2025-03-30T16:50-03:00",
+    "fecha_inicio": "2025-03-30T17:50-03:00",
+    "fecha_cierre": "2025-03-30T21:20-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "b1 gotea mucho la empaquetadura, 25 gotas x min aprox",
+    "trabajo_realizado": "emapquetadura nueva. se dejo goteando y se ajusto. ok sin perdida",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0033",
+    "fecha_aviso": "2025-04-02T11:10-03:00",
+    "fecha_inicio": "2025-04-02T12:10-03:00",
+    "fecha_cierre": "2025-04-02T15:40-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "primario sucio, manometro dif 1,6",
+    "trabajo_realizado": "cartuchos nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0034",
+    "fecha_aviso": "2025-04-07T09:15-03:00",
+    "fecha_inicio": "2025-04-07T10:15-03:00",
+    "fecha_cierre": "2025-04-07T18:15-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "bba 2 golpea, manometro oscila mucho",
+    "trabajo_realizado": "CBIO DE VALVULAS LAS 6. ASIENTOS MARCADOS. SE AJUSTO TAPAS A TORQUE. VIB OK",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 8.0,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0035",
+    "fecha_aviso": "2025-04-08T11:50-03:00",
+    "fecha_inicio": "2025-04-08T14:50-03:00",
+    "fecha_cierre": "2025-04-08T19:20-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "la tres gotea mucho de nuevo",
+    "trabajo_realizado": "cbio de empaquetadura B3. embolo 2 con rayitas finas, se pulio con tela",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0036",
+    "fecha_aviso": "2025-04-12T08:55-03:00",
+    "fecha_inicio": "2025-04-14T08:55-03:00",
+    "fecha_cierre": "2025-04-14T12:25-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "medicion mensual de vibraciones B-101, B-102, B-103",
+    "trabajo_realizado": "ruta de vibraciones. todo en zona a/b. informe adjunto",
+    "repuestos": [],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0037",
+    "fecha_aviso": "2025-04-13T11:35-03:00",
+    "fecha_inicio": "2025-04-14T13:35-03:00",
+    "fecha_cierre": "2025-04-14T14:05-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "temp aceite b-101 en 66 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "se completo nivel de aceite iso 220. ok",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0038",
+    "fecha_aviso": "2025-04-16T15:20-03:00",
+    "fecha_inicio": "2025-04-16T20:20-03:00",
+    "fecha_cierre": "2025-04-16T23:20-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "dif de filtro B en 1,69",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0039",
+    "fecha_aviso": "2025-04-18T15:05-03:00",
+    "fecha_inicio": "2025-04-18T20:05-03:00",
+    "fecha_cierre": "2025-04-18T22:05-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "bomba 1 patinan las correas",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0040",
+    "fecha_aviso": "2025-04-26T02:55-03:00",
+    "fecha_inicio": "2025-04-26T22:55-03:00",
+    "fecha_cierre": "2025-04-27T01:25-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "chirrido en correas de la dos al arrancar",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0041",
+    "fecha_aviso": "2025-04-27T14:00-03:00",
+    "fecha_inicio": "2025-04-29T14:00-03:00",
+    "fecha_cierre": "2025-04-29T18:00-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "dif de FA en 1,63",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0042",
+    "fecha_aviso": "2025-04-29T10:55-03:00",
+    "fecha_inicio": "2025-04-29T15:55-03:00",
+    "fecha_cierre": "2025-04-29T17:55-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "chirrido en correas de la del fondo al arrancar",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0043",
+    "fecha_aviso": "2025-04-29T15:35-03:00",
+    "fecha_inicio": "2025-04-29T16:35-03:00",
+    "fecha_cierre": "2025-04-29T18:35-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "CORREAS B2",
+    "trabajo_realizado": "cbio correas. Aprobado x telefono x el supervisor porq no habia resevra (B3 en mant). quedo 2 hs c/ una sola bba",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0044",
+    "fecha_aviso": "2025-05-04T16:30-03:00",
+    "fecha_inicio": "2025-05-04T17:30-03:00",
+    "fecha_cierre": "2025-05-04T18:00-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "temp aceite bomba 2 en 76 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "reposicion de aceite. 8 litros. temp bajando",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0045",
+    "fecha_aviso": "2025-05-09T20:10-03:00",
+    "fecha_inicio": "2025-05-10T16:10-03:00",
+    "fecha_cierre": "2025-05-10T19:40-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "bba 2 gotea mucho la empaquetadura, 26 gotas x min aprox",
+    "trabajo_realizado": "se cambio empaquetadura completa de los 3 embolos con kit. embolos ok. queda goteando normal",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0046",
+    "fecha_aviso": "2025-05-12T11:25-03:00",
+    "fecha_inicio": "2025-05-12T13:25-03:00",
+    "fecha_cierre": "2025-05-12T16:25-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "medicion mensual de vibraciones b-101, b-102, b-103",
+    "trabajo_realizado": "SE MIDIERON LAS 3 BBAS. VALORES GLOBALES EN ZONA B. SIN NOVEDAD",
+    "repuestos": [],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0047",
+    "fecha_aviso": "2025-05-14T10:20-03:00",
+    "fecha_inicio": "2025-05-14T13:20-03:00",
+    "fecha_cierre": "2025-05-14T15:50-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "la dos correas flojas, polea caliente",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0048",
+    "fecha_aviso": "2025-05-20T14:55-03:00",
+    "fecha_inicio": "2025-05-20T19:55-03:00",
+    "fecha_cierre": "2025-05-21T00:55-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "goteo fuerte prensa 2 de la del fondo",
+    "trabajo_realizado": "otra vez empaq de la 3, el embolo 2 pierde. rayas se sienten con la uña",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0049",
+    "fecha_aviso": "2025-05-20T16:10-03:00",
+    "fecha_inicio": "2025-05-20T21:10-03:00",
+    "fecha_cierre": "2025-05-21T00:40-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "b-101 gotea mucho la empaquetadura, 72 gotas x min aprox",
+    "trabajo_realizado": "SE CAMBIO EMPAQUETADURA COMPLETA DE LOS 3 EMBOLOS CON KIT. EMBOLOS OK. QUEDA GOTEANDO NOMRAL",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0050",
+    "fecha_aviso": "2025-05-22T20:10-03:00",
+    "fecha_inicio": "2025-05-23T16:10-03:00",
+    "fecha_cierre": "2025-05-23T19:40-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "CAMBIO DE CARTUCHOS PRIMARIO X DIF ALTO",
+    "trabajo_realizado": "cartuchos nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0051",
+    "fecha_aviso": "2025-05-26T14:20-03:00",
+    "fecha_inicio": "2025-05-26T15:20-03:00",
+    "fecha_cierre": "2025-05-26T20:20-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "ruido metalico en bba 1, vib 7,0",
+    "trabajo_realizado": "CBIO DE VALVULAS LAS 6. ASIENTOS MARCADOS. SE AJUSTO TAPAS A TORQUE. VIB OK",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0052",
+    "fecha_aviso": "2025-05-28T15:35-03:00",
+    "fecha_inicio": "2025-05-28T16:35-03:00",
+    "fecha_cierre": "2025-05-28T19:35-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "secundario sucio, manometro dif 1,6",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0053",
+    "fecha_aviso": "2025-06-01T16:20-03:00",
+    "fecha_inicio": "2025-06-01T17:20-03:00",
+    "fecha_cierre": "2025-06-01T19:50-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "b-101 correas flojas, polea caliente",
+    "trabajo_realizado": "se cambiaron las 4 correas 5V-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0054",
+    "fecha_aviso": "2025-06-03T10:30-03:00",
+    "fecha_inicio": "2025-06-03T15:30-03:00",
+    "fecha_cierre": "2025-06-03T21:00-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "b2 golpea, pulsacion alta, vib 6,8",
+    "trabajo_realizado": "VALVULAS DESTRUIDAS, MUCHA ARENA EN LAS CAMARAS. SE CAMBIO KIT",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.5,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0055",
+    "fecha_aviso": "2025-06-06T02:15-03:00",
+    "fecha_inicio": "2025-06-07T04:15-03:00",
+    "fecha_cierre": "2025-06-07T06:45-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "caudal de b1 bajo y motor caliente, chilla",
+    "trabajo_realizado": "CORREAS CUARTEADAS, SE CAMBIO EL JUEGO DE 4. SE REVISO POLEA OK",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0056",
+    "fecha_aviso": "2025-06-10T11:30-03:00",
+    "fecha_inicio": "2025-06-10T12:30-03:00",
+    "fecha_cierre": "2025-06-10T13:00-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "B-101 aceite bajo en visor, temp aceite subiendo",
+    "trabajo_realizado": "se repuso aceite 220 hasta max, 8 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0057",
+    "fecha_aviso": "2025-06-12T16:05-03:00",
+    "fecha_inicio": "2025-06-12T17:05-03:00",
+    "fecha_cierre": "2025-06-12T20:05-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "medicion mensual de vibraciones B-101, B-102, B-103",
+    "trabajo_realizado": "vibraciones mensuales ok. B3 en reserva medida en marcha 15 min",
+    "repuestos": [],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0058",
+    "fecha_aviso": "2025-06-14T16:15-03:00",
+    "fecha_inicio": "2025-06-14T17:15-03:00",
+    "fecha_cierre": "2025-06-15T00:15-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "la uno golpea tambien, igual q la dos",
+    "trabajo_realizado": "valvulas gastadas c/ arena. raro tan seguido. kit nuevo",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 7.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0059",
+    "fecha_aviso": "2025-06-16T16:20-03:00",
+    "fecha_inicio": "2025-06-18T16:20-03:00",
+    "fecha_cierre": "2025-06-18T18:50-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "dif de f-201b en 1,56",
+    "trabajo_realizado": "dif del fb estaba en 0,09 hace semanas (nadie lo vio). al abrir 2 cartuchos partidos y uno fuera del asiento. se cambiaron los 48 y o-rings. por esto se gastaron las valvluas de b1 y b2",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F08",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0060",
+    "fecha_aviso": "2025-06-17T14:35-03:00",
+    "fecha_inicio": "2025-06-18T16:35-03:00",
+    "fecha_cierre": "2025-06-18T17:05-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "falta aceite la dos",
+    "trabajo_realizado": "reposicion de aceite. 6 litros. temp bajando",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0061",
+    "fecha_aviso": "2025-06-21T14:45-03:00",
+    "fecha_inicio": "2025-06-22T16:45-03:00",
+    "fecha_cierre": "2025-06-22T20:45-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "bomba 2 empaquetadura pierde, charco abajo del cabezal",
+    "trabajo_realizado": "EMPAQUETADURA NUEVA. SE DEJO GOTEANDO Y SE AJUSTO. OK SIN PERDIDA",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0062",
+    "fecha_aviso": "2025-06-22T21:30-03:00",
+    "fecha_inicio": "2025-06-22T23:30-03:00",
+    "fecha_cierre": "2025-06-23T02:30-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "primario sucio, manometro dif 1,5",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0063",
+    "fecha_aviso": "2025-06-26T15:55-03:00",
+    "fecha_inicio": "2025-06-26T17:55-03:00",
+    "fecha_cierre": "2025-06-26T20:25-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "bomba 2 patinan las correas",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0064",
+    "fecha_aviso": "2025-06-30T09:55-03:00",
+    "fecha_inicio": "2025-06-30T11:55-03:00",
+    "fecha_cierre": "2025-06-30T16:55-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "PULSACION ALTA EN DESCAGRA DE BOMBA 2",
+    "trabajo_realizado": "valvulas gastadas, un resorte partido en descarga 2. se cambio kit completo",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0065",
+    "fecha_aviso": "2025-07-01T11:35-03:00",
+    "fecha_inicio": "2025-07-01T12:35-03:00",
+    "fecha_cierre": "2025-07-01T16:05-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "goteo fuerte prensa 2 de la del fondo",
+    "trabajo_realizado": "empaquetadura b3 de nuevo (3ra vez). embolo 2 rayado, pedir embolo tx-emb-57c, con el kit solo no alcanza",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0066",
+    "fecha_aviso": "2025-07-06T16:10-03:00",
+    "fecha_inicio": "2025-07-06T19:10-03:00",
+    "fecha_cierre": "2025-07-06T19:40-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "B-103 aceite bajo en visor, temp aceite subiendo",
+    "trabajo_realizado": "REPOSICION DE ACEITE. 6 LITROS. TEMP BAJANDO",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0067",
+    "fecha_aviso": "2025-07-07T08:55-03:00",
+    "fecha_inicio": "2025-07-07T13:55-03:00",
+    "fecha_cierre": "2025-07-07T16:55-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "DIF DE FB EN 1,73",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0068",
+    "fecha_aviso": "2025-07-08T11:05-03:00",
+    "fecha_inicio": "2025-07-08T13:05-03:00",
+    "fecha_cierre": "2025-07-08T14:05-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-I-CAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "pres descarga B3 claada en 112 hace 2 dias, local marca 104 bar",
+    "trabajo_realizado": "linea de impulso del transmisor congelada, el calefaccionado estaba cortado (fusible). se reupso y se calibro. ok",
+    "repuestos": [],
+    "horas": 1.0,
+    "codigo_falla": "F10",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0069",
+    "fecha_aviso": "2025-07-12T10:20-03:00",
+    "fecha_inicio": "2025-07-12T12:20-03:00",
+    "fecha_cierre": "2025-07-12T15:20-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "MEDICION MENSUAL DE VIBRACIONES B-101, B-102, B-103",
+    "trabajo_realizado": "vibraciones mensuales ok. B3 en reserva medida en marcha 15 min",
+    "repuestos": [],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0070",
+    "fecha_aviso": "2025-07-14T11:25-03:00",
+    "fecha_inicio": "2025-07-15T07:25-03:00",
+    "fecha_cierre": "2025-07-15T07:55-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "la dos aceite bajo en visor, temp aceite subiedno",
+    "trabajo_realizado": "se repuso aceite 220 hasta max, 8 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0071",
+    "fecha_aviso": "2025-07-16T10:05-03:00",
+    "fecha_inicio": "2025-07-16T12:05-03:00",
+    "fecha_cierre": "2025-07-16T13:05-03:00",
+    "equipo": "F-201A",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-I-CAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "dif FA no se mueve de 0,9, manometro local 2,2",
+    "trabajo_realizado": "toma del transmisor de dif congelada. se descongelo y calibro. el fa estaba sucio de verdad -> se pidio cbio cartuchos",
+    "repuestos": [],
+    "horas": 1.0,
+    "codigo_falla": "F10",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0072",
+    "fecha_aviso": "2025-07-18T16:35-03:00",
+    "fecha_inicio": "2025-07-18T19:35-03:00",
+    "fecha_cierre": "2025-07-18T23:05-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "dif de f-201a en 1,57",
+    "trabajo_realizado": "cartuchos nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0073",
+    "fecha_aviso": "2025-07-22T09:50-03:00",
+    "fecha_inicio": "2025-07-22T10:50-03:00",
+    "fecha_cierre": "2025-07-22T16:50-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "RUIDO METALICO EN LA TRES, VIB 5,9",
+    "trabajo_realizado": "valvulas gastadas, un resorte paritdo en descarga 2. se cambio kit copmleto",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.0,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0074",
+    "fecha_aviso": "2025-07-26T15:10-03:00",
+    "fecha_inicio": "2025-07-26T16:10-03:00",
+    "fecha_cierre": "2025-07-26T21:10-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "goteo empaquetadura b-101 en aumento (73 g/min) revisar",
+    "trabajo_realizado": "SE CAMBIO EMPAQUETADURA CMOPLETA DE LOS 3 EMBOLOS CON KIT. EMBOLOS OK. QUEDA GOTEANDO NORMAL",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0075",
+    "fecha_aviso": "2025-07-30T11:45-03:00",
+    "fecha_inicio": "2025-07-30T12:45-03:00",
+    "fecha_cierre": "2025-07-30T13:15-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "visor de acetie de la tres debajo del minimo",
+    "trabajo_realizado": "se repuso aceite 220 hasta max, 7 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0076",
+    "fecha_aviso": "2025-08-06T10:55-03:00",
+    "fecha_inicio": "2025-08-06T11:55-03:00",
+    "fecha_cierre": "2025-08-06T15:55-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "B3 EMPAQUETADURA PIERDE, CHARCO ABAJO DEL CABEZAL",
+    "trabajo_realizado": "empaquetadura nueva. se dejo goteando y se ajusto. ok sin perdida",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0077",
+    "fecha_aviso": "2025-08-09T10:10-03:00",
+    "fecha_inicio": "2025-08-11T10:10-03:00",
+    "fecha_cierre": "2025-08-11T10:40-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "la uno aceite bajo en visor, temp acetie subiendo",
+    "trabajo_realizado": "se repuso aceite 220 hasta max, 9 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0078",
+    "fecha_aviso": "2025-08-12T15:25-03:00",
+    "fecha_inicio": "2025-08-12T16:25-03:00",
+    "fecha_cierre": "2025-08-12T21:25-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "b3 pierde x empaquetadura, 70 gotas",
+    "trabajo_realizado": "se cmabio empaq. b3 x 4ta vez. sigue sin llegar el embolo. dura 5 semanas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0079",
+    "fecha_aviso": "2025-08-12T16:25-03:00",
+    "fecha_inicio": "2025-08-13T12:25-03:00",
+    "fecha_cierre": "2025-08-13T15:55-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "medicion mensual de vibraciones b-101, b-102, b-103",
+    "trabajo_realizado": "se midieron las 3 bbas. valores globales en zona B. sin novedad",
+    "repuestos": [],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0080",
+    "fecha_aviso": "2025-08-14T09:15-03:00",
+    "fecha_inicio": "2025-08-14T11:15-03:00",
+    "fecha_cierre": "2025-08-14T13:15-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "bba 1 patinan las correas",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0081",
+    "fecha_aviso": "2025-08-16T08:45-03:00",
+    "fecha_inicio": "2025-08-17T10:45-03:00",
+    "fecha_cierre": "2025-08-17T14:15-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "primario con difreencial alto, cambiar cartuchos",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0082",
+    "fecha_aviso": "2025-08-16T15:20-03:00",
+    "fecha_inicio": "2025-08-16T16:20-03:00",
+    "fecha_cierre": "2025-08-16T20:20-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "dif de secundario en 1,54",
+    "trabajo_realizado": "cartuchos nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0083",
+    "fecha_aviso": "2025-08-20T14:05-03:00",
+    "fecha_inicio": "2025-08-21T10:05-03:00",
+    "fecha_cierre": "2025-08-21T10:35-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "falta aceite bba 1",
+    "trabajo_realizado": "REPOSICION DE ACEITE. 6 LITROS. TEMP BAJANDO",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0084",
+    "fecha_aviso": "2025-08-28T09:00-03:00",
+    "fecha_inicio": "2025-08-28T11:00-03:00",
+    "fecha_cierre": "2025-08-28T16:30-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "bba 2 golpea, manometro oscila mucho",
+    "trabajo_realizado": "cbio de valvulas las 6. asientos marcados. se ajusto tapas a torque. vib ok",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.5,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0085",
+    "fecha_aviso": "2025-08-31T15:20-03:00",
+    "fecha_inicio": "2025-09-01T17:20-03:00",
+    "fecha_cierre": "2025-09-01T21:50-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "b-102 gotea mucho la empaquetadura, 61 gotas x min aprox",
+    "trabajo_realizado": "cambio empaq. embolo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0086",
+    "fecha_aviso": "2025-09-03T15:45-03:00",
+    "fecha_inicio": "2025-09-03T18:45-03:00",
+    "fecha_cierre": "2025-09-04T01:15-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "plusacion alta en descarga de la tres",
+    "trabajo_realizado": "valvulas gastadas, un resorte partido en descarga 2. se cambio kit completo",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0087",
+    "fecha_aviso": "2025-09-07T14:00-03:00",
+    "fecha_inicio": "2025-09-08T10:00-03:00",
+    "fecha_cierre": "2025-09-08T12:00-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "la del fondo patinan las correas",
+    "trabajo_realizado": "se cambiaron las 4 correas 5V-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0088",
+    "fecha_aviso": "2025-09-09T08:35-03:00",
+    "fecha_inicio": "2025-09-11T08:35-03:00",
+    "fecha_cierre": "2025-09-11T15:35-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "NO-ESTANDAR",
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "cambio de embolo 2 B-103 (llego repuesto)",
+    "trabajo_realizado": "se cambio embolo 2 x tx-emb-57c y empaquetadura completa. embolo viejo con surcos de 0,2 mm. goteo normal",
+    "repuestos": [
+      {
+        "codigo": "TX-EMB-57C",
+        "cantidad": 1
+      },
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 7.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0089",
+    "fecha_aviso": "2025-09-11T14:15-03:00",
+    "fecha_inicio": "2025-09-11T15:15-03:00",
+    "fecha_cierre": "2025-09-11T19:15-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "la del fondo empaquetadura pierde, charco abajo del cabezal",
+    "trabajo_realizado": "CBIO DE EMPAQUETADURA, SE ASENTO 30 MIN Y SE AJUSTO 1/6. GOTEO NORMAL 4 GOTAS",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0090",
+    "fecha_aviso": "2025-09-12T08:35-03:00",
+    "fecha_inicio": "2025-09-12T11:35-03:00",
+    "fecha_cierre": "2025-09-12T14:35-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "medicion mensual de vibraciones B-101, B-102, B-103",
+    "trabajo_realizado": "se midieron las 3 bbas. valores globales en zona b. sin novedad",
+    "repuestos": [],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0091",
+    "fecha_aviso": "2025-09-19T09:10-03:00",
+    "fecha_inicio": "2025-09-19T12:10-03:00",
+    "fecha_cierre": "2025-09-19T14:10-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "LA TRES PATINAN LAS CORREAS",
+    "trabajo_realizado": "se cambiaron las 4 correas 5V-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0092",
+    "fecha_aviso": "2025-09-19T14:40-03:00",
+    "fecha_inicio": "2025-09-19T16:40-03:00",
+    "fecha_cierre": "2025-09-19T19:40-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "cambio de cartucohs F-201A x dif alto",
+    "trabajo_realizado": "cartuchos nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0093",
+    "fecha_aviso": "2025-09-20T09:10-03:00",
+    "fecha_inicio": "2025-09-20T12:10-03:00",
+    "fecha_cierre": "2025-09-20T14:10-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "I-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "disparo de bomba 1 x baja succion, no rearmar hasta revisar",
+    "trabajo_realizado": "inspeccion valvulas s/ novedad. posible pico. se pone en servicio",
+    "repuestos": [],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0094",
+    "fecha_aviso": "2025-09-23T02:00-03:00",
+    "fecha_inicio": "2025-09-24T04:00-03:00",
+    "fecha_cierre": "2025-09-24T08:00-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "pierde agua x el prensa de bba 1, cuento 30 gotas/min",
+    "trabajo_realizado": "cambio empaq. emoblo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0095",
+    "fecha_aviso": "2025-09-23T10:10-03:00",
+    "fecha_inicio": "2025-09-23T11:10-03:00",
+    "fecha_cierre": "2025-09-23T14:10-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "f-201a sucio, manometro dif 1,6",
+    "trabajo_realizado": "CAMBIO URGENTE DE CARTUCHOS FA X CAVITACION EN B2. DIF 2,3 -> 0,31",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0096",
+    "fecha_aviso": "2025-09-23T15:30-03:00",
+    "fecha_inicio": "2025-09-24T17:30-03:00",
+    "fecha_cierre": "2025-09-24T19:30-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "I-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "la dos hace ruido a piedras, succion 0,8",
+    "trabajo_realizado": "valvulas ok. el problema era el fa tapado (dif 2,3). la 2 es la primera en cavitar porque tiene el ramal de succoin mas largo. se pidio cambio de cartuchos fa",
+    "repuestos": [],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0097",
+    "fecha_aviso": "2025-09-28T16:00-03:00",
+    "fecha_inicio": "2025-09-30T16:00-03:00",
+    "fecha_cierre": "2025-09-30T16:30-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "temp aceite b3 en 78 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "reposicion de aceite. 10 litros. temp bajando",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0098",
+    "fecha_aviso": "2025-10-02T10:50-03:00",
+    "fecha_inicio": "2025-10-03T06:50-03:00",
+    "fecha_cierre": "2025-10-03T10:50-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "FB con diferencial alto, cambiar cartuchos",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0099",
+    "fecha_aviso": "2025-10-02T16:20-03:00",
+    "fecha_inicio": "2025-10-02T18:20-03:00",
+    "fecha_cierre": "2025-10-02T18:50-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "falta acetie bomba 1",
+    "trabajo_realizado": "SE REPUSO ACEITE 220 HASTA MAX, 7 LTS. NO SE VEN PERDIDAS",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0100",
+    "fecha_aviso": "2025-10-05T20:50-03:00",
+    "fecha_inicio": "2025-10-07T20:50-03:00",
+    "fecha_cierre": "2025-10-08T00:20-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "la tres gotea mucho la empaquetadura, 45 gotas x min aprox",
+    "trabajo_realizado": "empaquetadura nueva. se dejo goteando y se ajusto. ok sin perdida",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0101",
+    "fecha_aviso": "2025-10-07T16:40-03:00",
+    "fecha_inicio": "2025-10-07T17:40-03:00",
+    "fecha_cierre": "2025-10-07T18:10-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "falta aceite la dos, temp aceite 74",
+    "trabajo_realizado": "se repuso 8 lts",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0102",
+    "fecha_aviso": "2025-10-11T02:20-03:00",
+    "fecha_inicio": "2025-10-11T05:20-03:00",
+    "fecha_cierre": "2025-10-11T05:50-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "temp aceite b-102 en 70 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "SE REPUSO ACEITE 220 HASTA MAX, 8 LTS. NO SE VEN PERDDAS",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0103",
+    "fecha_aviso": "2025-10-14T15:25-03:00",
+    "fecha_inicio": "2025-10-14T16:25-03:00",
+    "fecha_cierre": "2025-10-15T00:25-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "ruido metalico en B-101, vib 6,3",
+    "trabajo_realizado": "se cambiaron valvulas de succion y descarga (kit completo). discos con escalon",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 8.0,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0104",
+    "fecha_aviso": "2025-10-14T21:40-03:00",
+    "fecha_inicio": "2025-10-14T22:40-03:00",
+    "fecha_cierre": "2025-10-15T01:10-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "FA con diferencial alto, cambiar cartuchos",
+    "trabajo_realizado": "cartuchos nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0105",
+    "fecha_aviso": "2025-10-22T09:45-03:00",
+    "fecha_inicio": "2025-10-22T14:45-03:00",
+    "fecha_cierre": "2025-10-22T15:15-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "temp aceite bomba 1 en 67 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "se completo nivel de aceite iso 220. ok",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0106",
+    "fecha_aviso": "2025-10-26T10:30-03:00",
+    "fecha_inicio": "2025-10-26T13:30-03:00",
+    "fecha_cierre": "2025-10-26T15:30-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "caudal de la uno bajo y motor caliente, chilla",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0107",
+    "fecha_aviso": "2025-10-28T20:35-03:00",
+    "fecha_inicio": "2025-10-28T22:35-03:00",
+    "fecha_cierre": "2025-10-28T23:05-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "B2 aceite bajo otra vez",
+    "trabajo_realizado": "se repusieron 9 lts. pierde x el reten del piñon, mancha en el piso",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0108",
+    "fecha_aviso": "2025-11-01T10:45-03:00",
+    "fecha_inicio": "2025-11-02T06:45-03:00",
+    "fecha_cierre": "2025-11-02T11:15-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "BBA 1 GOTEA MUCHO LA EMPAQUETADURA, 46 GOTAS X MIN APROX",
+    "trabajo_realizado": "se cambio empauetadura completa de los 3 embolos con kit. embolos ok. queda goteando nromal",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0109",
+    "fecha_aviso": "2025-11-06T08:30-03:00",
+    "fecha_inicio": "2025-11-07T04:30-03:00",
+    "fecha_cierre": "2025-11-07T10:00-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "b-102 golpea, manometro oscila mucho",
+    "trabajo_realizado": "cbio de valvulas las 6. asientos marcados. se ajusto tapas a torque. vib ok",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0110",
+    "fecha_aviso": "2025-11-12T11:15-03:00",
+    "fecha_inicio": "2025-11-12T13:15-03:00",
+    "fecha_cierre": "2025-11-12T16:45-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "medicion mensul de vibraciones b-101, b-102, b-103",
+    "trabajo_realizado": "RUTA DE VIBRACIONES. TODO EN ZONA A/B. INFORME ADJUNTO",
+    "repuestos": [],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0111",
+    "fecha_aviso": "2025-11-13T10:25-03:00",
+    "fecha_inicio": "2025-11-14T12:25-03:00",
+    "fecha_cierre": "2025-11-14T12:55-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "visor de aceite de la dos debajo del minimo",
+    "trabajo_realizado": "se completo nivel de aceite iso 220. ok",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0112",
+    "fecha_aviso": "2025-11-16T09:20-03:00",
+    "fecha_inicio": "2025-11-18T09:20-03:00",
+    "fecha_cierre": "2025-11-18T11:50-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "dif de F-201A en 1,72",
+    "trabajo_realizado": "cambio de cartuchos y junta de tapa (estaba aplastada). ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      },
+      {
+        "codigo": "FC-JUNTA-TAPA",
+        "cantidad": 1
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0113",
+    "fecha_aviso": "2025-11-18T21:20-03:00",
+    "fecha_inicio": "2025-11-19T17:20-03:00",
+    "fecha_cierre": "2025-11-19T17:50-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "B2 aceite bajo otra vez",
+    "trabajo_realizado": "8 lts otra vez en 3 semanas. pedir reten tx-ret-pin",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0114",
+    "fecha_aviso": "2025-11-19T15:05-03:00",
+    "fecha_inicio": "2025-11-19T20:05-03:00",
+    "fecha_cierre": "2025-11-19T23:05-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "filtro b sucio, manometro dif 1,7",
+    "trabajo_realizado": "cambio de cartuchos y junta de tapa (estaba aplastada). ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      },
+      {
+        "codigo": "FC-JUNTA-TAPA",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0115",
+    "fecha_aviso": "2025-11-19T20:10-03:00",
+    "fecha_inicio": "2025-11-21T20:10-03:00",
+    "fecha_cierre": "2025-11-21T20:40-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "visor de aceite de la del fondo debajo del minimo",
+    "trabajo_realizado": "SE COMPLETO NIVEL DE ACEITE ISO 220. OK",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0116",
+    "fecha_aviso": "2025-11-24T09:10-03:00",
+    "fecha_inicio": "2025-11-24T12:10-03:00",
+    "fecha_cierre": "2025-11-24T14:10-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "CAUDAL DE BBA 2 BAJO Y MOTOR CALIENTE, CHILLA",
+    "trabajo_realizado": "se cambiaron las 4 correas 5v-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0117",
+    "fecha_aviso": "2025-11-27T09:35-03:00",
+    "fecha_inicio": "2025-11-27T10:35-03:00",
+    "fecha_cierre": "2025-11-27T14:05-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "pierde agua x el prensa de bba 3, cuento 49 gotas/min",
+    "trabajo_realizado": "cambio empaq. embolo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0118",
+    "fecha_aviso": "2025-11-30T16:05-03:00",
+    "fecha_inicio": "2025-11-30T18:05-03:00",
+    "fecha_cierre": "2025-11-30T19:35-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "la del fondo patinan las correas",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 1.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0119",
+    "fecha_aviso": "2025-12-02T20:45-03:00",
+    "fecha_inicio": "2025-12-03T01:45-03:00",
+    "fecha_cierre": "2025-12-03T07:45-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ALI"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "otra vez vibra la uno 5,9 sin golpeteo, acople caliente",
+    "trabajo_realizado": "otra vez el acople de la 1. desalineado 0,28. se recalzo la base del contraeje (asentamiento). elastomero gastado se cambio. NO cambiar valvulas x esto, es el acople",
+    "repuestos": [
+      {
+        "codigo": "ACO-ELAST-90",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0120",
+    "fecha_aviso": "2025-12-05T09:10-03:00",
+    "fecha_inicio": "2025-12-05T14:10-03:00",
+    "fecha_cierre": "2025-12-05T17:40-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "peirde agua x el prensa de bba 1, cuento 87 gotas/min",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0121",
+    "fecha_aviso": "2025-12-08T09:35-03:00",
+    "fecha_inicio": "2025-12-08T14:35-03:00",
+    "fecha_cierre": "2025-12-08T16:35-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "chirirdo en correas de b-101 al arrancar",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0122",
+    "fecha_aviso": "2025-12-12T10:20-03:00",
+    "fecha_inicio": "2025-12-14T10:20-03:00",
+    "fecha_cierre": "2025-12-14T14:20-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "MEDICION MENSUAL DE VIBRACIONES B-101, B-102, B-103",
+    "trabajo_realizado": "vibraciones mensuales ok. b3 en reserva meddia en marcha 15 min",
+    "repuestos": [],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-25-0123",
+    "fecha_aviso": "2025-12-13T08:30-03:00",
+    "fecha_inicio": "2025-12-13T13:30-03:00",
+    "fecha_cierre": "2025-12-13T14:00-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "b3 acetie bajo en visor, temp aceite subiedno",
+    "trabajo_realizado": "se repuso aceite 220 hasta max, 8 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0124",
+    "fecha_aviso": "2025-12-13T10:00-03:00",
+    "fecha_inicio": "2025-12-14T06:00-03:00",
+    "fecha_cierre": "2025-12-14T10:00-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "FA sucio, manometro dif 1,6",
+    "trabajo_realizado": "cartuchos nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0125",
+    "fecha_aviso": "2025-12-16T11:45-03:00",
+    "fecha_inicio": "2025-12-16T16:45-03:00",
+    "fecha_cierre": "2025-12-16T21:45-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "NO-ESTANDAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "cambio de reten de piñon B-102",
+    "trabajo_realizado": "se cambio reten del eje piñon y sellos de carter. consumo de aceite normal desde entonces",
+    "repuestos": [
+      {
+        "codigo": "TX-RET-PIN",
+        "cantidad": 1
+      },
+      {
+        "codigo": "TX-SELLO-CAR",
+        "cantidad": 1
+      },
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 10
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0126",
+    "fecha_aviso": "2025-12-17T02:00-03:00",
+    "fecha_inicio": "2025-12-17T05:00-03:00",
+    "fecha_cierre": "2025-12-17T05:30-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "falta aceite bba 1",
+    "trabajo_realizado": "se repuso aceite 220 hasta max, 8 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0127",
+    "fecha_aviso": "2025-12-21T10:15-03:00",
+    "fecha_inicio": "2025-12-21T11:15-03:00",
+    "fecha_cierre": "2025-12-21T11:45-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "b1 aceite bajo en visor, temp aceite subiendo",
+    "trabajo_realizado": "se repuso aecite 220 hasta max, 8 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0128",
+    "fecha_aviso": "2025-12-27T14:40-03:00",
+    "fecha_inicio": "2025-12-27T16:40-03:00",
+    "fecha_cierre": "2025-12-27T21:40-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "B-102 gotea mucho la empaquetadura, 28 gotas x min aprox",
+    "trabajo_realizado": "empaquetadura nueva. se dejo goteando y se ajusto. ok sin peridda",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-25-0129",
+    "fecha_aviso": "2025-12-31T11:55-03:00",
+    "fecha_inicio": "2026-01-01T13:55-03:00",
+    "fecha_cierre": "2026-01-01T16:25-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "chirrido en correas de b1 al arrancar",
+    "trabajo_realizado": "se cmabiaron las 4 crreas 5v-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0001",
+    "fecha_aviso": "2026-01-02T15:50-03:00",
+    "fecha_inicio": "2026-01-02T20:50-03:00",
+    "fecha_cierre": "2026-01-03T00:20-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "cambio de cartuchos filtro b x dif alto",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0002",
+    "fecha_aviso": "2026-01-03T10:25-03:00",
+    "fecha_inicio": "2026-01-04T12:25-03:00",
+    "fecha_cierre": "2026-01-04T13:55-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "CAUDAL DE B2 BAJO Y MOTOR CALIENTE, CHILLA",
+    "trabajo_realizado": "se cambiaron las 4 correas 5v-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 1.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0003",
+    "fecha_aviso": "2026-01-10T20:50-03:00",
+    "fecha_inicio": "2026-01-11T16:50-03:00",
+    "fecha_cierre": "2026-01-11T23:50-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "pulsacion alta en descarga de B-102",
+    "trabajo_realizado": "valvulas gastadas, un resorte partido en descarga 2. se cambio kit completo",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 7.0,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0004",
+    "fecha_aviso": "2026-01-10T21:00-03:00",
+    "fecha_inicio": "2026-01-11T17:00-03:00",
+    "fecha_cierre": "2026-01-11T20:00-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "PRIMARIO SUCIO, MANOMETRO DIF 1,6",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0005",
+    "fecha_aviso": "2026-01-14T20:40-03:00",
+    "fecha_inicio": "2026-01-15T22:40-03:00",
+    "fecha_cierre": "2026-01-16T01:10-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "caudal de la tres bajo y motor caliente, chilla",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0006",
+    "fecha_aviso": "2026-01-19T15:45-03:00",
+    "fecha_inicio": "2026-01-20T17:45-03:00",
+    "fecha_cierre": "2026-01-21T00:15-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "golpeteo en cabezal de bba 3, vibra mas de lo normal",
+    "trabajo_realizado": "SE CAMBIARN VALVULAS DE SUCCION Y DESCARGA (KIT COMPLETO). DISCOS CON ESCALON",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0007",
+    "fecha_aviso": "2026-01-20T16:50-03:00",
+    "fecha_inicio": "2026-01-21T18:50-03:00",
+    "fecha_cierre": "2026-01-21T22:20-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "cambio cartuchos fb",
+    "trabajo_realizado": "solo habia 40 cartuchos de 10 en el yacimiento, se pusieron 40 + 8 de 25 micrones (!!). cambiar cuando lleguen del central",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 40
+      },
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 8
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0008",
+    "fecha_aviso": "2026-01-26T16:45-03:00",
+    "fecha_inicio": "2026-01-27T12:45-03:00",
+    "fecha_cierre": "2026-01-27T13:15-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "temp aceite b3 en 68 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "se completo nivel de aceite iso 220. ok",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0009",
+    "fecha_aviso": "2026-01-30T21:30-03:00",
+    "fecha_inicio": "2026-01-30T22:30-03:00",
+    "fecha_cierre": "2026-01-31T00:30-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "CHIRRIDO EN CORREAS DE LA DEL FONDO AL ARRANCAR",
+    "trabajo_realizado": "se cambiaron las 4 correas 5v-1800 y se tensaron. retenar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0010",
+    "fecha_aviso": "2026-02-05T09:50-03:00",
+    "fecha_inicio": "2026-02-05T11:50-03:00",
+    "fecha_cierre": "2026-02-05T16:20-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "pierde agua x el prensa de la tres, cuento 70 gotas/min",
+    "trabajo_realizado": "cambio empaq. embolo 1 y 2 muy gastados los anillos, el 3 bien pero se cmabio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0011",
+    "fecha_aviso": "2026-02-10T09:45-03:00",
+    "fecha_inicio": "2026-02-11T05:45-03:00",
+    "fecha_cierre": "2026-02-11T12:45-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "B2 GOLPETEO Y VIBRA 7,0",
+    "trabajo_realizado": "valvulas con arena otra vez. se cambio kit. avisar q revisen filtros",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 7.0,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0012",
+    "fecha_aviso": "2026-02-12T15:10-03:00",
+    "fecha_inicio": "2026-02-12T20:10-03:00",
+    "fecha_cierre": "2026-02-12T23:10-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "dif de FA en 1,68",
+    "trabajo_realizado": "CAMBIO DE CARTUCHOS Y JUNTA DE TAPA (ESTABA APLASTADA). OK",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      },
+      {
+        "codigo": "FC-JUNTA-TAPA",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0013",
+    "fecha_aviso": "2026-02-13T10:10-03:00",
+    "fecha_inicio": "2026-02-15T10:10-03:00",
+    "fecha_cierre": "2026-02-15T13:40-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "B-103 gotea mucho la empaquetadura, 65 gotas x min aprox",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0014",
+    "fecha_aviso": "2026-02-18T09:05-03:00",
+    "fecha_inicio": "2026-02-18T11:05-03:00",
+    "fecha_cierre": "2026-02-18T13:35-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "dif de secundario en 1,53",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0015",
+    "fecha_aviso": "2026-02-19T11:35-03:00",
+    "fecha_inicio": "2026-02-19T16:35-03:00",
+    "fecha_cierre": "2026-02-20T00:05-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "la tres golpea, recien entro en servicio",
+    "trabajo_realizado": "valvulas gastadas c/ arena. 2da bomba en 10 dias",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 7.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0016",
+    "fecha_aviso": "2026-02-20T15:30-03:00",
+    "fecha_inicio": "2026-02-20T20:30-03:00",
+    "fecha_cierre": "2026-02-21T00:30-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "FB con diferencial alto, cambiar cartuchos",
+    "trabajo_realizado": "dif fb 0,11. cartucho mal trabado del cambio anterior, se habia salido del asiento. cambio completo. ojo: si golepan 2 bombas seguidas mirar priemro el fb",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0017",
+    "fecha_aviso": "2026-02-20T15:45-03:00",
+    "fecha_inicio": "2026-02-20T16:45-03:00",
+    "fecha_cierre": "2026-02-20T19:15-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "la del fondo patinan las correas",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0018",
+    "fecha_aviso": "2026-02-25T08:45-03:00",
+    "fecha_inicio": "2026-02-25T09:45-03:00",
+    "fecha_cierre": "2026-02-25T13:45-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "la dos gotea mucho la empaquetadura, 74 gotas x min aprox",
+    "trabajo_realizado": "cbio de empaquetadura, se asetno 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0019",
+    "fecha_aviso": "2026-03-04T11:25-03:00",
+    "fecha_inicio": "2026-03-05T13:25-03:00",
+    "fecha_cierre": "2026-03-05T19:55-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "golpeteo en cabezal de bomba 2, vibra mas de lo normal",
+    "trabajo_realizado": "valvulas gastadas, un resorte partido en descarga 2. se cambio kit completo",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0020",
+    "fecha_aviso": "2026-03-11T11:30-03:00",
+    "fecha_inicio": "2026-03-11T12:30-03:00",
+    "fecha_cierre": "2026-03-11T13:00-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "visor de aceite de b-101 debajo del minimo",
+    "trabajo_realizado": "se completo nivel de aceite iso 220. ok",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0021",
+    "fecha_aviso": "2026-03-12T10:05-03:00",
+    "fecha_inicio": "2026-03-12T13:05-03:00",
+    "fecha_cierre": "2026-03-12T16:35-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "MEDICION MENSUAL DE VIBRACIONES B-101, B-102, B-103",
+    "trabajo_realizado": "vibraciones mensuales ok. b3 en reserva medida en marcha 15 min",
+    "repuestos": [],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-26-0022",
+    "fecha_aviso": "2026-03-14T16:45-03:00",
+    "fecha_inicio": "2026-03-14T18:45-03:00",
+    "fecha_cierre": "2026-03-14T19:15-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "temp aceite bba 2 en 69 y subendo despacio, nivel bajo",
+    "trabajo_realizado": "se repuso aceite 220 hasta max, 8 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0023",
+    "fecha_aviso": "2026-03-16T14:00-03:00",
+    "fecha_inicio": "2026-03-16T17:00-03:00",
+    "fecha_cierre": "2026-03-16T20:00-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "FA CON DIFERENCIAL ALTO, CAMBIAR CARTUCHOS",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0024",
+    "fecha_aviso": "2026-03-18T08:20-03:00",
+    "fecha_inicio": "2026-03-19T10:20-03:00",
+    "fecha_cierre": "2026-03-19T12:50-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "caudal de B-103 bajo y motor caliente, chilla",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0025",
+    "fecha_aviso": "2026-03-18T10:30-03:00",
+    "fecha_inicio": "2026-03-19T06:30-03:00",
+    "fecha_cierre": "2026-03-19T07:30-03:00",
+    "equipo": "FT-401",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-I-CAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "caudalimetro marca 60 m3 mas q la suma de las bbas",
+    "trabajo_realizado": "deriva del FT-401, se calibro. quedo bien",
+    "repuestos": [],
+    "horas": 1.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0026",
+    "fecha_aviso": "2026-03-22T11:55-03:00",
+    "fecha_inicio": "2026-03-23T07:55-03:00",
+    "fecha_cierre": "2026-03-23T12:25-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "bomba 2 gotea mucho la empaquetadura, 75 gotas x min aprox",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajsuto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0027",
+    "fecha_aviso": "2026-03-28T02:00-03:00",
+    "fecha_inicio": "2026-03-28T03:00-03:00",
+    "fecha_cierre": "2026-03-28T05:00-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "chirrido en correas de b2 al arrancar",
+    "trabajo_realizado": "cbio de juego de corraes completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0028",
+    "fecha_aviso": "2026-04-01T15:10-03:00",
+    "fecha_inicio": "2026-04-02T17:10-03:00",
+    "fecha_cierre": "2026-04-02T17:40-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "b3 aceite bajo en visor, temp aceite subiendo",
+    "trabajo_realizado": "SE COMPLETO NIVEL DE ACETIE ISO 220. OK",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0029",
+    "fecha_aviso": "2026-04-07T09:40-03:00",
+    "fecha_inicio": "2026-04-09T09:40-03:00",
+    "fecha_cierre": "2026-04-09T12:40-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "cambio de cartuchos secundario x dif alto",
+    "trabajo_realizado": "cartucohs nuevos, se venteo. dif 0,29 con caudal normal",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0030",
+    "fecha_aviso": "2026-04-07T16:35-03:00",
+    "fecha_inicio": "2026-04-07T21:35-03:00",
+    "fecha_cierre": "2026-04-07T23:35-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "B3 correas flojas, polea caliente",
+    "trabajo_realizado": "se cambiaron las 4 correas 5V-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0031",
+    "fecha_aviso": "2026-04-12T08:30-03:00",
+    "fecha_inicio": "2026-04-12T09:30-03:00",
+    "fecha_cierre": "2026-04-12T15:30-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "ruido metalico en bba 1, vib 5,9",
+    "trabajo_realizado": "valvulas gastadas, un resorte partido en descarga 2. se cambio kit completo",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.0,
+    "codigo_falla": "F02",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0032",
+    "fecha_aviso": "2026-04-12T16:45-03:00",
+    "fecha_inicio": "2026-04-13T18:45-03:00",
+    "fecha_cierre": "2026-04-13T22:45-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "medicion mensual de vibraciones B-101, B-102, B-103",
+    "trabajo_realizado": "RUTA DE VIBRACIONES. TODO EN ZONA A/B. INFORME ADJUNTO",
+    "repuestos": [],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-26-0033",
+    "fecha_aviso": "2026-04-13T14:55-03:00",
+    "fecha_inicio": "2026-04-13T17:55-03:00",
+    "fecha_cierre": "2026-04-13T20:25-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "primario con diferencial alto, cambiar cartuchos",
+    "trabajo_realizado": "cambio de cartuchos y junta de tapa (estaba aplastada). ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      },
+      {
+        "codigo": "FC-JUNTA-TAPA",
+        "cantidad": 1
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0034",
+    "fecha_aviso": "2026-04-15T14:30-03:00",
+    "fecha_inicio": "2026-04-15T19:30-03:00",
+    "fecha_cierre": "2026-04-15T23:00-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "B2 cavita (ruido piedras) succ 0,9",
+    "trabajo_realizado": "no tocar la bomba: es el FA de nuevo. se cambiaron cartuchos del primario y la 2 dejo de cavitar",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0035",
+    "fecha_aviso": "2026-04-20T15:15-03:00",
+    "fecha_inicio": "2026-04-20T17:15-03:00",
+    "fecha_cierre": "2026-04-20T22:15-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "BBA 1 GOTEA MUCHO LA EMPAQUETADURA, 46 GOTAS X MIN APROX",
+    "trabajo_realizado": "cambio empaq. embolo 1 y 2 muy gastdos los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0036",
+    "fecha_aviso": "2026-04-24T20:00-03:00",
+    "fecha_inicio": "2026-04-24T22:00-03:00",
+    "fecha_cierre": "2026-04-25T02:00-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "BBA 3 EMPAQUETADURA PIERDE, CHARCO ABAJO DEL CABEZAL",
+    "trabajo_realizado": "CAMBIO EMPAQ. EMBOLO 1 Y 2 MUY GASATDOS LOS ANILLOS, EL 3 BIEN PERO SE CAMBIO IGUAL. PRUEBA OK",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0037",
+    "fecha_aviso": "2026-05-01T08:05-03:00",
+    "fecha_inicio": "2026-05-01T09:05-03:00",
+    "fecha_cierre": "2026-05-01T14:35-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "pierde agua x el prensa de la uno, cuento 51 gotas/min",
+    "trabajo_realizado": "cambio empaq. embolo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0038",
+    "fecha_aviso": "2026-05-09T09:40-03:00",
+    "fecha_inicio": "2026-05-11T09:40-03:00",
+    "fecha_cierre": "2026-05-11T15:40-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "golpeteo en cabezal de la dos, vibra mas de lo normal",
+    "trabajo_realizado": "cbio de valvulas las 6. asientos marcados. se ajusto tapas a torque. vib ok",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0039",
+    "fecha_aviso": "2026-05-09T11:15-03:00",
+    "fecha_inicio": "2026-05-10T07:15-03:00",
+    "fecha_cierre": "2026-05-10T11:15-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "cambio de cartuchos primario x dif alto",
+    "trabajo_realizado": "cambio de cartuchos y junta de tapa (estaba aplastada). ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      },
+      {
+        "codigo": "FC-JUNTA-TAPA",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0040",
+    "fecha_aviso": "2026-05-12T16:20-03:00",
+    "fecha_inicio": "2026-05-12T17:20-03:00",
+    "fecha_cierre": "2026-05-12T20:20-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "MEDICION MENSUAL DE VIBRACIONES B-101, B-102, B-103",
+    "trabajo_realizado": "ruta de vibraciones. todo en zona a/b. informe adjunto",
+    "repuestos": [],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-26-0041",
+    "fecha_aviso": "2026-05-16T11:15-03:00",
+    "fecha_inicio": "2026-05-16T14:15-03:00",
+    "fecha_cierre": "2026-05-16T15:45-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "caudal de bba 2 bajo y motor caliente, chilla",
+    "trabajo_realizado": "se cambiaron las 4 correas 5V-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 1.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0042",
+    "fecha_aviso": "2026-05-21T20:10-03:00",
+    "fecha_inicio": "2026-05-21T23:10-03:00",
+    "fecha_cierre": "2026-05-22T01:10-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "bba 1 patinan las correas",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0043",
+    "fecha_aviso": "2026-05-24T16:10-03:00",
+    "fecha_inicio": "2026-05-25T18:10-03:00",
+    "fecha_cierre": "2026-05-25T21:10-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "SECUNDARIO CON DIFERENCIAL ALTO, CAMBIAR CARTUCHOS",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0044",
+    "fecha_aviso": "2026-05-28T14:15-03:00",
+    "fecha_inicio": "2026-05-28T17:15-03:00",
+    "fecha_cierre": "2026-05-28T22:15-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "la dos gotea mucho la empaquetadura, 69 gotas x min aprox",
+    "trabajo_realizado": "cambio empaq. embolo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0045",
+    "fecha_aviso": "2026-06-01T14:10-03:00",
+    "fecha_inicio": "2026-06-03T14:10-03:00",
+    "fecha_cierre": "2026-06-03T16:10-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "bomba 2 patinan las correas",
+    "trabajo_realizado": "SE CAMBIARON LAS 4 CORREAS 5V-1800 Y SE TENSARON. RETENSAR EN 24 HS",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0046",
+    "fecha_aviso": "2026-06-05T11:40-03:00",
+    "fecha_inicio": "2026-06-05T13:40-03:00",
+    "fecha_cierre": "2026-06-05T15:10-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "caudal de B-103 bajo y motor caliente, chilla",
+    "trabajo_realizado": "se cambiaron las 4 correas 5V-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 1.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0047",
+    "fecha_aviso": "2026-06-11T16:15-03:00",
+    "fecha_inicio": "2026-06-11T19:15-03:00",
+    "fecha_cierre": "2026-06-11T19:45-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "la tres aceite bajo en visor, temp aceite subiendo",
+    "trabajo_realizado": "SE REPUSO ACEITE 220 HASTA MAX, 8 LTS. NO SE VEN PERDIDAS",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0048",
+    "fecha_aviso": "2026-06-12T09:05-03:00",
+    "fecha_inicio": "2026-06-14T09:05-03:00",
+    "fecha_cierre": "2026-06-14T13:05-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "medicion mensual de vibraciones B-101, B-102, B-103",
+    "trabajo_realizado": "se midieron las 3 bbas. valores globales en zona b. sin novedad",
+    "repuestos": [],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-26-0049",
+    "fecha_aviso": "2026-06-12T10:10-03:00",
+    "fecha_inicio": "2026-06-13T12:10-03:00",
+    "fecha_cierre": "2026-06-13T16:10-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "CAMBIO DE CARTUCHOS FILTRO A X DIF ALTO",
+    "trabajo_realizado": "cambio de cartuchos y junta de tapa (estaba aplastada). ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      },
+      {
+        "codigo": "FC-JUNTA-TAPA",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0050",
+    "fecha_aviso": "2026-06-14T09:55-03:00",
+    "fecha_inicio": "2026-06-15T11:55-03:00",
+    "fecha_cierre": "2026-06-15T19:25-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "pulsacion alta en descarga de bba 1",
+    "trabajo_realizado": "cbio de valvulas las 6. asientos marcados. se ajusto tapas a torque. vib ok",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 7.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0051",
+    "fecha_aviso": "2026-06-19T11:05-03:00",
+    "fecha_inicio": "2026-06-19T12:05-03:00",
+    "fecha_cierre": "2026-06-19T13:35-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "I-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "DISPARO DE BBA 1 X TEMP ACEITE, NO REARMAR HASTA REVISAR",
+    "trabajo_realizado": "inspeccion valvulas s/ novedad. posible pico. se pone en servicio",
+    "repuestos": [],
+    "horas": 1.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0052",
+    "fecha_aviso": "2026-06-22T16:20-03:00",
+    "fecha_inicio": "2026-06-23T12:20-03:00",
+    "fecha_cierre": "2026-06-23T14:20-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "chirrido en correas de bba 1 al arrancar",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0053",
+    "fecha_aviso": "2026-06-23T20:15-03:00",
+    "fecha_inicio": "2026-06-23T22:15-03:00",
+    "fecha_cierre": "2026-06-24T01:45-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "b3 gotea prensa 3, 60 g/min",
+    "trabajo_realizado": "cbio empaq. el embolo 3 tiene marcas parecidas a las del 2 el año pasado. vigilar",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0054",
+    "fecha_aviso": "2026-06-27T11:45-03:00",
+    "fecha_inicio": "2026-06-29T11:45-03:00",
+    "fecha_cierre": "2026-06-29T15:45-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "goteo empaquetadura la del fondo en aumento (80 g/min) revisar",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0055",
+    "fecha_aviso": "2026-06-30T16:20-03:00",
+    "fecha_inicio": "2026-06-30T17:20-03:00",
+    "fecha_cierre": "2026-06-30T17:50-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "visor de aceite de b-101 dbeajo del minimo",
+    "trabajo_realizado": "reposicion de aceite. 8 litros. temp bajando",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0056",
+    "fecha_aviso": "2026-07-02T14:30-03:00",
+    "fecha_inicio": "2026-07-02T19:30-03:00",
+    "fecha_cierre": "2026-07-02T20:30-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-I-CAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "la 3 la presion de descarga no varia nada, plana",
+    "trabajo_realizado": "otra vez la linea de impulso del pt de descarga de la 3 congelada. calefaccionado anda pero la aislacion esta rota en ese tramo. pedir reparar aislacion",
+    "repuestos": [],
+    "horas": 1.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0057",
+    "fecha_aviso": "2026-07-04T20:30-03:00",
+    "fecha_inicio": "2026-07-04T23:30-03:00",
+    "fecha_cierre": "2026-07-05T02:00-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "CAUDAL DE B-101 BAJO Y MOTOR CALIENTE, CHILLA",
+    "trabajo_realizado": "se cambiaron las 4 correas 5V-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0058",
+    "fecha_aviso": "2026-07-07T15:10-03:00",
+    "fecha_inicio": "2026-07-09T15:10-03:00",
+    "fecha_cierre": "2026-07-09T19:40-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "b1 gotea mucho la empaquetadura, 87 gotas x min aprox",
+    "trabajo_realizado": "se cambio empaquetadura completa de los 3 embools con kit. embolos ok. queda goteando normal",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0059",
+    "fecha_aviso": "2026-07-08T16:05-03:00",
+    "fecha_inicio": "2026-07-08T17:05-03:00",
+    "fecha_cierre": "2026-07-08T21:05-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "FB con diferencial alto, cambiar cartuchos",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0060",
+    "fecha_aviso": "2026-07-11T11:50-03:00",
+    "fecha_inicio": "2026-07-11T14:50-03:00",
+    "fecha_cierre": "2026-07-11T18:50-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "b-102 gotea mucho la empaquetadura, 78 gotas x min aprox",
+    "trabajo_realizado": "cbio de empaquetadura, se asento 30 min y se ajusto 1/6. goteo normal 4 gotas",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0061",
+    "fecha_aviso": "2026-07-12T21:45-03:00",
+    "fecha_inicio": "2026-07-12T22:45-03:00",
+    "fecha_cierre": "2026-07-13T02:45-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "MEDICION MENSUAL DE VIBRACIONES B-101, B-102, B-103",
+    "trabajo_realizado": "RUTA DE VIBRACIONES. TODO EN ZONA A/B. INFORME ADJUNTO",
+    "repuestos": [],
+    "horas": 4.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-26-0062",
+    "fecha_aviso": "2026-07-14T02:00-03:00",
+    "fecha_inicio": "2026-07-14T03:00-03:00",
+    "fecha_cierre": "2026-07-14T05:30-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "B1 PATINAN LAS CORREAS",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0063",
+    "fecha_aviso": "2026-07-14T10:15-03:00",
+    "fecha_inicio": "2026-07-14T11:15-03:00",
+    "fecha_cierre": "2026-07-14T15:15-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "F-201A con diferencial alto, cambiar cartuchos",
+    "trabajo_realizado": "se cambiaron 48 cartuchos, dif quedo en 0,3. junta ok",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0064",
+    "fecha_aviso": "2026-07-19T02:25-03:00",
+    "fecha_inicio": "2026-07-19T05:25-03:00",
+    "fecha_cierre": "2026-07-19T07:25-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "chirrido en correas de la uno al arrancar",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0065",
+    "fecha_aviso": "2026-07-23T14:35-03:00",
+    "fecha_inicio": "2026-07-23T19:35-03:00",
+    "fecha_cierre": "2026-07-23T22:05-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "chirrido en correas de bomba 2 al arrancar",
+    "trabajo_realizado": "se cambiaron las 4 correas 5V-1800 y se tensaron. retensar en 24 hs",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0066",
+    "fecha_aviso": "2026-07-26T08:10-03:00",
+    "fecha_inicio": "2026-07-28T08:10-03:00",
+    "fecha_cierre": "2026-07-28T08:40-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "falta aceite la tres",
+    "trabajo_realizado": "se repuso aceite 220 hasta max, 9 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0067",
+    "fecha_aviso": "2026-07-30T16:40-03:00",
+    "fecha_inicio": "2026-07-30T19:40-03:00",
+    "fecha_cierre": "2026-07-31T01:10-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "bba 3 empaquetadura pierde, charco abajo del cabezal",
+    "trabajo_realizado": "empaquetadura nueva. se dejo goteando y se ajusto. ok sin perdida",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0068",
+    "fecha_aviso": "2026-08-03T15:00-03:00",
+    "fecha_inicio": "2026-08-04T11:00-03:00",
+    "fecha_cierre": "2026-08-04T11:30-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "temp aceite la dos en 72 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "reposicion de aceite. 8 litros. temp bajando",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": "F04",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0069",
+    "fecha_aviso": "2026-08-04T15:50-03:00",
+    "fecha_inicio": "2026-08-04T18:50-03:00",
+    "fecha_cierre": "2026-08-04T22:20-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "LA DEL FONDO PIERDE OTRA VEZ X EL 3",
+    "trabajo_realizado": "EMPAQUETADURA DE NUEVO A LAS 6 SEMANAS. EMBOLO 3 RAYADO, PEDIR TX-EMB-57C ANTES DE Q EMPEORE",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0070",
+    "fecha_aviso": "2026-08-09T21:55-03:00",
+    "fecha_inicio": "2026-08-11T21:55-03:00",
+    "fecha_cierre": "2026-08-12T02:25-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "B-102 GOTEA MUCHO LA EMPAQUETADURA, 49 GOTAS X MIN APROX",
+    "trabajo_realizado": "cambio empaq. embolo 1 y 2 muy gastados los anillos, el 3 bien pero se cambio igual. prueba ok",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.5,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0071",
+    "fecha_aviso": "2026-08-12T02:50-03:00",
+    "fecha_inicio": "2026-08-12T22:50-03:00",
+    "fecha_cierre": "2026-08-12T23:20-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "temp aceite la dos en 71 y subiendo despacio, nivel bajo",
+    "trabajo_realizado": "se repuso aceite 220 hasta max, 9 lts. no se ven perdidas",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0072",
+    "fecha_aviso": "2026-08-12T16:10-03:00",
+    "fecha_inicio": "2026-08-13T12:10-03:00",
+    "fecha_cierre": "2026-08-13T13:10-03:00",
+    "equipo": "B-101",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Walter Huenchumil (Servipat)",
+    "aviso": "ruta mensual vibraciones",
+    "trabajo_realizado": "b1 axial en 1x subiendo de nuevo (4,1). vigilar acople, la base del contraeje se sigue asentando. b2 y b3 ok",
+    "repuestos": [],
+    "horas": 1.0,
+    "codigo_falla": "F06",
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-26-0073",
+    "fecha_aviso": "2026-08-13T16:20-03:00",
+    "fecha_inicio": "2026-08-14T18:20-03:00",
+    "fecha_cierre": "2026-08-14T20:20-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "I-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "dispro de la dos x vibracion, no rearmar hasta revisar",
+    "trabajo_realizado": "se revisaron valvulas, ok. se rearmo y quedo normal",
+    "repuestos": [],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0074",
+    "fecha_aviso": "2026-08-17T14:35-03:00",
+    "fecha_inicio": "2026-08-17T15:35-03:00",
+    "fecha_cierre": "2026-08-17T17:35-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Ramón Cayupán",
+    "aviso": "BBA 3 CORREAS FLOJAS, POLEA CALIENTE",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0075",
+    "fecha_aviso": "2026-08-17T15:40-03:00",
+    "fecha_inicio": "2026-08-17T20:40-03:00",
+    "fecha_cierre": "2026-08-18T00:10-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "dif de FA en 1,63",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0076",
+    "fecha_aviso": "2026-08-22T10:40-03:00",
+    "fecha_inicio": "2026-08-22T15:40-03:00",
+    "fecha_cierre": "2026-08-22T20:10-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "bba 3 empaquetadura pierde, charco abajo del cabezal",
+    "trabajo_realizado": "EMPAQUETADURA NUEVA. SE DEJO GOTEANDO Y SE AJUSTO. OK SIN PERDIDA",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0077",
+    "fecha_aviso": "2026-08-26T16:50-03:00",
+    "fecha_inicio": "2026-08-27T18:50-03:00",
+    "fecha_cierre": "2026-08-27T22:20-03:00",
+    "equipo": "F-201B",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "CAMBIO DE CARTUCHOS FILTRO B X DIF ALTO",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-10",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0078",
+    "fecha_aviso": "2026-08-28T21:05-03:00",
+    "fecha_inicio": "2026-08-29T00:05-03:00",
+    "fecha_cierre": "2026-08-29T01:35-03:00",
+    "equipo": "B-103",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "chirrido en correas de la del fondo al arrancar",
+    "trabajo_realizado": "CBIO DE JUEGO DE CORREAS COMPLETO. FLECHA OK 13MM",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 1.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0079",
+    "fecha_aviso": "2026-09-02T20:30-03:00",
+    "fecha_inicio": "2026-09-03T01:30-03:00",
+    "fecha_cierre": "2026-09-03T03:30-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "la dos correas flojas, polea caliente",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0080",
+    "fecha_aviso": "2026-09-08T09:00-03:00",
+    "fecha_inicio": "2026-09-09T05:00-03:00",
+    "fecha_cierre": "2026-09-09T11:00-03:00",
+    "equipo": "B-101",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "golpeteo en cabezal de bomba 1, vibra mas de lo normal",
+    "trabajo_realizado": "cbio de valvulas las 6. asientos marcados. se ajusto tapas a torque. vib ok",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 6.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0081",
+    "fecha_aviso": "2026-09-12T20:00-03:00",
+    "fecha_inicio": "2026-09-13T01:00-03:00",
+    "fecha_cierre": "2026-09-13T04:00-03:00",
+    "equipo": "PLANTA",
+    "tipo": "predictiva",
+    "tareas": [
+      "I-VIB"
+    ],
+    "ejecutor": "Servipat",
+    "solicitante": "Juan Pablo Ñancucheo",
+    "tecnico": "Diego Barría (Servipat)",
+    "aviso": "medicion mensual de vibraciones b-101, b-102, b-103",
+    "trabajo_realizado": "ruta de vibraciones. todo en zona a/b. informe adjunto",
+    "repuestos": [],
+    "horas": 3.0,
+    "codigo_falla": null,
+    "estado": "Certificada"
+  },
+  {
+    "id": "OT-26-0082",
+    "fecha_aviso": "2026-09-16T16:50-03:00",
+    "fecha_inicio": "2026-09-18T16:50-03:00",
+    "fecha_cierre": "2026-09-18T20:50-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-EMP"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "bba 2 empauqetadura pierde, charco abajo del cabezal",
+    "trabajo_realizado": "empaquetadura nueva. se dejo goteando y se ajusto. ok sin perdida",
+    "repuestos": [
+      {
+        "codigo": "TX-EMP-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 4.0,
+    "codigo_falla": "F01",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0083",
+    "fecha_aviso": "2026-09-17T16:00-03:00",
+    "fecha_inicio": "2026-09-18T18:00-03:00",
+    "fecha_cierre": "2026-09-18T21:30-03:00",
+    "equipo": "F-201A",
+    "tipo": "por condición",
+    "tareas": [
+      "T-F-CAR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "cambio de cartuchos F-201A x dif alto",
+    "trabajo_realizado": "cbio de cartuchos completo. se conto 48 retirados. dif 0,32",
+    "repuestos": [
+      {
+        "codigo": "FC-CART-25",
+        "cantidad": 48
+      }
+    ],
+    "horas": 3.5,
+    "codigo_falla": "F07",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0084",
+    "fecha_aviso": "2026-09-23T16:40-03:00",
+    "fecha_inicio": "2026-09-23T17:40-03:00",
+    "fecha_cierre": "2026-09-23T20:10-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "caudal de bomba 2 bajo y motor caliente, chilla",
+    "trabajo_realizado": "cbio de juego de correas completo. flecha ok 13mm",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.5,
+    "codigo_falla": "F05",
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0085",
+    "fecha_aviso": "2026-09-28T09:10-03:00",
+    "fecha_inicio": "2026-09-28T12:10-03:00",
+    "fecha_cierre": "2026-09-28T12:40-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-ACE"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Matías Huichaqueo",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "TEMP ACEITE B-102 EN 76 Y SUBIENDO DESPACIO, NIVEL BAJO",
+    "trabajo_realizado": "reposicion de aceite. 6 litros. temp bajando",
+    "repuestos": [
+      {
+        "codigo": "ACE-ISO220",
+        "cantidad": 8
+      }
+    ],
+    "horas": 0.5,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0086",
+    "fecha_aviso": "2026-10-02T16:35-03:00",
+    "fecha_inicio": "2026-10-03T18:35-03:00",
+    "fecha_cierre": "2026-10-03T20:35-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-COR"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Héctor Llancafil",
+    "tecnico": "Lucas Ferreyra",
+    "aviso": "caudal de bomba 2 bajo y motor caliente, chilla",
+    "trabajo_realizado": "correas cuarteadas, se cambio el juego de 4. se reviso polea ok",
+    "repuestos": [
+      {
+        "codigo": "COR-5V-1800",
+        "cantidad": 4
+      }
+    ],
+    "horas": 2.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  },
+  {
+    "id": "OT-26-0087",
+    "fecha_aviso": "2026-10-06T11:20-03:00",
+    "fecha_inicio": "2026-10-06T13:20-03:00",
+    "fecha_cierre": "2026-10-06T18:20-03:00",
+    "equipo": "B-102",
+    "tipo": "correctiva",
+    "tareas": [
+      "T-B-VAL"
+    ],
+    "ejecutor": "propio",
+    "solicitante": "Rubén Catriel",
+    "tecnico": "Nahuel Antieco",
+    "aviso": "bomba 2 golpea, manometro oscila mucho",
+    "trabajo_realizado": "cbio de valvulas las 6. asientos marcados. se ajusto tapas a torque. vib ok",
+    "repuestos": [
+      {
+        "codigo": "TX-VAL-KIT",
+        "cantidad": 1
+      }
+    ],
+    "horas": 5.0,
+    "codigo_falla": null,
+    "estado": "Cerrada"
+  }
+]

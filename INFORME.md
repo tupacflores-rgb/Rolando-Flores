@@ -12,14 +12,15 @@ contratos estrictos y pueden reemplazarse por los servicios oficiales.
 | Tarea | Implementación | Ejecución |
 |---|---|---|
 | Detección, seguridad y aprobación | Python determinista | CPU de planta, 4 cores, 8 GB |
-| Transcripción | `Transcriber` configurable; fixture local incluido | Adaptador local, sin nube |
+| Transcripción | `faster-whisper-small` con revisión fija; fixture local incluido | CPU de planta, sin nube |
 | Extracción estructurada | `VoicePartExtractor`/adaptador de modelo cerrado | CPU de planta |
 | Recuperación | pgvector previsto + índice reproducible | PostgreSQL 16 |
 | Herramientas | Pydantic + FastAPI + MCP | Red local de planta |
 
-No se declara un modelo cerrado no entregado por la cátedra. Cuando se provea
-la lista oficial, se completa el adaptador con nombre, proveedor, versión,
-parámetros y benchmark sin modificar el dominio.
+El modelo se descarga con `scripts/download_whisper.py` desde
+`Systran/faster-whisper-small` usando una revisión fija. Los pesos no se
+versionan en Git por su tamaño; un clon limpio puede obtenerlos de forma
+reproducible antes de montar `models/`.
 
 ## Tokens, costo y latencia
 
@@ -39,8 +40,9 @@ de 30 segundos reales.
 
 ## Validación
 
-La suite actual cubre idempotencia, anomalía sostenida, seguridad offline,
-aprobación, cola de sincronización, API y contratos estrictos. La evaluación
+La suite actual cubre idempotencia, anomalía sostenida por variable, seguridad
+offline, aprobación con cantidades de stock, correcciones parciales de voz,
+cola de sincronización, API y contratos estrictos. La evaluación
 final debe ejecutar los escenarios del anexo y reportar aciertos por campo,
 preguntas, recall@k, latencia, tokens y costo.
 
@@ -52,7 +54,10 @@ citas.
 
 ## Decisiones y límites conocidos
 
-Los fixtures locales permiten ejecutar la entrega sin acceso al simulador,
-corpus o modelos oficiales. La integración HTTP, el transporte MCP y el
-backend pgvector se mantienen detrás de interfaces para evitar que una
-dependencia externa altere la seguridad operacional.
+El corpus oficial y su evaluación están incluidos en `datos/documentos/`.
+La integración HTTP, el transporte MCP completo y el backend pgvector se
+mantienen detrás de interfaces; la superficie MCP actual es un adaptador HTTP
+local y no debe presentarse como transporte MCP stdio/SSE. La memoria de
+conversación mantiene retención de 45 días en el proceso; todavía no se
+persiste en PostgreSQL, por lo que un reinicio elimina esa memoria aunque no
+el estado de órdenes, sensores y sincronización.

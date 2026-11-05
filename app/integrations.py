@@ -264,3 +264,21 @@ def apply_tablet_response(
         )
         for row in rows
     ]
+
+
+def merge_corrected_rows(
+    rows: list[FilaParte], corrected: list[FilaParte]
+) -> list[FilaParte]:
+    """Replace only explicitly identified rows in a draft."""
+    if not corrected:
+        raise ValueError("No pude identificar la fila corregida")
+    corrected_tags = [row.equipment_tag for row in corrected]
+    if len(corrected_tags) != len(set(corrected_tags)):
+        raise ValueError("La corrección identifica más de una lectura por equipo")
+    result = list(rows)
+    positions = {row.equipment_tag: index for index, row in enumerate(result)}
+    for row in corrected:
+        if row.equipment_tag not in positions:
+            raise ValueError(f"La corrección refiere un equipo ausente: {row.equipment_tag}")
+        result[positions[row.equipment_tag]] = row
+    return result

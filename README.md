@@ -43,9 +43,10 @@ posterior, pero no participa en las decisiones de esta etapa. La sincronización
 externa se modela como cola idempotente ordenada; si el enlace cae, las
 operaciones quedan pendientes y no se pierde el estado local.
 
-No se usa transcripción, extracción, RAG ni LLM en esta etapa. Las reglas de
-límites, sostenimiento, seguridad y aprobación están en código y son
-reproducibles.
+Las decisiones de límites, sostenimiento, seguridad y aprobación siguen siendo
+deterministas y reproducibles. La transcripción local y el RAG son adaptadores
+opcionales: si faltan sus datos o pesos, fallan explícitamente sin alterar esas
+decisiones.
 
 ## Endpoints principales
 
@@ -77,9 +78,16 @@ docker compose up --build
 ```
 
 El Compose instala el contrato oficial desde la copia local
-`context\academia2026-tp\contrato` y monta `.\models` como `/models`. Para habilitar
-las notas de voz reales, colocar allí un modelo permitido como
-`models\whisper-small` e instalar el extra local si se ejecuta fuera de Docker:
+`context\academia2026-tp\contrato` y monta `.\models` como `/models`. El modelo no se
+versiona en Git por su tamaño; se obtiene reproduciblemente con una revisión fija:
+
+```powershell
+python -m pip install -e ".[voice]"
+python scripts\download_whisper.py
+```
+
+Para habilitar las notas de voz reales, instalar el extra local si se ejecuta fuera
+de Docker:
 
 ```powershell
 python -m pip install -e ".[test,integration,voice]"
@@ -92,7 +100,7 @@ modelo montado, la nota se rechaza explícitamente y no se guarda como
 confirmada.
 
 El directorio `datos/` contiene los datos oficiales de Entrega 1, incluyendo
-`planta.yaml`, `materiales.yaml`, 701 fragmentos de manuales y 102 audios
+`planta.yaml`, `materiales.yaml`, el corpus y evaluación de manuales, y 102 audios
 `datos/voces/*.flac` con su índice `datos/voces/indice.json`. El arranque carga
 automáticamente equipos, límites, catálogos y corpus; los audios se descargan
 desde las URLs MQTT de la planta y se transcriben localmente.
