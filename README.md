@@ -77,17 +77,17 @@ docker network create planta-lan
 docker compose up --build
 ```
 
-El Compose instala el contrato oficial desde la copia local
-`context\academia2026-tp\contrato` y monta `.\models` como `/models`. El modelo no se
-versiona en Git por su tamaño; se obtiene reproduciblemente con una revisión fija:
+El Compose instala el contrato oficial desde Git usando una revisión fija y monta
+`.\models` como `/models`. El modelo no se versiona en Git por su tamaño; el
+contenedor lo obtiene automáticamente al iniciar, de forma reproducible:
 
 ```powershell
 python -m pip install -e ".[voice]"
 python scripts\download_whisper.py
 ```
 
-Para habilitar las notas de voz reales, instalar el extra local si se ejecuta fuera
-de Docker:
+Para habilitar las notas de voz reales fuera de Docker, instalar el extra local y
+ejecutar ese script:
 
 ```powershell
 python -m pip install -e ".[test,integration,voice]"

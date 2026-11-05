@@ -109,4 +109,12 @@ def catalog_from_materials(data: dict[str, Any]) -> tuple[
         tag: [by_code[code] for code in codes if code in by_code]
         for tag, codes in data.get("lista_materiales", {}).items()
     }
-    return materials, by_equipment, list(data.get("tareas_estandar", []))
+    tasks = [
+        {**task, "estandar": True}
+        for task in data.get("tareas_estandar", [])
+    ]
+    tasks.extend(
+        {**task, "estandar": False, "equipos": task.get("equipos", [])}
+        for task in data.get("tareas_no_estandar", [])
+    )
+    return materials, by_equipment, tasks

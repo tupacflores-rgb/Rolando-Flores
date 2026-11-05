@@ -1,5 +1,3 @@
-FROM contrato AS contrato_src
-
 FROM python:3.11-slim
 WORKDIR /app
 RUN apt-get update \
@@ -7,7 +5,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 COPY pyproject.toml .
 COPY app ./app
-COPY --from=contrato_src / /tmp/planta-contrato
-RUN pip install --no-cache-dir ".[integration,voice]" /tmp/planta-contrato
+COPY scripts ./scripts
+RUN pip install --no-cache-dir ".[integration,voice]" \
+    "git+https://github.com/NovitSoftware/academia2026-tp.git@ab65b95e911731351dba395817a74a8cc60da2b2#subdirectory=contrato"
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "scripts/ensure_whisper.py"]

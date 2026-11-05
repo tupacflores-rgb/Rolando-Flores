@@ -42,6 +42,13 @@ class FixtureTranscriber:
         return self.transcripts[key]
 
 
+class AmbiguousInputError(ValueError):
+    def __init__(self, message: str, *, options: list[str], note: str | None = None) -> None:
+        super().__init__(message)
+        self.options = options
+        self.note = note
+
+
 class WhisperTranscriber:
     """Transcriptor local; no realiza llamadas de inferencia a servicios externos."""
 
@@ -129,7 +136,11 @@ class VoicePartExtractor:
     def extract(self, note: VoiceNote, transcript: str) -> list[FilaParte]:
         rows: list[FilaParte] = []
         names = sorted(
-            {alias for item in self.equipment for alias in (item.aliases + [item.name])},
+            {
+                alias
+                for item in self.equipment
+                for alias in (item.aliases + [item.name, item.tag])
+            },
             key=len,
             reverse=True,
         )
@@ -232,7 +243,11 @@ class VoicePartExtractor:
             or (normalized == "la de reserva" and item.reserve_available)
         ]
         if len(matches) != 1:
-            raise ValueError(f"Nombre de equipo ambiguo o inexistente: {informal_name}")
+            raise AmbiguousInputError(
+                f"Nombre de equipo ambiguo o inexistente: {informal_name}",
+                options=[item.tag for item in matches],
+                note=informal_name,
+            )
         return matches[0]
 
     @staticmethod

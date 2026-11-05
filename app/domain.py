@@ -115,17 +115,18 @@ class DomainService:
             restored = self.repository.restore()
             self.equipment = {item.tag: item for item in restored["equipment"]}
             self.parts = {item.idempotency_key: item for item in restored["parts"]}
+            restored_sensors = restored.get("sensor_readings", [])
             self.sensor_readings = {
-                item.idempotency_key: item for item in restored["sensor_readings"]
+                item.idempotency_key: item for item in restored_sensors
             }
             self.events = {item.idempotency_key: item for item in restored["events"]}
             self.events_by_id = {str(item.id): item for item in restored["events"]}
             self.alerts = {str(item.id): item for item in restored["alerts"]}
             self.orders = {str(item.id): item for item in restored["orders"]}
-            for reading in restored["sensor_readings"]:
+            for reading in restored_sensors:
                 key = (reading.equipment_tag, reading.variable)
                 self._sustained[key].append((self._aware(reading.observed_at), reading.value))
-            for item in restored["sync"]:
+            for item in restored.get("sync", []):
                 self.sync_items[item["idempotency_key"]] = item
                 self.sync_queue.append(item["idempotency_key"])
 
@@ -301,10 +302,27 @@ class DomainService:
         )
         if existing is not None:
             return existing
+        open_order = next(
+            (
+                order
+                for order in self.orders.values()
+                if order.equipment_tag == event.equipment_tag
+                and order.status
+                not in {
+                    OrderStatus.REJECTED,
+                    OrderStatus.CLOSED,
+                    OrderStatus.CERTIFIED,
+                }
+            ),
+            None,
+        )
+        if open_order is not None:
+            return open_order
+        task = "I-VIB" if event.variable == "vibracion" else "I-VAL"
         order = Order(
             event_id=event.id,
             equipment_tag=event.equipment_tag,
-            task="Diagnóstico y corrección del evento escalado",
+            task=task,
             total_cost_usd=0,
             stock_available=False,
             standard_task=False,
@@ -313,6 +331,12 @@ class DomainService:
             structural_damage=False,
             detiene_equipo=True,
             reduce_inyeccion=True,
+            evidence={
+                "event_id": str(event.id),
+                "variable": event.variable,
+                "value": event.value,
+                "context": event.context,
+            },
         )
         return self.create_order(order)
 
@@ -333,6 +357,7 @@ class DomainService:
             for task in self.task_catalog
             for equipment in task.get("equipos", [])
         }
+        official_equipment.update(self.equipment)
         if self.task_catalog and request.equipment_tag in official_equipment:
             task_text = request.task.casefold()
             catalog_task = next(
@@ -343,7 +368,10 @@ class DomainService:
                         str(task.get("codigo", "")).casefold() == task_text
                         or str(task.get("nombre", "")).casefold() == task_text
                     )
-                    and request.equipment_tag in task.get("equipos", [])
+                    and (
+                        not task.get("equipos")
+                        or request.equipment_tag in task.get("equipos", [])
+                    )
                 ),
                 None,
             )
@@ -352,11 +380,15 @@ class DomainService:
                 request.parts = []
             else:
                 request.task = str(catalog_task["nombre"])
-                request.standard_task = True
+                request.standard_task = bool(catalog_task.get("estandar", True))
                 request.detiene_equipo = bool(catalog_task.get("detiene", False))
+                target = self.equipment.get(request.equipment_tag)
                 reserve_available = any(
-                    item.reserve_available for item in self.equipment.values()
-                )
+                    item.tag != request.equipment_tag
+                    and item.kind == target.kind
+                    and item.reserve_available
+                    for item in self.equipment.values()
+                ) if target is not None else False
                 request.keeps_injection = (
                     not request.detiene_equipo or reserve_available
                 )
@@ -433,7 +465,12 @@ class DomainService:
 
     def enqueue(self, operation: str, key: str, payload: dict) -> dict:
         if key in self.sync_items:
-            return self.sync_items[key]
+            item = self.sync_items[key]
+            if not item["synced"]:
+                item.update(operation=operation, payload=payload, last_error=None)
+                if self.repository:
+                    self.repository.save_sync(item)
+            return item
         item = {"idempotency_key": key, "operation": operation, "payload": payload, "attempts": 0, "synced": False}
         self.sync_items[key] = item
         self.sync_queue.append(key)
@@ -453,8 +490,12 @@ class DomainService:
                 publish(item)
             except Exception as exc:
                 item["last_error"] = str(exc)
+                if self.repository:
+                    self.repository.save_sync(item)
                 break
             item["synced"] = True
             self.sync_queue.remove(key)
+            if self.repository:
+                self.repository.save_sync(item)
             completed.append(item)
         return completed

@@ -27,7 +27,7 @@ from .certification import compare_closure, issue_habilita
 from .integrations import (
     VoicePartExtractor,
     WhisperTranscriber,
-    apply_tablet_response,
+    AmbiguousInputError,
     download_media,
     merge_corrected_rows,
 )
@@ -76,6 +76,7 @@ mcp_server = EquipmentMCPServer(tools)
 memory = ConversationMemory()
 draft_rows: dict[str, list[FilaParte]] = {}
 draft_notes: dict[str, VoiceNote] = {}
+pending_questions: dict[str, AmbiguousInputError] = {}
 tablet_notes: dict[str, str] = {}
 mqtt_bridge: MqttBridge | None = None
 
@@ -204,6 +205,10 @@ def _on_recorrida(payload: dict[str, Any]) -> None:
         memory.append(note.note_id, "nota", note.model_dump(mode="json"))
         memory.append(note.note_id, "borrador", {"filas": [row.model_dump() for row in rows]})
         _publish_draft(note, rows)
+    except AmbiguousInputError as exc:
+        pending_questions[note.note_id] = exc
+        draft_notes[note.note_id] = note
+        _publish_question(note, exc)
     except Exception as exc:
         logger.exception("No se pudo procesar la recorrida %s: %s", payload.get("id"), exc)
         if payload.get("id"):
@@ -244,6 +249,33 @@ def _on_respuesta(payload: dict[str, Any]) -> None:
         if note_id is None:
             raise ValueError(f"Mensaje de tablet inexistente: {response.mensaje_id}")
         note = draft_notes[note_id]
+        question = pending_questions.get(note_id)
+        if question is not None:
+            selected = next(
+                (
+                    option
+                    for option in question.options
+                    if option.casefold() in response.texto.casefold()
+                ),
+                None,
+            )
+            if selected is None:
+                raise ValueError("La respuesta no selecciona una opción válida")
+            pending_questions.pop(note_id)
+            note = note.model_copy(
+                update={
+                    "transcript": (note.transcript or "").replace(
+                        question.note or "", selected
+                    )
+                }
+            )
+            draft_notes[note_id] = note
+            rows = VoicePartExtractor(list(service.equipment.values())).extract(
+                note, note.transcript or ""
+            )
+            draft_rows[note_id] = rows
+            _publish_draft(note, rows)
+            return
         if response.texto.strip().casefold().startswith(("no", "nop")):
             corrected = VoicePartExtractor(list(service.equipment.values())).extract(
                 note, response.texto
@@ -270,6 +302,21 @@ def _publish_draft(note: VoiceNote, rows: list[FilaParte]) -> None:
             texto="Revisá el parte y confirmá o corregí los valores.",
             filas=rows,
             titulo="Borrador de recorrida",
+        )
+    )
+
+
+def _publish_question(note: VoiceNote, error: AmbiguousInputError) -> None:
+    message_id = f"tablet:question:{note.note_id}:{uuid4()}"
+    tablet_notes[message_id] = note.note_id
+    _publish_tablet(
+        tablet_message(
+            message_id=message_id,
+            note_ids=[note.note_id],
+            texto="Necesito identificar el equipo antes de continuar.",
+            filas=[],
+            titulo="Aclaración requerida",
+            opciones=error.options,
         )
     )
 
@@ -385,16 +432,25 @@ async def _heartbeat_loop() -> None:
         await asyncio.sleep(30)
 
 
+async def _sync_loop() -> None:
+    while True:
+        if mqtt_bridge is not None and mqtt_bridge.enlace_ok:
+            process_sync(enlace_ok=True)
+        await asyncio.sleep(1)
+
+
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     global mqtt_bridge
     _bootstrap_equipment()
     mqtt_bridge = _start_mqtt()
     heartbeat = asyncio.create_task(_heartbeat_loop())
+    synchronizer = asyncio.create_task(_sync_loop())
     try:
         yield
     finally:
         heartbeat.cancel()
+        synchronizer.cancel()
         if mqtt_bridge is not None:
             mqtt_bridge.stop()
             mqtt_bridge = None
@@ -484,6 +540,11 @@ def process_voice_note(note: VoiceNote) -> list[FilaParte]:
         rows = VoicePartExtractor(list(service.equipment.values())).extract(
             note, note.transcript
         )
+    except AmbiguousInputError as exc:
+        raise HTTPException(
+            status_code=409,
+            detail={"message": str(exc), "options": exc.options},
+        ) from exc
     except (ValueError, KeyError) as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     draft_rows[note.note_id] = rows
@@ -499,28 +560,32 @@ def process_tablet_response(response: TabletResponse) -> list[FilaParte]:
     rows = draft_rows.get(response.note_id)
     if rows is None:
         raise HTTPException(status_code=404, detail="Borrador inexistente")
-    try:
-        corrected = apply_tablet_response(rows, response)
-    except ValueError as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
-    draft_rows[response.note_id] = corrected
     memory.append(response.note_id, "intento", response.model_dump())
-    if response.accepted:
-        note = draft_notes.get(response.note_id)
-        if note is None:
-            raise HTTPException(status_code=404, detail="Nota de recorrida inexistente")
+    note = draft_notes.get(response.note_id)
+    if note is None:
+        raise HTTPException(status_code=404, detail="Nota de recorrida inexistente")
+    corrected = rows
+    if response.corrections:
         try:
-            if response.corrections and response.corrections.strip().casefold().startswith(
-                ("no", "nop")
-            ):
-                extracted = VoicePartExtractor(list(service.equipment.values())).extract(
-                    note, response.corrections
-                )
-                corrected = merge_corrected_rows(corrected, extracted)
-                draft_rows[response.note_id] = corrected
-            _confirm_voice_draft(note, corrected)
+            extracted = VoicePartExtractor(list(service.equipment.values())).extract(
+                note, response.corrections
+            )
+            corrected = merge_corrected_rows(rows, extracted)
         except ValueError as exc:
-            raise HTTPException(status_code=409, detail=str(exc)) from exc
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+    elif not response.accepted:
+        raise HTTPException(
+            status_code=422,
+            detail="Una corrección rechazada debe incluir texto",
+        )
+    draft_rows[response.note_id] = corrected
+    if not response.accepted:
+        _publish_draft(note, corrected)
+        return corrected
+    try:
+        _confirm_voice_draft(note, corrected)
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
     return corrected
 
 
@@ -742,7 +807,7 @@ def enqueue_sync(operation: str, idempotency_key: str, payload: dict[str, Any]) 
 
 @app.post("/api/sincronizacion/procesar")
 def process_sync(enlace_ok: bool = False) -> list[dict]:
-    if not enlace_ok or mqtt_bridge is None or not mqtt_bridge.enlace_ok:
+    if not enlace_ok or mqtt_bridge is None or not getattr(mqtt_bridge, "enlace_ok", False):
         return []
     def publish(item: dict[str, Any]) -> None:
         if item["operation"] == "event":

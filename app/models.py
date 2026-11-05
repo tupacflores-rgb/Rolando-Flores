@@ -143,6 +143,7 @@ class OrderCreate(StrictModel):
     structural_damage: bool = False
     detiene_equipo: bool = False
     reduce_inyeccion: bool = False
+    evidence: dict[str, Any] = Field(default_factory=dict)
 
 
 class ClosureReport(StrictModel):

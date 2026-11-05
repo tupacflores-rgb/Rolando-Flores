@@ -105,6 +105,7 @@ class PostgresRepository:
                     (id, idempotency_key, operation, payload, attempts, synced, last_error)
                 VALUES (gen_random_uuid(), %s, %s, %s::jsonb, %s, %s, %s)
                 ON CONFLICT (idempotency_key) DO UPDATE SET
+                    operation=EXCLUDED.operation, payload=EXCLUDED.payload,
                     attempts=EXCLUDED.attempts, synced=EXCLUDED.synced,
                     last_error=EXCLUDED.last_error
                 """,

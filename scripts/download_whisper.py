@@ -1,13 +1,19 @@
 """Download the approved local Whisper model at a reproducible revision."""
 
 from pathlib import Path
+import os
 
 from huggingface_hub import snapshot_download
 
 
 MODEL_ID = "Systran/faster-whisper-small"
 MODEL_REVISION = "536b0662742c02347bc0e980a01041f333bce120"
-TARGET = Path(__file__).resolve().parents[1] / "models" / "whisper-small"
+TARGET = Path(
+    os.getenv(
+        "WHISPER_MODEL_PATH",
+        str(Path(__file__).resolve().parents[1] / "models" / "whisper-small"),
+    )
+)
 
 
 def main() -> None:

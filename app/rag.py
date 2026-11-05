@@ -37,13 +37,13 @@ class ManualIndex:
                 citation = item["id"]
                 chunks.append(
                     ManualChunk(
-                        equipment_tag="B-101" if citation.startswith("TX350-") else "general",
-                        manufacturer="Trimax Industrial",
+                        equipment_tag=item.get("equipo", "general"),
+                        manufacturer=item.get("fabricante", "desconocido"),
                         document=item["doc"],
                         section=citation,
                         citation=citation,
                         text=item["texto"],
-                        vigente=item.get("vigente", True),
+                        vigente=bool(item.get("vigente", False)),
                     )
                 )
         return cls(chunks)
@@ -116,24 +116,39 @@ class ManualIndex:
     ) -> dict[str, float]:
         hits = 0
         reciprocal = 0.0
+        recall_sum = 0.0
         for item in suite:
             query = RetrievalQuery(
                 question=str(item["question"]),
                 equipment_tag=item.get("equipment_tag"),  # type: ignore[arg-type]
                 k=k,
             )
-            expected = str(item["expected_section"])
+            expected_sections = {
+                str(value)
+                for value in item.get(
+                    "relevant_sections", [item["expected_section"]]
+                )
+            }
             results = search.search(query)
             positions = [
                 index + 1
                 for index, result in enumerate(results)
-                if result.chunk.section == expected
+                if result.chunk.section in expected_sections
             ]
             if positions:
                 hits += 1
                 reciprocal += 1 / positions[0]
+            recall_sum += len(
+                expected_sections.intersection(
+                    {result.chunk.section for result in results}
+                )
+            ) / len(expected_sections)
         total = len(suite) or 1
-        return {"hit_at_k": hits / total, "recall_at_k": hits / total}
+        return {
+            "hit_at_k": hits / total,
+            "recall_at_k": recall_sum / total,
+            "mrr_at_k": reciprocal / total,
+        }
 
     def evaluate_official(
         self, retrieval_json: str | Path, k_values: tuple[int, ...] = (1, 3, 5, 10)
