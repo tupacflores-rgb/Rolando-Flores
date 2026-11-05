@@ -1,15 +1,23 @@
 from __future__ import annotations
 
 from datetime import datetime
+import os
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, status
 
 from .domain import DomainService
+from .certification import compare_closure, issue_habilita
+from .integrations import VoicePartExtractor, apply_tablet_response
+from .memory import ConversationMemory
+from .persistence import build_repository
 from .models import (
+    ClosureReport,
+    ClosureComparison,
     Equipment,
     Event,
     EventStatus,
+    FilaParte,
     Order,
     OrderCreate,
     OrderStatus,
@@ -17,12 +25,19 @@ from .models import (
     PartCreate,
     SafetyAlert,
     SensorReading,
+    TabletResponse,
+    VoiceNote,
 )
 from .tools import EquipmentQuery, ReadOnlyTools, SensorHistoryQuery
 
 app = FastAPI(title="Planta de inyección de agua", version="0.1.0")
-service = DomainService()
+database_url = os.path.expandvars(os.getenv("DATABASE_URL", ""))
+repository = build_repository(database_url)
+service = DomainService(repository=repository)
 tools = ReadOnlyTools(service)
+memory = ConversationMemory()
+draft_rows: dict[str, list[FilaParte]] = {}
+closures: dict[str, ClosureReport] = {}
 
 
 @app.get("/health")
@@ -43,6 +58,39 @@ def list_equipment(tag: str | None = None) -> list[Equipment]:
 @app.post("/api/partes", response_model=Part, status_code=status.HTTP_201_CREATED)
 def create_part(request: PartCreate) -> Part:
     return service.save_part(Part(**request.model_dump()))
+
+
+@app.post("/api/recorridas/procesar", response_model=list[FilaParte])
+def process_voice_note(note: VoiceNote) -> list[FilaParte]:
+    if not note.transcript:
+        raise HTTPException(
+            status_code=422,
+            detail="La nota requiere transcript o un transcriptor local configurado",
+        )
+    try:
+        rows = VoicePartExtractor(list(service.equipment.values())).extract(
+            note, note.transcript
+        )
+    except (ValueError, KeyError) as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    draft_rows[note.note_id] = rows
+    memory.append(note.note_id, "nota", note.model_dump(mode="json"))
+    memory.append(note.note_id, "borrador", {"filas": [row.model_dump() for row in rows]})
+    return rows
+
+
+@app.post("/api/tablet/respuesta", response_model=list[FilaParte])
+def process_tablet_response(response: TabletResponse) -> list[FilaParte]:
+    rows = draft_rows.get(response.note_id)
+    if rows is None:
+        raise HTTPException(status_code=404, detail="Borrador inexistente")
+    try:
+        corrected = apply_tablet_response(rows, response)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    draft_rows[response.note_id] = corrected
+    memory.append(response.note_id, "intento", response.model_dump())
+    return corrected
 
 
 @app.post("/api/partes/{idempotency_key}/confirmar", response_model=list[Event | SafetyAlert])
@@ -87,6 +135,44 @@ def transition_order(order_id: str, target: OrderStatus, reason: str | None = No
         raise HTTPException(status_code=404, detail="Orden inexistente") from exc
     except ValueError as exc:
         raise HTTPException(status_code=409, detail=str(exc)) from exc
+
+
+@app.post("/api/ordenes/{order_id}/cierre", response_model=ClosureComparison)
+def register_closure(order_id: str, closure: ClosureReport) -> ClosureComparison:
+    order = service.orders.get(order_id)
+    if order is None or str(order.id) != str(closure.order_id):
+        raise HTTPException(status_code=404, detail="Orden inexistente")
+    if order.status != OrderStatus.EXECUTED:
+        raise HTTPException(status_code=409, detail="La orden no está Ejecutada")
+    comparison = compare_closure(order, closure)
+    closures[order_id] = closure
+    memory.append(order_id, "cierre", closure.model_dump(mode="json"))
+    return comparison
+
+
+@app.post("/api/ordenes/{order_id}/certificar")
+def certify_order(
+    order_id: str, contract_prices: dict[str, float]
+) -> dict[str, object]:
+    order = service.orders.get(order_id)
+    closure = closures.get(order_id)
+    if order is None or closure is None:
+        raise HTTPException(status_code=404, detail="Orden o cierre inexistente")
+    if not closure.contractor:
+        raise HTTPException(status_code=409, detail="La orden no es de contratista")
+    comparison = compare_closure(order, closure)
+    if not comparison.matches:
+        raise HTTPException(status_code=409, detail=comparison.differences)
+    if order.status != OrderStatus.EXECUTED:
+        raise HTTPException(status_code=409, detail="La orden no está Ejecutada")
+    service.transition_order(order_id, OrderStatus.CERTIFIED)
+    habilita = issue_habilita(order, contract_prices)
+    return {"order": order, "habilita": habilita}
+
+
+@app.get("/api/memoria/{note_id}")
+def get_memory(note_id: str) -> list[dict[str, Any]]:
+    return memory.get(note_id)
 
 
 @app.get("/api/ordenes", response_model=list[Order])

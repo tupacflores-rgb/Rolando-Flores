@@ -129,3 +129,95 @@ class SyncItem(StrictModel):
     synced: bool = False
     last_error: str | None = None
 
+
+class FilaParte(StrictModel):
+    equipment_tag: str = Field(min_length=1)
+    variable: str = Field(min_length=1)
+    value: float | None = None
+    unit: str | None = None
+    observed_at: datetime
+    observation: str | None = None
+    photo_ids: list[str] = Field(default_factory=list)
+    requires_confirmation: bool = False
+    confirmation_reason: str | None = None
+
+
+class VoiceNote(StrictModel):
+    note_id: str = Field(min_length=1)
+    observed_at: datetime
+    audio_url: str | None = None
+    photo_urls: list[str] = Field(default_factory=list)
+    transcript: str | None = None
+
+
+class TabletResponse(StrictModel):
+    note_id: str = Field(min_length=1)
+    accepted: bool
+    corrections: str | None = None
+
+
+class ToolAudit(StrictModel):
+    tool_name: str
+    arguments: dict[str, Any]
+    duration_ms: int = Field(ge=0)
+    tokens: int = Field(default=0, ge=0)
+    error: str | None = None
+
+
+class ManualChunk(StrictModel):
+    equipment_tag: str
+    manufacturer: str
+    document: str
+    section: str
+    citation: str
+    text: str
+    vigente: bool = True
+    embedding: list[float] | None = None
+
+
+class RetrievalQuery(StrictModel):
+    question: str = Field(min_length=1)
+    equipment_tag: str | None = None
+    k: int = Field(default=5, ge=1, le=20)
+
+
+class ProbableCause(StrictModel):
+    cause: str
+    evidence: list[str] = Field(default_factory=list)
+    missing_confirmation: list[str] = Field(default_factory=list)
+    citation: str
+
+
+class WorkOrderEvidence(StrictModel):
+    event_id: UUID
+    photo_ids: list[str] = Field(default_factory=list)
+    sensor_trend: list[dict[str, Any]] = Field(default_factory=list)
+    causes: list[ProbableCause] = Field(default_factory=list)
+
+
+class ClosureReport(StrictModel):
+    order_id: UUID
+    technician: str = Field(min_length=1)
+    contractor: bool = False
+    tasks_done: list[str] = Field(min_length=1)
+    parts_used: list[str] = Field(default_factory=list)
+    hours: float = Field(ge=0)
+    final_test: str = Field(min_length=1)
+    photo_ids: list[str] = Field(default_factory=list)
+
+
+class ClosureComparison(StrictModel):
+    order_id: UUID
+    missing_tasks: list[str] = Field(default_factory=list)
+    unexpected_tasks: list[str] = Field(default_factory=list)
+    missing_parts: list[str] = Field(default_factory=list)
+    unexpected_parts: list[str] = Field(default_factory=list)
+    differences: list[str] = Field(default_factory=list)
+    matches: bool
+
+
+class Habilita(StrictModel):
+    number: str
+    order_id: UUID
+    amount_usd: float = Field(ge=0)
+    issued_at: datetime = Field(default_factory=datetime.utcnow)

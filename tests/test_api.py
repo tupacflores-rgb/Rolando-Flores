@@ -40,3 +40,26 @@ def test_equipment_part_and_sensor_flow():
     events = client.post("/api/partes/part-1/confirmar")
     assert events.status_code == 200
     assert events.json()[0]["status"] == "Sin novedad"
+
+
+def test_voice_tablet_and_memory_flow():
+    assert client.post(
+        "/api/equipos",
+        json={"tag": "B-103", "name": "Bomba reserva", "kind": "bomba", "aliases": ["la tres"]},
+    ).status_code == 201
+    response = client.post(
+        "/api/recorridas/procesar",
+        json={
+            "note_id": "VIVO-API-1",
+            "observed_at": "2026-11-05T10:00:00Z",
+            "transcript": "La tres está en ciento diez bar",
+        },
+    )
+    assert response.status_code == 200
+    assert response.json()[0]["equipment_tag"] == "B-103"
+    corrected = client.post(
+        "/api/tablet/respuesta",
+        json={"note_id": "VIVO-API-1", "accepted": True},
+    )
+    assert corrected.status_code == 200
+    assert client.get("/api/memoria/VIVO-API-1").json()

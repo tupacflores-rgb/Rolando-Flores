@@ -66,7 +66,8 @@ def detect_safety(text: str, source_id: str) -> list[SafetyAlert]:
 
 
 class DomainService:
-    def __init__(self) -> None:
+    def __init__(self, repository=None) -> None:
+        self.repository = repository
         self.equipment: dict[str, Equipment] = {}
         self.parts: dict[str, Part] = {}
         self.sensor_readings: dict[str, SensorReading] = {}
@@ -76,9 +77,18 @@ class DomainService:
         self.sync_queue: deque[str] = deque()
         self.sync_items: dict[str, dict] = {}
         self._sustained: dict[tuple[str, str], list[tuple[datetime, float]]] = defaultdict(list)
+        if self.repository:
+            restored = self.repository.restore()
+            self.equipment = {item.tag: item for item in restored["equipment"]}
+            self.parts = {item.idempotency_key: item for item in restored["parts"]}
+            self.events = {item.idempotency_key: item for item in restored["events"]}
+            self.alerts = {str(item.id): item for item in restored["alerts"]}
+            self.orders = {str(item.id): item for item in restored["orders"]}
 
     def add_equipment(self, equipment: Equipment) -> Equipment:
         self.equipment[equipment.tag] = equipment
+        if self.repository:
+            self.repository.save_equipment(equipment)
         return equipment
 
     def confirm_part(self, key: str) -> Part:
@@ -91,6 +101,8 @@ class DomainService:
         if existing:
             return existing
         self.parts[part.idempotency_key] = part
+        if self.repository:
+            self.repository.save_part(part)
         return part
 
     def evaluate_part(self, part: Part) -> list[Event | SafetyAlert]:
@@ -112,6 +124,8 @@ class DomainService:
             if existing_alert is None:
                 alert.source_id = alert_key
                 self.alerts[str(alert.id)] = alert
+                if self.repository:
+                    self.repository.save_alert(alert)
                 existing_alert = alert
             results.append(existing_alert)
         for index, reading in enumerate(part.readings):
@@ -142,6 +156,8 @@ class DomainService:
                 context={"reason": result.reason, "photos": reading.photo_ids},
             )
             self.events[event_key] = event
+            if self.repository:
+                self.repository.save_event(event)
             results.append(event)
         return results
 
@@ -165,6 +181,9 @@ class DomainService:
             context={"reason": evaluation.reason},
         )
         self.events[reading.idempotency_key] = event
+        if self.repository:
+            self.repository.save_sensor(reading)
+            self.repository.save_event(event)
         return event
 
     def create_order(self, request: Order) -> Order:
@@ -187,6 +206,8 @@ class DomainService:
         request.approval_reasons = reasons
         request.status = OrderStatus.APPROVED if not reasons else OrderStatus.PENDING
         self.orders[str(request.id)] = request
+        if self.repository:
+            self.repository.save_order(request)
         return request
 
     def transition_order(self, order_id: str, target: OrderStatus, reason: str | None = None) -> Order:
@@ -203,6 +224,8 @@ class DomainService:
         order.status = target
         if reason:
             order.approval_reasons.append(reason)
+        if self.repository:
+            self.repository.save_order(order)
         return order
 
     def enqueue(self, operation: str, key: str, payload: dict) -> dict:
@@ -211,6 +234,8 @@ class DomainService:
         item = {"idempotency_key": key, "operation": operation, "payload": payload, "attempts": 0, "synced": False}
         self.sync_items[key] = item
         self.sync_queue.append(key)
+        if self.repository:
+            self.repository.save_sync(item)
         return item
 
     def sync(self, publish) -> list[dict]:

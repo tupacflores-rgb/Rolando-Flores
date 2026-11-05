@@ -15,12 +15,17 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      - planta-lan
   api:
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      DATABASE_URL: postgresql://planta:planta@db:5432/planta
+      DATABASE_URL: postgresql://$${POSTGRES_USER}:$${POSTGRES_PASSWORD}@db:5432/$${POSTGRES_DB}
+      POSTGRES_USER: planta
+      POSTGRES_PASSWORD: planta
+      POSTGRES_DB: planta
       HTTP_PROXY: ${HTTP_PROXY:-}
       HTTPS_PROXY: ${HTTPS_PROXY:-}
       NO_PROXY: broker,sim,localhost,db
@@ -31,6 +36,8 @@ services:
       - "8000:8000"
     networks:
       - planta-lan
+    labels:
+      academia.planta: pc
     deploy:
       resources:
         limits:
@@ -40,5 +47,6 @@ networks:
   planta-lan:
     name: planta-lan
     driver: bridge
+    external: true
 volumes:
   postgres_data:

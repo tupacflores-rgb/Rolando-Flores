@@ -49,3 +49,46 @@ Las tools exponen solo lectura y validan contratos estrictos con Pydantic
 tarea es estándar, conserva la inyección, hay stock, el costo es menor a USD
 2.500 y trabaja personal propio. Cualquier excepción queda pendiente de
 aprobación.
+
+## Entrega completa
+
+La documentación del TP está en [INFORME.md](./INFORME.md), la mini-spec en
+[context/spec/PARTE-DETERMINISTA.md](./context/spec/PARTE-DETERMINISTA.md) y el
+recorrido de enseñanza en [teaching/README.md](./teaching/README.md).
+
+Para levantar con la red externa requerida por la planta:
+
+```powershell
+docker network create planta-lan
+docker compose up --build
+```
+
+Los adaptadores locales de [app/integrations.py](./app/integrations.py),
+[app/rag.py](./app/rag.py), [app/memory.py](./app/memory.py) y
+[app/certification.py](./app/certification.py) permiten probar el flujo sin
+simulador, corpus o modelos externos. Las integraciones oficiales se conectan
+sin cambiar las reglas deterministas.
+
+## Datos oficiales de la Academia
+
+Con el repositorio oficial `academia2026-tp` disponible localmente, se pueden
+cargar los equipos y materiales desde `datos/planta.yaml` y
+`datos/materiales.yaml`. El corpus se indexa desde
+`datos/documentos/fragmentos.jsonl` y la evaluación usa
+`datos/documentos/evaluacion/retrieval.json`:
+
+```python
+from app.official_data import load_equipment
+from app.rag import ManualIndex
+
+equipos = load_equipment(r"C:\ruta\academia2026-tp\datos\planta.yaml")
+indice = ManualIndex.from_jsonl(
+    r"C:\ruta\academia2026-tp\datos\documentos\fragmentos.jsonl"
+)
+metricas = indice.evaluate_official(
+    r"C:\ruta\academia2026-tp\datos\documentos\evaluacion\retrieval.json"
+)
+```
+
+El contrato `planta_contrato` se carga como dependencia instalada mediante
+[app/contract_adapter.py](./app/contract_adapter.py); no se copia al proyecto.
