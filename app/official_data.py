@@ -6,7 +6,7 @@ import json
 
 import yaml
 
-from .models import Equipment
+from .models import Equipment, SensorLimits
 
 
 def load_yaml(path: str | Path) -> dict[str, Any]:
@@ -24,7 +24,7 @@ def equipment_from_definition(data: dict[str, Any]) -> list[Equipment]:
     if not isinstance(data, dict):
         raise ValueError("La definición de planta no es un objeto")
     result: list[Equipment] = []
-    limits: dict[str, dict[str, float | None]] = {}
+    limits: dict[str, dict[str, SensorLimits]] = {}
     sensor_groups: dict[str, list[dict[str, Any]]] = {}
     for sensor in data.get("sensores", []):
         if isinstance(sensor, dict):
@@ -38,8 +38,11 @@ def equipment_from_definition(data: dict[str, Any]) -> list[Equipment]:
             ),
         )
         limits[tag] = {
-            "min": selected.get("alarma_baja"),
-            "max": selected.get("alarma_alta"),
+            item["variable"]: SensorLimits(
+                alarm_min=item.get("alarma_baja"),
+                alarm_max=item.get("alarma_alta"),
+            )
+            for item in sensors
         }
     for item in data.get("equipos", []):
         if not isinstance(item, dict):
@@ -50,8 +53,17 @@ def equipment_from_definition(data: dict[str, Any]) -> list[Equipment]:
                 name=item["descripcion"],
                 aliases=item.get("nombres", []),
                 kind=item["tipo"],
-                alarm_min=limits.get(item["tag"], {}).get("min"),
-                alarm_max=limits.get(item["tag"], {}).get("max"),
+                alarm_min=(
+                    limits.get(item["tag"], {})
+                    .get("presion_descarga", SensorLimits())
+                    .alarm_min
+                ),
+                alarm_max=(
+                    limits.get(item["tag"], {})
+                    .get("presion_descarga", SensorLimits())
+                    .alarm_max
+                ),
+                sensor_limits=limits.get(item["tag"], {}),
                 reserve_available=item.get("rol_inicial") == "reserva",
             )
         )
@@ -79,3 +91,22 @@ def load_voice_index(path: str | Path) -> dict[str, dict[str, Any]]:
     if not isinstance(data, dict):
         raise ValueError(f"El índice de voces no es un objeto: {source}")
     return data
+
+
+def catalog_from_materials(data: dict[str, Any]) -> tuple[
+    list[dict[str, Any]], dict[str, list[dict[str, Any]]], list[dict[str, Any]]
+]:
+    """Normaliza materiales oficiales para las tools de solo lectura."""
+    materials = list(data.get("repuestos", []))
+    by_code = {item.get("codigo"): item for item in materials}
+    equipment_by_code: dict[str, list[str]] = {}
+    for tag, codes in data.get("lista_materiales", {}).items():
+        for code in codes:
+            equipment_by_code.setdefault(code, []).append(tag)
+    for item in materials:
+        item["equipos"] = equipment_by_code.get(item.get("codigo"), [])
+    by_equipment = {
+        tag: [by_code[code] for code in codes if code in by_code]
+        for tag, codes in data.get("lista_materiales", {}).items()
+    }
+    return materials, by_equipment, list(data.get("tareas_estandar", []))

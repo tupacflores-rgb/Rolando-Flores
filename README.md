@@ -76,8 +76,8 @@ docker network create planta-lan
 docker compose up --build
 ```
 
-El Compose instala el contrato oficial desde el contexto local
-`..\academia2026-tp\contrato` y monta `.\models` como `/models`. Para habilitar
+El Compose instala el contrato oficial desde la copia local
+`context\academia2026-tp\contrato` y monta `.\models` como `/models`. Para habilitar
 las notas de voz reales, colocar allí un modelo permitido como
 `models\whisper-small` e instalar el extra local si se ejecuta fuera de Docker:
 
@@ -90,6 +90,12 @@ La integración de Entrega 1 consume `planta/recorridas`, descarga el audio desd
 `sistema/tablet` y confirma el parte al recibir `planta/respuestas`. Sin un
 modelo montado, la nota se rechaza explícitamente y no se guarda como
 confirmada.
+
+El directorio `datos/` contiene los datos oficiales de Entrega 1, incluyendo
+`planta.yaml`, `materiales.yaml`, 701 fragmentos de manuales y 102 audios
+`datos/voces/*.flac` con su índice `datos/voces/indice.json`. El arranque carga
+automáticamente equipos, límites, catálogos y corpus; los audios se descargan
+desde las URLs MQTT de la planta y se transcriben localmente.
 
 Los adaptadores locales de [app/integrations.py](./app/integrations.py),
 [app/rag.py](./app/rag.py), [app/memory.py](./app/memory.py) y

@@ -31,6 +31,7 @@ def evaluate_value(
     equipment: Equipment,
     value: float,
     *,
+    variable: str | None = None,
     sustained: bool = True,
     state: str | None = None,
 ) -> Evaluation:
@@ -38,9 +39,12 @@ def evaluate_value(
         return Evaluation(EventStatus.NORMAL, "Equipo detenido en reserva: estado esperado")
     if not sustained:
         return Evaluation(EventStatus.NORMAL, "Pico aislado: requiere confirmación sostenida")
-    if equipment.alarm_min is not None and value < equipment.alarm_min:
+    limits = equipment.sensor_limits.get(variable or "") if variable else None
+    alarm_min = limits.alarm_min if limits else equipment.alarm_min
+    alarm_max = limits.alarm_max if limits else equipment.alarm_max
+    if alarm_min is not None and value < alarm_min:
         return Evaluation(EventStatus.ESCALATED, "Valor inferior al límite de alarma")
-    if equipment.alarm_max is not None and value > equipment.alarm_max:
+    if alarm_max is not None and value > alarm_max:
         return Evaluation(EventStatus.ESCALATED, "Valor superior al límite de alarma")
     return Evaluation(EventStatus.NORMAL, "Valor dentro del rango de operación")
 
@@ -61,9 +65,15 @@ def detect_safety(text: str, source_id: str) -> list[SafetyAlert]:
     normalized = re.sub(r"\s+", " ", normalized)
     alerts: list[SafetyAlert] = []
     for code, patterns, action in _SAFETY_PATTERNS:
-        if re.search(r"\b(?:no|sin)\s+(?:hay\s+)?(?:olor\s+a\s+)?gas\b", normalized):
-            continue
-        if any(re.search(rf"\b{re.escape(pattern)}\b", normalized) for pattern in patterns):
+        matched = False
+        for pattern in patterns:
+            found = re.search(rf"\b{re.escape(pattern)}\b", normalized)
+            if found:
+                prefix = normalized[max(0, found.start() - 32):found.start()]
+                if not re.search(r"\b(?:no|sin)\b(?:\s+\w+){0,4}\s*$", prefix):
+                    matched = True
+                    break
+        if matched:
             alerts.append(
                 SafetyAlert(
                     code=code,
@@ -84,6 +94,10 @@ class DomainService:
         self.events_by_id: dict[str, Event] = {}
         self.alerts: dict[str, SafetyAlert] = {}
         self.orders: dict[str, Order] = {}
+        self.inventory_catalog: list[dict] = []
+        self.material_catalog: dict[str, list[dict]] = {}
+        self.task_catalog: list[dict] = []
+        self.manual_index = None
         self.sync_queue: deque[str] = deque()
         self.sync_items: dict[str, dict] = {}
         self._sustained: dict[tuple[str, str], list[tuple[datetime, float]]] = defaultdict(list)
@@ -175,18 +189,23 @@ class DomainService:
             history.append((observed_at, reading.value))
             cutoff = observed_at - timedelta(hours=4)
             self._sustained[key] = [(when, val) for when, val in history if when >= cutoff]
+            limits = equipment.sensor_limits.get(reading.variable)
+            alarm_min = limits.alarm_min if limits else equipment.alarm_min
+            alarm_max = limits.alarm_max if limits else equipment.alarm_max
             anomalies = [
                 val
                 for _, val in self._sustained[key]
                 if (
-                    equipment.alarm_min is not None and val < equipment.alarm_min
+                    alarm_min is not None and val < alarm_min
                 )
                 or (
-                    equipment.alarm_max is not None and val > equipment.alarm_max
+                    alarm_max is not None and val > alarm_max
                 )
             ]
             sustained = len(anomalies) >= 2
-            result = evaluate_value(equipment, reading.value, sustained=sustained)
+            result = evaluate_value(
+                equipment, reading.value, variable=reading.variable, sustained=sustained
+            )
             event = Event(
                 idempotency_key=event_key,
                 origin="part",
@@ -224,7 +243,9 @@ class DomainService:
             or (equipment.alarm_max is not None and val > equipment.alarm_max)
         ]
         sustained = sustained or len(anomalies) >= 2
-        evaluation = evaluate_value(equipment, reading.value, sustained=sustained)
+        evaluation = evaluate_value(
+            equipment, reading.value, variable=reading.variable, sustained=sustained
+        )
         event = Event(
             idempotency_key=reading.idempotency_key,
             origin="sensor",
@@ -242,6 +263,28 @@ class DomainService:
             self.repository.save_event(event)
         return event
 
+    def _ensure_order_for_event(self, event: Event) -> Order:
+        existing = next(
+            (order for order in self.orders.values() if order.event_id == event.id),
+            None,
+        )
+        if existing is not None:
+            return existing
+        order = Order(
+            event_id=event.id,
+            equipment_tag=event.equipment_tag,
+            task="Diagnóstico y corrección del evento escalado",
+            total_cost_usd=0,
+            stock_available=False,
+            standard_task=False,
+            keeps_injection=False,
+            internal_staff=False,
+            structural_damage=False,
+            detiene_equipo=True,
+            reduce_inyeccion=True,
+        )
+        return self.create_order(order)
+
     @staticmethod
     def _aware(value: datetime) -> datetime:
         if value.tzinfo is None:
@@ -253,6 +296,49 @@ class DomainService:
         if existing:
             return existing
         reasons: list[str] = []
+        catalog_task = None
+        official_equipment = {
+            equipment
+            for task in self.task_catalog
+            for equipment in task.get("equipos", [])
+        }
+        if self.task_catalog and request.equipment_tag in official_equipment:
+            task_text = request.task.casefold()
+            catalog_task = next(
+                (
+                    task
+                    for task in self.task_catalog
+                    if (
+                        str(task.get("codigo", "")).casefold() == task_text
+                        or str(task.get("nombre", "")).casefold() == task_text
+                    )
+                    and request.equipment_tag in task.get("equipos", [])
+                ),
+                None,
+            )
+            if catalog_task is None:
+                reasons.append("La tarea no está en el catálogo oficial para ese equipo")
+            else:
+                request.task = str(catalog_task["nombre"])
+                request.standard_task = True
+                request.detiene_equipo = bool(catalog_task.get("detiene", False))
+                request.keeps_injection = not request.detiene_equipo
+                request.internal_staff = catalog_task.get("ejecutor") == "propio"
+                required_parts = [
+                    part["codigo"]
+                    for part in catalog_task.get("repuestos", [])
+                ]
+                request.parts = required_parts
+                prices = {
+                    item.get("codigo"): float(item.get("costo_usd", 0))
+                    for item in self.inventory_catalog
+                }
+                request.total_cost_usd = sum(prices.get(code, 0) for code in required_parts)
+                stock = {
+                    item.get("codigo"): float(item.get("stock", {}).get("yacimiento", 0))
+                    for item in self.inventory_catalog
+                }
+                request.stock_available = all(stock.get(code, 0) >= 1 for code in required_parts)
         if not request.standard_task:
             reasons.append("La tarea no está en el catálogo estándar")
         if not request.keeps_injection:

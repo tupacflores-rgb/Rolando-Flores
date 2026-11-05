@@ -22,7 +22,7 @@ from .contract_messages import (
     tablet_message,
 )
 from .contract_adapter import load_contract
-from .domain import DomainService
+from .domain import DomainService, detect_safety
 from .certification import compare_closure, issue_habilita
 from .integrations import (
     VoicePartExtractor,
@@ -33,8 +33,15 @@ from .integrations import (
 from .memory import ConversationMemory
 from .mcp import EquipmentMCPServer
 from .mqtt_bridge import MqttBridge
-from .official_data import equipment_from_definition
+from .official_data import (
+    catalog_from_materials,
+    equipment_from_definition,
+    load_material_catalog,
+    load_yaml,
+    load_voice_index,
+)
 from .persistence import build_repository
+from .rag import ManualIndex
 from .models import (
     ClosureReport,
     ClosureComparison,
@@ -125,6 +132,8 @@ def _on_sensor(payload: dict[str, Any]) -> None:
         event = service.evaluate_sensor(reading)
         if event.status == EventStatus.ESCALATED:
             _publish_event(event)
+            order = service._ensure_order_for_event(event)
+            _publish_order(order)
     except Exception as exc:
         logger.warning("Lectura MQTT rechazada: %s", exc)
 
@@ -155,7 +164,26 @@ def _on_recorrida(payload: dict[str, Any]) -> None:
             photo_urls=note_contract.fotos,
             transcript=transcript,
         )
+        safety_alerts = detect_safety(transcript, note.note_id)
+        for alert in safety_alerts:
+            _publish_alert(alert, nota_ids=[note.note_id])
+            if mqtt_bridge is not None:
+                mqtt_bridge.publish_tablet(
+                    tablet_message(
+                        message_id=f"tablet:safety:{note.note_id}:{alert.code}",
+                        note_ids=[note.note_id],
+                        texto=(
+                            f"{alert.message}. Aplique el procedimiento de emergencia "
+                            "y avise por radio al supervisor de turno."
+                        ),
+                        filas=[],
+                        espera_respuesta=False,
+                    )
+                )
         rows = VoicePartExtractor(list(service.equipment.values())).extract(note, transcript)
+        if not rows:
+            logger.info("Nota %s sin filas reportables; no se publica borrador vacío", note.note_id)
+            return
         draft_rows[note.note_id] = rows
         draft_notes[note.note_id] = note
         memory.append(note.note_id, "nota", note.model_dump(mode="json"))
@@ -248,6 +276,32 @@ def _confirm_voice_draft(note: VoiceNote, rows: list[FilaParte]) -> None:
 
 
 def _bootstrap_equipment() -> None:
+    data_dir = os.getenv("PLANTA_DATOS_DIR", "datos")
+    local_plant = os.path.join(data_dir, "planta.yaml")
+    local_materials = os.path.join(data_dir, "materiales.yaml")
+    try:
+        if os.path.isfile(local_plant):
+            for equipment in equipment_from_definition(
+                load_yaml(local_plant)
+            ):
+                if equipment.tag not in service.equipment:
+                    service.add_equipment(equipment)
+        if os.path.isfile(local_materials):
+            inventory, materials, tasks = catalog_from_materials(
+                load_material_catalog(local_materials)
+            )
+            service.inventory_catalog = inventory
+            service.material_catalog = materials
+            service.task_catalog = tasks
+        corpus = os.path.join(data_dir, "documentos", "fragmentos.jsonl")
+        if os.path.isfile(corpus):
+            service.manual_index = ManualIndex.from_jsonl(corpus)
+        voice_index = os.path.join(data_dir, "voces", "indice.json")
+        if os.path.isfile(voice_index):
+            logger.info("Índice de voces local cargado: %d notas", len(load_voice_index(voice_index)))
+    except (OSError, ValueError, KeyError) as exc:
+        logger.exception("No se pudieron cargar los datos oficiales locales: %s", exc)
+
     url = os.getenv("PLANTA_URL", "").strip()
     if not url:
         return
@@ -350,12 +404,12 @@ def plant_definition() -> dict[str, Any]:
         "sensores": [
             {
                 "tag": equipment.tag,
-                "variable": "presion_descarga",
-                "alarma_baja": equipment.alarm_min,
-                "alarma_alta": equipment.alarm_max,
+                "variable": variable,
+                "alarma_baja": limits.alarm_min,
+                "alarma_alta": limits.alarm_max,
             }
             for equipment in service.equipment.values()
-            if equipment.alarm_min is not None or equipment.alarm_max is not None
+            for variable, limits in equipment.sensor_limits.items()
         ],
     }
 
@@ -452,6 +506,13 @@ def ingest_sensor(reading: SensorReading) -> Event:
     try:
         event = service.evaluate_sensor(reading)
         _publish_event(event)
+        if event.status == EventStatus.ESCALATED:
+            order = next(
+                (item for item in service.orders.values() if item.event_id == event.id),
+                None,
+            )
+            if order is not None:
+                _publish_order(order)
         return event
     except ValueError as exc:
         raise HTTPException(status_code=409, detail=str(exc)) from exc

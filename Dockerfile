@@ -8,6 +8,6 @@ RUN apt-get update \
 COPY pyproject.toml .
 COPY app ./app
 COPY --from=contrato_src / /tmp/planta-contrato
-RUN pip install --no-cache-dir ".[integration]" /tmp/planta-contrato
+RUN pip install --no-cache-dir ".[integration,voice]" /tmp/planta-contrato
 EXPOSE 8000
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

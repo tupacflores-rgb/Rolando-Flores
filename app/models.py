@@ -45,6 +45,12 @@ class Equipment(StrictModel):
     alarm_max: float | None = None
     normal_state: str | None = None
     reserve_available: bool = False
+    sensor_limits: dict[str, "SensorLimits"] = Field(default_factory=dict)
+
+
+class SensorLimits(StrictModel):
+    alarm_min: float | None = None
+    alarm_max: float | None = None
 
 
 class PartReading(StrictModel):

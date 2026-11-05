@@ -68,7 +68,8 @@ class WhisperTranscriber:
                 device=self.device,
                 compute_type=self.compute_type,
             )
-        with tempfile.NamedTemporaryFile(suffix=".wav") as audio_file:
+        suffix = ".flac" if audio.startswith(b"fLaC") else ".wav"
+        with tempfile.NamedTemporaryFile(suffix=suffix) as audio_file:
             audio_file.write(audio)
             audio_file.flush()
             segments, _ = self._model.transcribe(
