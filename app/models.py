@@ -45,6 +45,7 @@ class Equipment(StrictModel):
     alarm_max: float | None = None
     normal_state: str | None = None
     reserve_available: bool = False
+    local_gauge_unit: str | None = None
     sensor_limits: dict[str, "SensorLimits"] = Field(default_factory=dict)
 
 
@@ -231,6 +232,7 @@ class ToolAudit(StrictModel):
 
 class ManualChunk(StrictModel):
     equipment_tag: str
+    equipment_tags: list[str] = Field(default_factory=list)
     manufacturer: str
     document: str
     section: str

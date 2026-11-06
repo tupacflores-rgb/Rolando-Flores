@@ -13,14 +13,15 @@ contratos estrictos y pueden reemplazarse por los servicios oficiales.
 |---|---|---|
 | Detección, seguridad y aprobación | Python determinista | CPU de planta, 4 cores, 8 GB |
 | Transcripción | `faster-whisper-small` con revisión fija; fixture local incluido | CPU de planta, sin nube |
-| Extracción estructurada | `VoicePartExtractor`/adaptador de modelo cerrado | CPU de planta |
-| Recuperación | pgvector previsto + índice reproducible | PostgreSQL 16 |
-| Herramientas | Pydantic + FastAPI + MCP | Red local de planta |
+| Extracción estructurada | `VoicePartExtractor` determinista (regex + números en palabras) | CPU de planta |
+| Recuperación | Índice léxico BM25 reproducible (pgvector es el backend previsto) | PostgreSQL 16 |
+| Herramientas | Pydantic + FastAPI + servidor MCP (stdio, JSON-RPC) | Red local de planta |
 
 El modelo se descarga con `scripts/download_whisper.py` desde
 `Systran/faster-whisper-small` usando una revisión fija. Los pesos no se
 versionan en Git por su tamaño; un clon limpio puede obtenerlos de forma
-reproducible antes de montar `models/`.
+reproducible antes de montar `models/`, o el contenedor los descarga en el
+primer arranque.
 
 ## Tokens, costo y latencia
 
@@ -54,10 +55,11 @@ citas.
 
 ## Decisiones y límites conocidos
 
-El corpus oficial y su evaluación están incluidos en `datos/documentos/`.
-La integración HTTP, el transporte MCP completo y el backend pgvector se
-mantienen detrás de interfaces; la superficie MCP actual es un adaptador HTTP
-local y no debe presentarse como transporte MCP stdio/SSE. La memoria de
-conversación mantiene retención de 45 días en el proceso; todavía no se
-persiste en PostgreSQL, por lo que un reinicio elimina esa memoria aunque no
-el estado de órdenes, sensores y sincronización.
+El corpus oficial y su evaluación están incluidos en `datos/documentos/`. El
+índice RAG es léxico (BM25) y determinista: no usa embeddings; pgvector queda
+como backend previsto para una etapa posterior. El servidor MCP expone las
+tools por transporte `stdio` (JSON-RPC 2.0); el wrapper HTTP `/api/mcp/*` es
+solo para pruebas y no se presenta como transporte MCP. La memoria de
+conversación se persiste en PostgreSQL (`conversation_memory`) cuando hay
+`DATABASE_URL`; sin base, opera en RAM con la misma política de retención de
+45 días.

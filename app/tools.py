@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import os
 from time import perf_counter
 from typing import Any
 
 from pydantic import Field
 
+from .historian import HistorianClient
 from .models import (
     Equipment,
     InventoryQuery,
@@ -28,8 +30,9 @@ class SensorHistoryQuery(StrictModel):
 
 
 class ReadOnlyTools:
-    def __init__(self, service) -> None:
+    def __init__(self, service, historian: HistorianClient | None = None) -> None:
         self.service = service
+        self.historian = historian or HistorianClient(os.getenv("PLANTA_URL", ""))
 
     def _audit(self, name: str, arguments: dict[str, Any], started: float) -> None:
         self.service.tool_audits.append(
@@ -54,7 +57,7 @@ class ReadOnlyTools:
 
     def sensor_history(self, query: SensorHistoryQuery) -> list[dict[str, Any]]:
         started = perf_counter()
-        readings = sorted(
+        local = sorted(
             (
                 reading
                 for reading in self.service.sensor_readings.values()
@@ -63,28 +66,53 @@ class ReadOnlyTools:
             ),
             key=lambda reading: reading.observed_at,
         )
-        result = [
-            {
+        merged: dict[tuple, dict[str, Any]] = {}
+        for reading in local:
+            key = (reading.observed_at.isoformat(), reading.value)
+            merged[key] = {
                 "equipment_tag": reading.equipment_tag,
                 "variable": reading.variable,
                 "value": reading.value,
                 "observed_at": reading.observed_at,
             }
-            for reading in readings[-query.limit :]
-        ]
+        for item in self.historian.sensor_history(query.tag, query.variable):
+            if not isinstance(item, dict) or "valor" not in item:
+                continue
+            ts = item.get("ts") or item.get("observed_at")
+            value = item.get("valor", item.get("value"))
+            key = (str(ts), value)
+            if key not in merged:
+                merged[key] = {
+                    "equipment_tag": query.tag,
+                    "variable": query.variable,
+                    "value": value,
+                    "observed_at": ts,
+                }
+        result = sorted(merged.values(), key=lambda row: str(row["observed_at"]))
         self._audit("historial_sensores", query.model_dump(), started)
-        return result
+        return result[-query.limit :]
 
     def order_history(self, query: OrderHistoryQuery) -> list[dict[str, Any]]:
         started = perf_counter()
-        orders = [
-            order.model_dump(mode="json")
-            for order in self.service.orders.values()
-            if query.equipment_tag is None or order.equipment_tag == query.equipment_tag
-        ]
-        result = orders[-query.limit :]
+        merged: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        for item in self.historian.order_history(query.equipment_tag):
+            if not isinstance(item, dict):
+                continue
+            oid = str(item.get("id") or item.get("numero") or item.get("orden_id") or id(item))
+            if oid in seen:
+                continue
+            seen.add(oid)
+            merged.append(item)
+        for order in self.service.orders.values():
+            if query.equipment_tag is not None and order.equipment_tag != query.equipment_tag:
+                continue
+            if str(order.id) in seen:
+                continue
+            seen.add(str(order.id))
+            merged.append(order.model_dump(mode="json"))
         self._audit("historial_ordenes", query.model_dump(), started)
-        return result
+        return merged[-query.limit :]
 
     def inventory(self, query: InventoryQuery) -> list[dict[str, Any]]:
         started = perf_counter()

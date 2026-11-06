@@ -28,6 +28,7 @@ from .integrations import (
     VoicePartExtractor,
     WhisperTranscriber,
     AmbiguousInputError,
+    ClosureExtractor,
     download_media,
     merge_corrected_rows,
 )
@@ -39,7 +40,6 @@ from .official_data import (
     equipment_from_definition,
     load_material_catalog,
     load_yaml,
-    load_voice_index,
 )
 from .persistence import build_repository
 from .rag import ManualIndex
@@ -73,7 +73,7 @@ repository = build_repository(database_url)
 service = DomainService(repository=repository)
 tools = ReadOnlyTools(service)
 mcp_server = EquipmentMCPServer(tools)
-memory = ConversationMemory()
+memory = ConversationMemory(repository=repository)
 draft_rows: dict[str, list[FilaParte]] = {}
 draft_notes: dict[str, VoiceNote] = {}
 pending_questions: dict[str, AmbiguousInputError] = {}
@@ -218,28 +218,56 @@ def _on_recorrida(payload: dict[str, Any]) -> None:
 def _on_cierre(payload: dict[str, Any]) -> None:
     try:
         note = load_contract().NotaCierre.model_validate(payload)
-        order = service.orders.get(note.orden_id)
-        if order is None:
-            raise ValueError(f"Orden inexistente: {note.orden_id}")
-        if order.status != OrderStatus.APPROVED:
-            raise ValueError(f"La orden no está Aprobada: {order.status}")
-        service.transition_order(note.orden_id, OrderStatus.EXECUTED)
-        closure = ClosureReport(
-            order_id=order.id,
-            technician=note.tecnico,
-            contractor=note.empresa.casefold() != "propio",
-            tasks_done=[order.task],
-            parts_used=order.parts,
-            hours=0,
-            final_test="Cierre recibido por la planta",
-            photo_ids=note.fotos,
-        )
-        service.attach_closure(note.orden_id, closure)
-        _publish_order(order)
+        transcript: str | None = None
+        if note.audio_url:
+            audio = download_media(
+                os.getenv("PLANTA_URL", "http://sim:8100"),
+                note.audio_url,
+            )
+            transcript = WhisperTranscriber(
+                os.getenv("WHISPER_MODEL_PATH", ""),
+                device=os.getenv("WHISPER_DEVICE", "cpu"),
+                compute_type=os.getenv("WHISPER_COMPUTE_TYPE", "int8"),
+            ).transcribe(audio)
+        _process_cierre(note, transcript)
     except (KeyError, ValueError) as exc:
         logger.warning("Cierre rechazado: %s", exc)
     except Exception:
         logger.exception("No se pudo procesar la nota de cierre %s", payload.get("id"))
+
+
+def _process_cierre(note: Any, transcript: str | None) -> None:
+    """Núcleo testeable: transcribe → extrae → compara → transiciona la orden."""
+    order = service.orders.get(note.orden_id)
+    if order is None:
+        raise ValueError(f"Orden inexistente: {note.orden_id}")
+    if order.status != OrderStatus.APPROVED:
+        raise ValueError(f"La orden no está Aprobada: {order.status}")
+    if not transcript:
+        logger.warning("Cierre %s sin transcripción; no se inventa cierre", note.id)
+        return
+    parsed = ClosureExtractor(service.task_catalog, service.inventory_catalog).extract(transcript)
+    if parsed is None:
+        logger.warning("Cierre %s sin evidencia interpretable; la orden queda Aprobada", note.id)
+        return
+    closure = ClosureReport(
+        order_id=order.id,
+        technician=note.tecnico,
+        contractor=note.empresa.casefold() != "propio",
+        tasks_done=parsed["tasks_done"],
+        parts_used=parsed["parts_used"],
+        hours=parsed["hours"],
+        final_test=parsed["final_test"],
+        photo_ids=note.fotos,
+    )
+    service.transition_order(note.orden_id, OrderStatus.EXECUTED)
+    service.attach_closure(note.orden_id, closure)
+    comparison = compare_closure(order, closure)
+    if not comparison.matches:
+        service.transition_order(
+            note.orden_id, OrderStatus.OBSERVED, reason="; ".join(comparison.differences)
+        )
+    _publish_order(order)
 
 
 def _on_respuesta(payload: dict[str, Any]) -> None:
@@ -383,9 +411,6 @@ def _bootstrap_equipment() -> None:
         corpus = os.path.join(data_dir, "documentos", "fragmentos.jsonl")
         if os.path.isfile(corpus):
             service.manual_index = ManualIndex.from_jsonl(corpus)
-        voice_index = os.path.join(data_dir, "voces", "indice.json")
-        if os.path.isfile(voice_index):
-            logger.info("Índice de voces local cargado: %d notas", len(load_voice_index(voice_index)))
     except (OSError, ValueError, KeyError) as exc:
         logger.exception("No se pudieron cargar los datos oficiales locales: %s", exc)
 

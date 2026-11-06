@@ -47,6 +47,10 @@ def equipment_from_definition(data: dict[str, Any]) -> list[Equipment]:
     for item in data.get("equipos", []):
         if not isinstance(item, dict):
             raise ValueError("Entrada de equipo inválida")
+        manometro = item.get("manometro_local") or {}
+        local_gauge_unit = None
+        if isinstance(manometro, dict) and manometro.get("unidad"):
+            local_gauge_unit = str(manometro["unidad"])
         result.append(
             Equipment(
                 tag=item["tag"],
@@ -65,6 +69,7 @@ def equipment_from_definition(data: dict[str, Any]) -> list[Equipment]:
                 ),
                 sensor_limits=limits.get(item["tag"], {}),
                 reserve_available=item.get("rol_inicial") == "reserva",
+                local_gauge_unit=local_gauge_unit,
             )
         )
     return result

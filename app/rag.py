@@ -16,8 +16,28 @@ class RetrievalResult:
     score: float
 
 
+# Metadatos por documento del corpus: a qué equipos aplica y quién lo emite.
+# Es un mapa explícito (fuente: datos/documentos/indice.json), no "general" para todo.
+_DOCUMENT_METADATA: dict[str, tuple[list[str], str]] = {
+    "TX350-D": (["B-101", "B-102", "B-103"], "Trimax Industrial"),
+    "TX350-C": (["B-101", "B-102", "B-103"], "Trimax Industrial"),
+    "FC48-3": (["F-201A", "F-201B"], "Filtrapat"),
+    "MBP-4": (["B-101", "B-102", "B-103", "F-201A", "F-201B", "TK-301", "FT-401"], "operadora"),
+    "CT-SVP-2025": (["B-101", "B-102", "B-103"], "Servipat"),
+    "CERT-EJ": (["B-101", "B-102", "B-103"], "Servipat"),
+    "historial": ([], "operadora"),
+}
+
+_TAG_RE = re.compile(r"\b(?:B-\d{3}|F-\d{3}[A-Z]?|TK-\d{3}|FT-\d{3})\b")
+
+
 class ManualIndex:
-    """Índice pequeño y reproducible; puede reemplazarse por pgvector."""
+    """Índice léxico pequeño y reproducible; pgvector es el backend previsto.
+
+    El ranking actual es BM25 sobre tokens: es un fallback determinista y sin
+    red, no un índice de embeddings. Cada fragmento conserva su equipo,
+    fabricante, documento, sección, cita y vigencia para poder filtrar.
+    """
 
     def __init__(self, chunks: list[ManualChunk] | None = None) -> None:
         self.chunks = chunks or []
@@ -35,11 +55,19 @@ class ManualIndex:
             for line in handle:
                 item = json.loads(line)
                 citation = item["id"]
+                doc = item["doc"]
+                equipment_tags, manufacturer = _DOCUMENT_METADATA.get(doc, ([], "desconocido"))
+                if doc == "historial":
+                    # El equipo de la orden está en el título: "OT-24-0001 B-101 T-B-VAL".
+                    tag = next((m for m in _TAG_RE.findall(item.get("titulo", ""))), None)
+                    equipment_tags = [tag] if tag else []
+                equipment_tag = equipment_tags[0] if equipment_tags else "general"
                 chunks.append(
                     ManualChunk(
-                        equipment_tag=item.get("equipo", "general"),
-                        manufacturer=item.get("fabricante", "desconocido"),
-                        document=item["doc"],
+                        equipment_tag=equipment_tag,
+                        equipment_tags=equipment_tags,
+                        manufacturer=manufacturer,
+                        document=doc,
                         section=citation,
                         citation=citation,
                         text=item["texto"],
@@ -48,13 +76,22 @@ class ManualIndex:
                 )
         return cls(chunks)
 
+    def _matches_equipment(self, chunk: ManualChunk, equipment_tag: str | None) -> bool:
+        if equipment_tag is None:
+            return True
+        if chunk.equipment_tags:
+            return equipment_tag in chunk.equipment_tags
+        # Sin lista explícita: un fragmento "general" aplica a todo; si no, por tag.
+        if chunk.equipment_tag == "general":
+            return True
+        return chunk.equipment_tag == equipment_tag
+
     def search(self, query: RetrievalQuery) -> list[RetrievalResult]:
         terms = self._tokens(query.question)
         candidates = [
             chunk
             for chunk in self.chunks
-            if chunk.vigente
-            and (query.equipment_tag is None or chunk.equipment_tag == query.equipment_tag)
+            if chunk.vigente and self._matches_equipment(chunk, query.equipment_tag)
         ]
         document_frequency: dict[str, int] = {}
         tokenized: list[tuple[ManualChunk, list[str]]] = []
@@ -109,46 +146,6 @@ class ManualIndex:
         if document.endswith("-C"):
             return -1
         return 0
-
-    @staticmethod
-    def evaluate(
-        search: "ManualIndex", suite: list[dict[str, object]], k: int = 5
-    ) -> dict[str, float]:
-        hits = 0
-        reciprocal = 0.0
-        recall_sum = 0.0
-        for item in suite:
-            query = RetrievalQuery(
-                question=str(item["question"]),
-                equipment_tag=item.get("equipment_tag"),  # type: ignore[arg-type]
-                k=k,
-            )
-            expected_sections = {
-                str(value)
-                for value in item.get(
-                    "relevant_sections", [item["expected_section"]]
-                )
-            }
-            results = search.search(query)
-            positions = [
-                index + 1
-                for index, result in enumerate(results)
-                if result.chunk.section in expected_sections
-            ]
-            if positions:
-                hits += 1
-                reciprocal += 1 / positions[0]
-            recall_sum += len(
-                expected_sections.intersection(
-                    {result.chunk.section for result in results}
-                )
-            ) / len(expected_sections)
-        total = len(suite) or 1
-        return {
-            "hit_at_k": hits / total,
-            "recall_at_k": recall_sum / total,
-            "mrr_at_k": reciprocal / total,
-        }
 
     def evaluate_official(
         self, retrieval_json: str | Path, k_values: tuple[int, ...] = (1, 3, 5, 10)

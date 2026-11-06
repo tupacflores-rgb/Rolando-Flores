@@ -27,6 +27,23 @@ class Evaluation:
     reason: str
 
 
+# Variables dichas en campo que se comparan contra el límite del sensor homónimo.
+VARIABLE_LIMIT_MAP: dict[str, str] = {
+    "presion_descarga_local": "presion_descarga",
+    "presion_diferencial": "presion_diferencial",
+}
+
+# Observaciones de estado que no constituyen una anomalía.
+NORMAL_OBSERVATIONS: frozenset[str] = frozenset(
+    {"parada, en reserva", "parada por mantenimiento"}
+)
+
+# Estados de una bomba en los que no puede reemplazar a otra (reserva fuera de servicio).
+RESERVE_UNAVAILABLE: frozenset[str] = frozenset(
+    {"parada por mantenimiento", "disparada, no arranca"}
+)
+
+
 def evaluate_value(
     equipment: Equipment,
     value: float,
@@ -53,7 +70,8 @@ _SAFETY_PATTERNS: tuple[tuple[str, tuple[str, ...], str], ...] = (
     ("S1", ("agua a presion", "proyeccion de agua", "chorro a presion"), "Alejarse y aislar la presión"),
     ("S2", ("olor a gas", "gas"), "Evacuar el área y avisar por radio"),
     ("S3", ("humo", "fuego", "incendio"), "Activar el procedimiento contra incendio"),
-    ("S4", ("persona lesionada", "lesionado", "herido"), "Solicitar asistencia y asegurar el área"),
+    ("S4", ("persona lesionada", "lesionado", "herido", "sangrando", "sangre",
+            "golpeo la mano", "se golpeo", "se lastimo", "lastimado"), "Solicitar asistencia y asegurar el área"),
 )
 
 
@@ -108,6 +126,7 @@ class DomainService:
         self.task_catalog: list[dict] = []
         self.manual_index = None
         self.tool_audits: list[dict] = []
+        self.pump_states: dict[str, str] = {}
         self.sync_queue: deque[str] = deque()
         self.sync_items: dict[str, dict] = {}
         self._sustained: dict[tuple[str, str], list[tuple[datetime, float]]] = defaultdict(list)
@@ -193,48 +212,63 @@ class DomainService:
                     self.repository.save_alert(alert)
                 existing_alert = alert
             results.append(existing_alert)
-        for index, reading in enumerate(part.readings):
+
+        # Una decisión por equipo: cualquier lectura anómala (valor fuera de límite u
+        # observación que no es un estado normal) escala el equipo; si no, Sin novedad.
+        per_tag: dict[str, dict] = {}
+        for reading in part.readings:
             equipment = self.equipment.get(reading.equipment_tag)
             if equipment is None:
                 raise ValueError(f"Equipo inexistente: {reading.equipment_tag}")
-            if reading.value is None:
+            if reading.variable == "estado" and reading.observation:
+                # La recorrida reporta el estado de la bomba; actualiza la disponibilidad dinámica.
+                self.pump_states[reading.equipment_tag] = reading.observation
+            entry = per_tag.setdefault(
+                reading.equipment_tag,
+                {"anomalous": False, "variable": None, "value": None, "photos": [], "has_content": False},
+            )
+            observation = (reading.observation or "").strip()
+            if observation:
+                entry["has_content"] = True
+                if (
+                    observation.casefold() not in NORMAL_OBSERVATIONS
+                    and not detect_safety(observation, str(part.id))
+                ):
+                    entry["anomalous"] = True
+            if reading.value is not None:
+                entry["has_content"] = True
+                entry["variable"] = entry["variable"] or reading.variable
+                entry["value"] = reading.value
+                limit_variable = VARIABLE_LIMIT_MAP.get(reading.variable, reading.variable)
+                limits = equipment.sensor_limits.get(limit_variable)
+                if limits is not None:
+                    if limits.alarm_min is not None and reading.value < limits.alarm_min:
+                        entry["anomalous"] = True
+                    if limits.alarm_max is not None and reading.value > limits.alarm_max:
+                        entry["anomalous"] = True
+            entry["photos"].extend(reading.photo_ids)
+
+        for tag, entry in per_tag.items():
+            if not entry["has_content"]:
                 continue
-            event_key = f"part:{part.idempotency_key}:{index}"
+            status = EventStatus.ESCALATED if entry["anomalous"] else EventStatus.NORMAL
+            event_key = f"part:{part.idempotency_key}:{tag}"
             if event_key in self.events:
                 results.append(self.events[event_key])
                 continue
-            key = (equipment.tag, reading.variable)
-            history = self._sustained[key]
-            observed_at = self._aware(part.observed_at)
-            history.append((observed_at, reading.value))
-            cutoff = observed_at - timedelta(hours=4)
-            self._sustained[key] = [(when, val) for when, val in history if when >= cutoff]
-            limits = equipment.sensor_limits.get(reading.variable)
-            alarm_min = limits.alarm_min if limits else equipment.alarm_min
-            alarm_max = limits.alarm_max if limits else equipment.alarm_max
-            anomalies = [
-                val
-                for _, val in self._sustained[key]
-                if (
-                    alarm_min is not None and val < alarm_min
-                )
-                or (
-                    alarm_max is not None and val > alarm_max
-                )
-            ]
-            sustained = len(anomalies) >= 2
-            result = evaluate_value(
-                equipment, reading.value, variable=reading.variable, sustained=sustained
+            reason = (
+                "Anomalía en la recorrida" if entry["anomalous"]
+                else "Valor dentro del rango de operación"
             )
             event = Event(
                 idempotency_key=event_key,
                 origin="part",
                 source_id=str(part.id),
-                status=result.status,
-                equipment_tag=equipment.tag,
-                variable=reading.variable,
-                value=reading.value,
-                context={"reason": result.reason, "photos": reading.photo_ids},
+                status=status,
+                equipment_tag=tag,
+                variable=entry["variable"],
+                value=entry["value"],
+                context={"reason": reason, "photos": list(dict.fromkeys(entry["photos"]))},
             )
             self._remember_event(event)
             if self.repository:
@@ -346,6 +380,25 @@ class DomainService:
             return value.replace(tzinfo=datetime.now().astimezone().tzinfo)
         return value
 
+    def _reserve_available(self, target: Equipment | None) -> bool:
+        """Reserva disponible para reemplazar a ``target``, según el estado reportado.
+
+        Una bomba de reserva en ``parada por mantenimiento`` o ``disparada, no
+        arranca`` no puede reemplazar a nadie, aunque su rol inicial sea reserva.
+        """
+        if target is None:
+            return False
+        for item in self.equipment.values():
+            if item.tag == target.tag or item.kind != target.kind:
+                continue
+            if not item.reserve_available:
+                continue
+            state = self.pump_states.get(item.tag)
+            if state and state.casefold() in RESERVE_UNAVAILABLE:
+                continue
+            return True
+        return False
+
     def create_order(self, request: Order) -> Order:
         existing = next((o for o in self.orders.values() if o.event_id == request.event_id), None)
         if existing:
@@ -383,12 +436,7 @@ class DomainService:
                 request.standard_task = bool(catalog_task.get("estandar", True))
                 request.detiene_equipo = bool(catalog_task.get("detiene", False))
                 target = self.equipment.get(request.equipment_tag)
-                reserve_available = any(
-                    item.tag != request.equipment_tag
-                    and item.kind == target.kind
-                    and item.reserve_available
-                    for item in self.equipment.values()
-                ) if target is not None else False
+                reserve_available = self._reserve_available(target)
                 request.keeps_injection = (
                     not request.detiene_equipo or reserve_available
                 )

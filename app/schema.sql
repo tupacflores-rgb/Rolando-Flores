@@ -66,6 +66,15 @@ CREATE TABLE IF NOT EXISTS sync_queue (
     synced BOOLEAN NOT NULL DEFAULT FALSE,
     last_error TEXT
 );
+CREATE TABLE IF NOT EXISTS conversation_memory (
+    id UUID PRIMARY KEY,
+    note_id TEXT NOT NULL,
+    kind TEXT NOT NULL,
+    payload JSONB NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL
+);
+CREATE INDEX IF NOT EXISTS conversation_memory_note_idx
+    ON conversation_memory (note_id, created_at);
 CREATE INDEX IF NOT EXISTS sensor_history_idx
     ON sensor_readings (equipment_tag, variable, observed_at);
 CREATE INDEX IF NOT EXISTS event_status_idx

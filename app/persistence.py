@@ -113,6 +113,31 @@ class PostgresRepository:
                  item["attempts"], item["synced"], item.get("last_error")),
             )
 
+    def save_memory(self, note_id: str, kind: str, payload: dict[str, Any], created_at: Any) -> None:
+        with self.connection.cursor() as cursor:
+            cursor.execute(
+                """
+                INSERT INTO conversation_memory (id, note_id, kind, payload, created_at)
+                VALUES (gen_random_uuid(), %s, %s, %s::jsonb, %s)
+                """,
+                (note_id, kind, json.dumps(payload), created_at),
+            )
+
+    def restore_memory(self) -> list[dict[str, Any]]:
+        with self.connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT note_id, kind, payload, created_at FROM conversation_memory ORDER BY created_at"
+            )
+            return [
+                {
+                    "note_id": row[0],
+                    "kind": row[1],
+                    "payload": row[2],
+                    "created_at": row[3],
+                }
+                for row in cursor.fetchall()
+            ]
+
     def restore(self) -> dict[str, list[Any]]:
         restored: dict[str, list[Any]] = {
             "equipment": [], "parts": [], "sensor_readings": [],

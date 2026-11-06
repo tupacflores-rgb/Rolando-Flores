@@ -5,17 +5,23 @@ import subprocess
 import sys
 from pathlib import Path
 
-from download_whisper import MODEL_ID, MODEL_REVISION, main as download_model
+# Permite importar download_whisper aunque el cwd no sea scripts/.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from download_whisper import MODEL_ID, MODEL_REVISION, TARGET, main as download_model  # noqa: E402
+
+
+def model_is_ready() -> bool:
+    return (TARGET / "model.bin").is_file()
 
 
 def main() -> None:
-    target = Path(os.getenv("WHISPER_MODEL_PATH", "/models/whisper-small"))
-    if not (target / "model.bin").is_file():
+    if not model_is_ready():
         try:
             download_model()
         except Exception as exc:
             raise RuntimeError(
-                f"No se pudo descargar {MODEL_ID}@{MODEL_REVISION} en {target}: {exc}"
+                f"No se pudo descargar {MODEL_ID}@{MODEL_REVISION} en {TARGET}: {exc}"
             ) from exc
     subprocess.run(
         [
@@ -26,7 +32,7 @@ def main() -> None:
             "--host",
             "0.0.0.0",
             "--port",
-            "8000",
+            str(os.getenv("PORT", "8000")),
         ],
         check=True,
     )
